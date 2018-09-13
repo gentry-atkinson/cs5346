@@ -38,21 +38,22 @@ program to make it better.*/
 
 
 /*  conclusion list */
-char conclt[10][3];
+string conclusionList[21];
 /*  variable list */
-char varlt[10][3];
+string variableList[18];
 /*  clause vairable list */
-char clvarlt[40][3];
-char varble[3];
-char /* qualify */ qu[4], /* degree*/ de[4];
-char /* discovery */ di[4], /* position */ po[4];
+string clauseVariableList[69];
+string variables[18];
+string /* qualify */ goodGrades, /* degree*/ degree;
+string /* discovery */ labwork, /* position */ profession, ;
+string outdoorWork, leadership, groupWork;
 char buff[128];
 
 /* instantiated list */
-int instlt[11];
+int instantiatedList[11];
 /* statement stack */
-int statsk[11];
-int /* clause stack */ clausk[11], sn, f, i, j, s, k, /*stack pointer */ sp;
+int statementStack[11];
+int /* clause stack */ clauseStack[11], sn, f, s, /*stack pointer */ stackPointer;
 
 float /* grade */ gr, /*experience */ ex;
 
@@ -61,20 +62,24 @@ void push_on_stack(void);
 void instantiate(void);
 
 
-main()
+int main()
 {
         /***** initialization section ******/
         /* stack space is 10 we initially place stack space at 10+1 */
-        sp=11;
-        for (i=1; i<11; i++)
+        stackPointer=11;
+        for (int i=0; i<11; i++)
         {
-                strcpy(conclt[i],"");
-                strcpy(varlt[i],"");
-                instlt[i]=0;
-                statsk[i]=0;
-                clausk[i]=0;
+                //strcpy(conclt[i],"");
+                //strcpy(varlt[i],"");
+                instantiatedList[i]=0;
+                statementStack[i]=0;
+                clauseStack[i]=0;
         }
-        for (i=1; i<41; i++)  strcpy(clvarlt[i],"");
+
+
+        conclusionList.copy("");
+        variableList.copy("");
+        for (int i=0; i<69; i++)  clauseVariableList[i].copy("");
         /* enter conclusions which are the variables in the then part,
 1 at
         a time.  enter the conclusions in exact order starting at the 1st
@@ -82,31 +87,73 @@ main()
         conclusions */
 
         /*** comment 305 *****/
-        strcpy(conclt[1], "PO");
-        strcpy(conclt[2], "QU");
-        strcpy(conclt[3], "PO");
-        strcpy(conclt[4], "PO");
-        strcpy(conclt[5], "PO");
-        strcpy(conclt[6], "PO");
-        printf("*** CONCLUSION LIST ***\n");
-        for (i=1; i<11; i++) printf("CONCLUSION %d %s\n", i,conclt[i]);
+        //strcpy(conclt[1], "PO");
+        conclusionList[1].copy("GOOD GRADES");
+        //strcpy(conclt[2], "QU");
+        conclusionList[2].copy("GOOD GRADES");
+        //strcpy(conclt[3], "PO");
+        conclusionList[3].copy("LAB WORK");
+        //strcpy(conclt[4], "PO");
+        conclusionList[4].copy("LEADERSHIP");
+        //strcpy(conclt[5], "PO");
+        conclusionList[5].copy("PROFESSION");
+        //strcpy(conclt[6], "PO");
+        conclusionList[6].copy("PROFESSION");
+        conclusionList[7].copy("PROFESSION");
+        conclusionList[8].copy("WORK ALONE");
+        conclusionList[9].copy("PROFESSION");
+        conclusionList[10].copy("PROFESSION");
+        conclusionList[11].copy("OUTDOOR WORK");
+        conclusionList[12].copy("PROFESSION");
+        conclusionList[13].copy("PROFESSION");
+        conclusionList[14].copy("PROFESSION");
+        conclusionList[15].copy("MEDICAL CERTIFICATE");
+        conclusionList[16].copy("PROFESSION");
+        conclusionList[17].copy("TEACHING CERTIFICATE");
+        conclusionList[18].copy("PROFESSION");
+        conclusionList[19].copy("PROFESSION");
+        conclusionList[20].copy("PROFESSION");
+        //printf("*** CONCLUSION LIST ***\n");
+        for (i=1; i<21; i++) /*printf("CONCLUSION %d %s\n", i,conclt[i])*/ cout << "Conclusion: " << i << conclusionList[i] << endl;
 
-        printf("HIT RETURN TO CONTINUE");
-        gets(buff);
+        //printf("HIT RETURN TO CONTINUE");
+        cout << "Hit Return to continue..." << endl;
+        //gets(buff);
+        getchar();
         /* enter variables which are in the if part, 1 at a time in the
 exact
         order that they occur, up to 3 variables per if statement.  do not
         duplicate any variable names.  any name is used only once.  if no
         more variables left just hit return key. */
-        printf("*** VARIABLE LIST *\n");
+        //printf("*** VARIABLE LIST *\n");
+        cout << "Variable List:" << endl;
         /**** comment 367 *****/
-        strcpy(varlt[1], "DE");
-        strcpy(varlt[2], "DI");
-        strcpy(varlt[3], "EX");
-        strcpy(varlt[4], "GR");
-        for(i=1; i<11; i++) printf("VARIABLE %d %s\n", i, varlt[i]);
-        printf("HIT RETURN KEY TO CONTINUE");
-        gets(buff);
+        //strcpy(varlt[1], "DE");
+        variableList[1].copy("DEGREE");
+        //strcpy(varlt[2], "DI");
+        variableList[2].copy("GOOD GRADES");
+        //strcpy(varlt[3], "EX");
+        variableList[3].copy("LAB WORK");
+        //strcpy(varlt[4], "GR");
+        variableList[4].copy("LEADERSHIP");
+        variableList[5].copy("MED SCHOOL");
+        variableList[6].copy("GROUP WORK");
+        variableList[7].copy("WORK ALONE");
+        variableList[8].copy("OUTDOOR WORK");
+        variableList[9].copy("MEDICAL CERTIFICATE");
+        variableList[10].copy("TEACHER CERTIFICATE");
+        variableList[11].copy("PROJECT WORK");
+        variableList[12].copy("PROFESSION");
+        variableList[13].copy("COURSES WITH LABS");
+        variableList[14].copy("GROUP LEADER");
+        variableList[15].copy("HOURS OUTSIDE");
+        variableList[16].copy("MED FIELD");
+        variableList[17].copy("CRIMINAL BACKGROUND");
+        for(int i=1; i<18; i++) /*printf("VARIABLE %d %s\n", i, varlt[i])*/ cout << "Variable: " << i << " " << variableList[i];
+        //printf("HIT RETURN KEY TO CONTINUE");
+        cout << "Hit Return to continue...";
+        //gets(buff);
+        getchar();
         /* enter variables as they appear in the if clauses.  a maximum
 of 3
         variables per if statement.  if no more variables hit return
