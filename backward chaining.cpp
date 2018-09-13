@@ -43,7 +43,7 @@ string conclusionList[21];
 string variableList[18];
 /*  clause vairable list */
 string clauseVariableList[69];
-string variables[18];
+string variable;
 string /* qualify */ goodGrades, /* degree*/ degree;
 string /* discovery */ labwork, /* position */ profession, ;
 string outdoorWork, leadership, groupWork;
@@ -142,47 +142,104 @@ exact
         variableList[8].copy("OUTDOOR WORK");
         variableList[9].copy("MEDICAL CERTIFICATE");
         variableList[10].copy("TEACHER CERTIFICATE");
-        variableList[11].copy("PROJECT WORK");
+        variableList[11].copy("GPA");
         variableList[12].copy("PROFESSION");
         variableList[13].copy("COURSES WITH LABS");
         variableList[14].copy("GROUP LEADER");
         variableList[15].copy("HOURS OUTSIDE");
         variableList[16].copy("MED FIELD");
         variableList[17].copy("CRIMINAL BACKGROUND");
-        for(int i=1; i<18; i++) /*printf("VARIABLE %d %s\n", i, varlt[i])*/ cout << "Variable: " << i << " " << variableList[i];
+        for(int i=1; i<18; i++) /*printf("VARIABLE %d %s\n", i, varlt[i])*/ cout << "Variable: " << i << " " << variableList[i]<<endl;
         //printf("HIT RETURN KEY TO CONTINUE");
-        cout << "Hit Return to continue...";
+        cout << "Hit Return to continue..."<<endl;
         //gets(buff);
         getchar();
         /* enter variables as they appear in the if clauses.  a maximum
 of 3
         variables per if statement.  if no more variables hit return
 key. */
-        printf("*** CLAUSE VARIABLE LIST ***\n");
+       // printf("*** CLAUSE VARIABLE LIST ***\n");
+       cout<<"****Clause variable list****"<<endl;
         /***** comment 407 through 409 ***/
-        strcpy(clvarlt[1], "DE");
-        strcpy(clvarlt[5], "DE");
-        strcpy(clvarlt[9], "DE");
-        strcpy(clvarlt[10], "DI");
-        strcpy(clvarlt[13], "QU");
-        strcpy(clvarlt[14], "GR");
-        strcpy(clvarlt[15], "EX");
-        strcpy(clvarlt[17], "QU");
-        strcpy(clvarlt[18], "GR");
-        strcpy(clvarlt[19], "EX");
-        strcpy(clvarlt[21], "QU");
-        strcpy(clvarlt[22], "GR");
-        for(i=1; i<9; i++)
+        //strcpy(clvarlt[1], "DE");
+        clauseVariableList[1].copy("GPA");
+        //strcpy(clvarlt[5], "DE");
+        clauseVariableList[5].copy("GPA");
+        //strcpy(clvarlt[9], "DE");
+        clauseVariableList[9].copy("COURSES WITH LABS");
+        //strcpy(clvarlt[10], "DI");
+        clauseVariableList[13].copy("GROUP LEADER");
+        //strcpy(clvarlt[13], "QU");
+        clauseVariableList[17].copy("DEGREE");
+        clauseVariableList[18].copy("GOOD GRADES");
+        //strcpy(clvarlt[14], "GR");
+        clauseVariableList[21].copy("DEGREE");
+        clauseVariableList[22].copy("GOOD GRADES");
+        clauseVariableList[23].copy("LAB WORK");
+        //strcpy(clvarlt[15], "EX");
+        clauseVariableList[25].copy("DEGREE");
+        clauseVariableList[26].copy("LEADERSHIP");
+        //strcpy(clvarlt[17], "QU");
+        clauseVariableList[29].copy("GROUP WORK");
+        //strcpy(clvarlt[18], "GR");
+        clauseVariableList[33].copy("DEGREE");
+        clauseVariableList[34].copy("MED SCHOOL");
+        clauseVariableList[35].copy("GROUP WORK");
+        //strcpy(clvarlt[19], "EX");
+        clauseVariableList[37].copy("DEGREE");
+        clauseVariableList[38].copy("WORK ALONE");
+        clauseVariableList[41].copy("HOURS OUTSODE");
+        clauseVariableList[45].copy("DEGREE");
+        clauseVariableList[46].copy("OUTDOOR WORK");
+        clauseVariableList[49].copy("DEGREE");
+        clauseVariableList[50].copy("GROUP WORK");
+        clauseVariableList[53].copy("DEGREE");
+        clauseVariableList[54].copy("OUTDOOR WORK);
+        clauseVariableList[57].copy("MED SCHOOL");
+        clauseVariableList[58].copy("MED FIELD");
+        clauseVariableList[61].copy("DEGREE");
+        clauseVariableList[62].copy("MEDICAL CERTIFICATE);
+        clauseVariableList[63].copy("GROUP WORK");
+        clauseVariableList[65].copy("CRIMINAL BACKGROUND");
+        clauseVariableList[69].copy("DEGREE");
+        clauseVariableList[70].copy("TEACHING CERTIFICATE");
+        clauseVariableList[73].copy("DEGREE");
+        clauseVariableList[74].copy("OUTDOOR WORK");
+        clauseVariableList[77].copy("DEGREE");
+        clauseVariableList[78].copy("GOOD GRADES");
+        clauseVariableList[79].copy("GOOD WORK");
+
+        //strcpy(clvarlt[21], "QU");
+        //strcpy(clvarlt[22], "GR");
+        for(int i=1; i<18; i++)
         {
-                printf("** CLAUSE %d\n", i);
-                for(j=1; j<5; j++)
-                { k = 4 * (i-1) + j;
-                  printf("VARIABLE %d  %s\n", j, clvarlt[k]); }
-                if (i==4)
-                { printf("HIT RETURN KEY TO CONTINUE"); gets(buff); }
-        }
+               // printf("** CLAUSE %d\n", i);
+               cout<<"***CLAUSE***"<<i;
+                for(int j=1; j<5; j++)
+                {
+                    int k = 4 * (i-1) + j;
+
+                  //printf("VARIABLE %d  %s\n", j, clvarlt[k]); }
+                cout<<"VARIABLE "<< j <<clauseVariableList[k]<<endl;
+                }
+
+
+                if (i==17)
+                {
+                    //printf("HIT RETURN KEY TO CONTINUE"); gets(buff); }
+                    cout<<"HIT THE RETURN KEY TO CONTINUE..."<<endl;
+                    getchar();
+                }
+
         /****** inference section *****/
-        printf("** ENTER CONCLUSION ? "); gets(varble);
+        //printf("** ENTER CONCLUSION ? "); gets(varble);
+
+       // cout<<"****ENTER CONCLUSION? "<<endl;
+        cout<<"Conclusion here is....PROFESSION"<<endl;
+        variable.copy("PROFESSION");
+
+
+
         /* get conclusion statement number (sn) from the conclusion list
            (conclt) */
         /* first statement starts search */
