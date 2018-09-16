@@ -45,7 +45,7 @@ string variableList[18];
 string clauseVariableList[69];
 string variable;
 string /* qualify */ goodGrades, /* degree*/ degree;
-string /* discovery */ labwork, /* position */ profession, ;
+string /* discovery */ labwork, /* position */ profession;
 string outdoorWork, leadership, groupWork;
 char buff[128];
 
@@ -55,7 +55,7 @@ int instantiatedList[11];
 int statementStack[11];
 int /* clause stack */ clauseStack[11], sn, f, s, /*stack pointer */ stackPointer;
 
-float /* grade */ gr, /*experience */ ex;
+float /* grade */ grade, /*experience */ ex;
 
 void determine_member_concl_list(void);
 void push_on_stack(void);
@@ -76,10 +76,12 @@ int main()
                 clauseStack[i]=0;
         }
 
-
-        conclusionList.copy("");
-        variableList.copy("");
-        for (int i=0; i<69; i++)  clauseVariableList[i].copy("");
+        for (int i = 0; i < 21; i++)
+            conclusionList[i].assign(" ");
+        for (int i = 0; i < 18; i++)
+            variableList[i].assign(" ");
+        for (int i=0; i<69; i++)
+            clauseVariableList[i].assign(" ");
         /* enter conclusions which are the variables in the then part,
 1 at
         a time.  enter the conclusions in exact order starting at the 1st
@@ -88,33 +90,33 @@ int main()
 
         /*** comment 305 *****/
         //strcpy(conclt[1], "PO");
-        conclusionList[1].copy("GOOD GRADES");
+        conclusionList[1].assign("GOOD GRADES");
         //strcpy(conclt[2], "QU");
-        conclusionList[2].copy("GOOD GRADES");
+        conclusionList[2].assign("GOOD GRADES");
         //strcpy(conclt[3], "PO");
-        conclusionList[3].copy("LAB WORK");
+        conclusionList[3].assign("LAB WORK");
         //strcpy(conclt[4], "PO");
-        conclusionList[4].copy("LEADERSHIP");
+        conclusionList[4].assign("LEADERSHIP");
         //strcpy(conclt[5], "PO");
-        conclusionList[5].copy("PROFESSION");
+        conclusionList[5].assign("PROFESSION");
         //strcpy(conclt[6], "PO");
-        conclusionList[6].copy("PROFESSION");
-        conclusionList[7].copy("PROFESSION");
-        conclusionList[8].copy("WORK ALONE");
-        conclusionList[9].copy("PROFESSION");
-        conclusionList[10].copy("PROFESSION");
-        conclusionList[11].copy("OUTDOOR WORK");
-        conclusionList[12].copy("PROFESSION");
-        conclusionList[13].copy("PROFESSION");
-        conclusionList[14].copy("PROFESSION");
-        conclusionList[15].copy("MEDICAL CERTIFICATE");
-        conclusionList[16].copy("PROFESSION");
-        conclusionList[17].copy("TEACHING CERTIFICATE");
-        conclusionList[18].copy("PROFESSION");
-        conclusionList[19].copy("PROFESSION");
-        conclusionList[20].copy("PROFESSION");
+        conclusionList[6].assign("PROFESSION");
+        conclusionList[7].assign("PROFESSION");
+        conclusionList[8].assign("WORK ALONE");
+        conclusionList[9].assign("PROFESSION");
+        conclusionList[10].assign("PROFESSION");
+        conclusionList[11].assign("OUTDOOR WORK");
+        conclusionList[12].assign("PROFESSION");
+        conclusionList[13].assign("PROFESSION");
+        conclusionList[14].assign("PROFESSION");
+        conclusionList[15].assign("MEDICAL CERTIFICATE");
+        conclusionList[16].assign("PROFESSION");
+        conclusionList[17].assign("TEACHING CERTIFICATE");
+        conclusionList[18].assign("PROFESSION");
+        conclusionList[19].assign("PROFESSION");
+        conclusionList[20].assign("PROFESSION");
         //printf("*** CONCLUSION LIST ***\n");
-        for (i=1; i<21; i++) /*printf("CONCLUSION %d %s\n", i,conclt[i])*/ cout << "Conclusion: " << i << conclusionList[i] << endl;
+        for (int i=1; i<21; i++) /*printf("CONCLUSION %d %s\n", i,conclt[i])*/ cout << "Conclusion: " << i << conclusionList[i] << endl;
 
         //printf("HIT RETURN TO CONTINUE");
         cout << "Hit Return to continue..." << endl;
@@ -129,26 +131,26 @@ exact
         cout << "Variable List:" << endl;
         /**** comment 367 *****/
         //strcpy(varlt[1], "DE");
-        variableList[1].copy("DEGREE");
+        variableList[1].assign("DEGREE");
         //strcpy(varlt[2], "DI");
-        variableList[2].copy("GOOD GRADES");
+        variableList[2].assign("GOOD GRADES");
         //strcpy(varlt[3], "EX");
-        variableList[3].copy("LAB WORK");
+        variableList[3].assign("LAB WORK");
         //strcpy(varlt[4], "GR");
-        variableList[4].copy("LEADERSHIP");
-        variableList[5].copy("MED SCHOOL");
-        variableList[6].copy("GROUP WORK");
-        variableList[7].copy("WORK ALONE");
-        variableList[8].copy("OUTDOOR WORK");
-        variableList[9].copy("MEDICAL CERTIFICATE");
-        variableList[10].copy("TEACHER CERTIFICATE");
-        variableList[11].copy("GPA");
-        variableList[12].copy("PROFESSION");
-        variableList[13].copy("COURSES WITH LABS");
-        variableList[14].copy("GROUP LEADER");
-        variableList[15].copy("HOURS OUTSIDE");
-        variableList[16].copy("MED FIELD");
-        variableList[17].copy("CRIMINAL BACKGROUND");
+        variableList[4].assign("LEADERSHIP");
+        variableList[5].assign("MED SCHOOL");
+        variableList[6].assign("GROUP WORK");
+        variableList[7].assign("WORK ALONE");
+        variableList[8].assign("OUTDOOR WORK");
+        variableList[9].assign("MEDICAL CERTIFICATE");
+        variableList[10].assign("TEACHER CERTIFICATE");
+        variableList[11].assign("GPA");
+        variableList[12].assign("PROFESSION");
+        variableList[13].assign("COURSES WITH LABS");
+        variableList[14].assign("GROUP LEADER");
+        variableList[15].assign("HOURS OUTSIDE");
+        variableList[16].assign("MED FIELD");
+        variableList[17].assign("CRIMINAL BACKGROUND");
         for(int i=1; i<18; i++) /*printf("VARIABLE %d %s\n", i, varlt[i])*/ cout << "Variable: " << i << " " << variableList[i]<<endl;
         //printf("HIT RETURN KEY TO CONTINUE");
         cout << "Hit Return to continue..."<<endl;
@@ -162,52 +164,52 @@ key. */
        cout<<"****Clause variable list****"<<endl;
         /***** comment 407 through 409 ***/
         //strcpy(clvarlt[1], "DE");
-        clauseVariableList[1].copy("GPA");
+        clauseVariableList[1].assign("GPA");
         //strcpy(clvarlt[5], "DE");
-        clauseVariableList[5].copy("GPA");
+        clauseVariableList[5].assign("GPA");
         //strcpy(clvarlt[9], "DE");
-        clauseVariableList[9].copy("COURSES WITH LABS");
+        clauseVariableList[9].assign("COURSES WITH LABS");
         //strcpy(clvarlt[10], "DI");
-        clauseVariableList[13].copy("GROUP LEADER");
+        clauseVariableList[13].assign("GROUP LEADER");
         //strcpy(clvarlt[13], "QU");
-        clauseVariableList[17].copy("DEGREE");
-        clauseVariableList[18].copy("GOOD GRADES");
+        clauseVariableList[17].assign("DEGREE");
+        clauseVariableList[18].assign("GOOD GRADES");
         //strcpy(clvarlt[14], "GR");
-        clauseVariableList[21].copy("DEGREE");
-        clauseVariableList[22].copy("GOOD GRADES");
-        clauseVariableList[23].copy("LAB WORK");
+        clauseVariableList[21].assign("DEGREE");
+        clauseVariableList[22].assign("GOOD GRADES");
+        clauseVariableList[23].assign("LAB WORK");
         //strcpy(clvarlt[15], "EX");
-        clauseVariableList[25].copy("DEGREE");
-        clauseVariableList[26].copy("LEADERSHIP");
+        clauseVariableList[25].assign("DEGREE");
+        clauseVariableList[26].assign("LEADERSHIP");
         //strcpy(clvarlt[17], "QU");
-        clauseVariableList[29].copy("GROUP WORK");
+        clauseVariableList[29].assign("GROUP WORK");
         //strcpy(clvarlt[18], "GR");
-        clauseVariableList[33].copy("DEGREE");
-        clauseVariableList[34].copy("MED SCHOOL");
-        clauseVariableList[35].copy("GROUP WORK");
+        clauseVariableList[33].assign("DEGREE");
+        clauseVariableList[34].assign("MED SCHOOL");
+        clauseVariableList[35].assign("GROUP WORK");
         //strcpy(clvarlt[19], "EX");
-        clauseVariableList[37].copy("DEGREE");
-        clauseVariableList[38].copy("WORK ALONE");
-        clauseVariableList[41].copy("HOURS OUTSODE");
-        clauseVariableList[45].copy("DEGREE");
-        clauseVariableList[46].copy("OUTDOOR WORK");
-        clauseVariableList[49].copy("DEGREE");
-        clauseVariableList[50].copy("GROUP WORK");
-        clauseVariableList[53].copy("DEGREE");
-        clauseVariableList[54].copy("OUTDOOR WORK);
-        clauseVariableList[57].copy("MED SCHOOL");
-        clauseVariableList[58].copy("MED FIELD");
-        clauseVariableList[61].copy("DEGREE");
-        clauseVariableList[62].copy("MEDICAL CERTIFICATE);
-        clauseVariableList[63].copy("GROUP WORK");
-        clauseVariableList[65].copy("CRIMINAL BACKGROUND");
-        clauseVariableList[69].copy("DEGREE");
-        clauseVariableList[70].copy("TEACHING CERTIFICATE");
-        clauseVariableList[73].copy("DEGREE");
-        clauseVariableList[74].copy("OUTDOOR WORK");
-        clauseVariableList[77].copy("DEGREE");
-        clauseVariableList[78].copy("GOOD GRADES");
-        clauseVariableList[79].copy("GOOD WORK");
+        clauseVariableList[37].assign("DEGREE");
+        clauseVariableList[38].assign("WORK ALONE");
+        clauseVariableList[41].assign("HOURS OUTSODE");
+        clauseVariableList[45].assign("DEGREE");
+        clauseVariableList[46].assign("OUTDOOR WORK");
+        clauseVariableList[49].assign("DEGREE");
+        clauseVariableList[50].assign("GROUP WORK");
+        clauseVariableList[53].assign("DEGREE");
+        clauseVariableList[54].assign("OUTDOOR WORK");
+        clauseVariableList[57].assign("MED SCHOOL");
+        clauseVariableList[58].assign("MED FIELD");
+        clauseVariableList[61].assign("DEGREE");
+        clauseVariableList[62].assign("MEDICAL CERTIFICATE");
+        clauseVariableList[63].assign("GROUP WORK");
+        clauseVariableList[65].assign("CRIMINAL BACKGROUND");
+        clauseVariableList[69].assign("DEGREE");
+        clauseVariableList[70].assign("TEACHING CERTIFICATE");
+        clauseVariableList[73].assign("DEGREE");
+        clauseVariableList[74].assign("OUTDOOR WORK");
+        clauseVariableList[77].assign("DEGREE");
+        clauseVariableList[78].assign("GOOD GRADES");
+        clauseVariableList[79].assign("GOOD WORK");
 
         //strcpy(clvarlt[21], "QU");
         //strcpy(clvarlt[22], "GR");
@@ -236,7 +238,7 @@ key. */
 
        // cout<<"****ENTER CONCLUSION? "<<endl;
         cout<<"Conclusion here is....PROFESSION"<<endl;
-        variable.copy("PROFESSION");
+        variable.assign("PROFESSION");
 
 
 
@@ -258,10 +260,11 @@ goal
                           {
                            /* calculate clause location in clause-variable
                               list */
-b545: i= (statsk[sp] -1) *4 + clausk[sp];
+b545: i= (statementStack[stackPointer] -1) *4 + clauseStack[stackPointer];
           /* clause variable */
-          strcpy(varble, clvarlt[i]);
-          if(strcmp(varble, "") != 0) {
+          //strcpy(variable, clauseVariableList[i]);
+          variable.assign(clauseVariableList[i]);
+          if(strcmp(variable.c_str(), "") != 0) {
                   /*is this clause variable a conclusion? */
                   f = 1;
                   determine_member_concl_list();
@@ -270,11 +273,11 @@ b545: i= (statsk[sp] -1) *4 + clausk[sp];
                           goto b520;
                   /* check instantiation of this clause */
                   instantiate();
-                  clausk[sp] = clausk[sp] + 1;
+                  clauseStack[stackPointer] = clauseStack[stackPointer] + 1;
           }
-                          } while(strcmp(varble, "") != 0); /*do-while*/
+                          } while(strcmp(variable.c_str(), "") != 0); /*do-while*/
                           /*no more clauses check if part of statement */
-                          sn = statsk[sp];
+                          sn = statementStack[stackPointer];
                           s = 0;
                           /**** if then statements ****/
                           /* sample if parts of if then statements from
@@ -282,29 +285,29 @@ b545: i= (statsk[sp] -1) *4 + clausk[sp];
                           switch (sn) {
                                   /* if part of statement 1 */
                                   /****** comment 1500 ****/
-                          case 1: if(strcmp(de, "NO") == 0) s = 1;
+                          case 1: if(strcmp(degree.c_str(), "NO") == 0) s = 1;
                                   break;
                                   /* if part of statement 2 */
                                   /***** comment 1510 ******/
-                          case 2: if(strcmp(de, "YES") == 0) s = 1;
+                          case 2: if(strcmp(degree.c_str(), "YES") == 0) s = 1;
                                   break;
                                   /* if part of statement 3 */
-                          case 3: if((strcmp(de, "YES") == 0) &&
-                                     (strcmp(di, "YES") == 0)) s =1;
+                          case 3: if((strcmp(degree.c_str(), "YES") == 0) &&
+                                     (strcmp(labwork.c_str(), "YES") == 0)) s =1;
                                   break;
                                   /* if part of statement 4 */
                                   /******** comment 1560 ******/
-                          case 4: if((strcmp(qu, "YES") == 0) &&
-                                     (gr<3.5) && (ex >= 2)) s = 1;
+                          case 4: if((strcmp(goodGrades.c_str(), "YES") == 0) &&
+                                     (grade<3.5) && (grade >= 2)) s = 1;
                                   break;
                                   /******** comment 1570 ********/
                                   /* if part of statement 5 */
-                          case 5: if((strcmp(qu, "YES") == 0) &&
-                                     (gr<3) && (ex<2)) s = 1;
+                          case 5: if((strcmp(goodGrades.c_str(), "YES") == 0) &&
+                                     (grade<3) && (grade<2)) s = 1;
                                   break;
                                   /* if part of statement 6 */
-                          case 6: if((strcmp(qu, "YES") == 0) &&
-                                     (gr >=3.5)) s = 1;
+                          case 6: if((strcmp(goodGrades.c_str(), "YES") == 0) &&
+                                     (grade >=3.5)) s = 1;
 
                                   break;
                                   /********* comment 1680 ******/
@@ -314,13 +317,14 @@ b545: i= (statsk[sp] -1) *4 + clausk[sp];
                                   /* failed..search rest of statements for
                                      same conclusion */
                                   /* get conclusion */
-                                  i = statsk[sp];
-                                  strcpy(varble, conclt[i]);
+                                  i = statementStack[stackPointer];
+                                  //strcpy(variable, clauseVariableList[i]);
+                                  variable.assign(clauseVariableList[i]);
                                   /* search for conclusion starting at the
                                      next statement number */
-                                  f = statsk[sp] + 1;
+                                  f = statementStack[stackPointer] + 1;
                                   determine_member_concl_list();
-                                  sp = sp+1;
+                                  stackPointer = stackPointer+1;
                           }
                           /* pop old conclusion and put on new one */
                   } while((s != 1) && (sn !=0));  /* outer do-while loop */
@@ -360,14 +364,14 @@ b545: i= (statsk[sp] -1) *4 + clausk[sp];
                                   /****** comment 1680 ********/
                           }
                           /* pop the stack */
-                          sp=sp+1;
-                          if(sp >= 11)
+                          stackPointer=stackPointer+1;
+                          if(stackPointer >= 11)
                                   /* finished */
                                   printf("*** SUCCESS\n");
                           else {
                                   /* stack is not empty */
                                   /* get next clause then continue */
-                                  clausk[sp] = clausk[sp]+1;
+                                  clauseStack[stackPointer] = clauseStack[stackPointer]+1;
                                   goto b545;
                           }
                   }
@@ -383,10 +387,10 @@ void determine_member_concl_list() {
         sn = 0;
         /* member of conclusion list to be searched is f */
         i = f;
-        while((strcmp(varble, conclt[i]) != 0) && (i<8))
+        while((strcmp(variable, conclt[i]) != 0) && (i<8))
                 /* test for membership */
                 i=i+1;
-        if (strcmp(varble, conclt[i]) == 0) sn = i;  /* a member */
+        if (strcmp(variable, conclt[i]) == 0) sn = i;  /* a member */
 }
 
 void push_on_stack()
@@ -394,9 +398,9 @@ void push_on_stack()
 conclusion stack which consists of the statement stack (statsk) and the
 clause stack (clausk)..to push decrement stack pointer (sp) */
 {
-        sp=sp-1;
-        statsk[sp] = sn;
-        clausk[sp] = 1;
+        stackPointer=stackPointer-1;
+        statementStack[stackPointer] = sn;
+        clauseStack[stackPointer] = 1;
 }
 
 void instantiate()
@@ -406,8 +410,8 @@ variable list (varlt) contains the variable (varble). */
 {
         i=1;
         /* find variable in the list */
-        while((strcmp(varble, varlt[i]) != 0) && (i<10)) i=i+1;
-        if((strcmp(varble, varlt[i]) == 0) && (instlt[i] != 1))
+        while((strcmp(variable, varlt[i]) != 0) && (i<10)) i=i+1;
+        if((strcmp(variable, varlt[i]) == 0) && (instlt[i] != 1))
                 /*found variable and not already instantiated */
         {
                 instlt[i]=1; /*mark instantiated */
@@ -420,7 +424,7 @@ variable list (varlt) contains the variable (varble). */
                         /* input statements for sample position knowledge
                            base */
                         /***** comment 1700 ******/
-                case 1: printf("INPUT YES OR NOW FOR DE-? ");
+                case 1: printf("INPUT YES OR NO FOR DE-? ");
                         gets(de);
                         break;
                 case 2: printf("INPUT YES OR NO FOR DI-? ");
