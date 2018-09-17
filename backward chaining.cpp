@@ -47,10 +47,11 @@ string variable;
 string /* qualify */ goodGrades, /* degree*/ degree;
 string /* discovery */ labwork, /* position */ profession;
 string outdoorWork, leadership, groupWork;
+int coursesWithLabs;
 char buff[128];
 
 /* instantiated list */
-int instantiatedList[11];
+int instantiatedList[18];
 /* statement stack */
 int statementStack[11];
 int /* clause stack */ clauseStack[11], sn, f, s, /*stack pointer */ stackPointer;
@@ -282,6 +283,7 @@ b545: i= (statementStack[stackPointer] -1) *4 + clauseStack[stackPointer];
                           /**** if then statements ****/
                           /* sample if parts of if then statements from
                              the position knowledge base */
+
                           switch (sn) {
                                   /* if part of statement 1 */
                                   /****** comment 1500 ****/
@@ -387,10 +389,10 @@ void determine_member_concl_list() {
         sn = 0;
         /* member of conclusion list to be searched is f */
         i = f;
-        while((strcmp(variable, conclt[i]) != 0) && (i<8))
+        while((strcmp(variable.c_str(), conclusionList[i].c_str()) != 0) && (i<8))
                 /* test for membership */
                 i=i+1;
-        if (strcmp(variable, conclt[i]) == 0) sn = i;  /* a member */
+        if (strcmp(variable.c_str(), conclusionList[i].c_str()) == 0) sn = i;  /* a member */
 }
 
 void push_on_stack()
@@ -410,11 +412,11 @@ variable list (varlt) contains the variable (varble). */
 {
         i=1;
         /* find variable in the list */
-        while((strcmp(variable, varlt[i]) != 0) && (i<10)) i=i+1;
-        if((strcmp(variable, varlt[i]) == 0) && (instlt[i] != 1))
+        while((strcmp(variable.c_str(), variableList[i].c_str()) != 0) && (i<10)) i=i+1;
+        if((strcmp(variable.c_str(), variableList[i].c_str()) == 0) && (instantiatedList[i] != 1))
                 /*found variable and not already instantiated */
         {
-                instlt[i]=1; /*mark instantiated */
+                instantiatedList[i]=1; /*mark instantiated */
                 /* the designer of the
                knowledge base places the input statements to
                instantiate the variables below in the case statement */
@@ -424,14 +426,25 @@ variable list (varlt) contains the variable (varble). */
                         /* input statements for sample position knowledge
                            base */
                         /***** comment 1700 ******/
-                case 1: printf("INPUT YES OR NO FOR DE-? ");
-                        gets(de);
+                //case 1: printf("INPUT YES OR NO FOR DE-? ");
+                //        gets(de);
+                case 1: cout << "What degree are you working towards?";
+                        cin >> degree;
+                        cout << endl;
                         break;
-                case 2: printf("INPUT YES OR NO FOR DI-? ");
-                        gets(di);
+                //case 2: printf("INPUT YES OR NO FOR DI-? ");
+                //        gets(di);
+                case 2: cout << "What GPA do you maintain?";
+                        cin >> grade;
+                        if (grade > 3.5)
+                            goodGrades.assign("true");
+                        else
+                            goodGrades.assign("false");
                         break;
-                case 3: printf("INPUT A REAL NUMBER FOR EX-? ");
-                        scanf("%f", &ex);
+                //case 3: printf("INPUT A REAL NUMBER FOR EX-? ");
+                //        scanf("%f", &ex);
+                case 3: cout << "How many courses will you take that include a lab section?";
+                        cin >> coursesWithLabs;
                         break;
                 case 4: printf("INPUT A REAL NUMBER FOR GR-? ");
                         scanf("%f", &gr);
