@@ -1,8 +1,3 @@
-Enclosed a program, which comprises the inference engine based on Forward chaining.  You need it for your 
-project #1.  The program contains some errors and it is not designed to be efficient. 
-Modify the program to make it better and efficient.  Explain in your report how you have modified the
-program to make it better.
-
 /*** FORWARD CHAINING ***/
 /************************/
 /* Install your IF clauses in squence in the middle of
@@ -14,7 +9,24 @@ The THEN part of the above construction always contains
 S-1. Install your THEN clauses in sequence in the middle
 of the progrram within the second case statement. */
 
-#include <stdio.h>
+//TO DO:
+//1- Remove globals
+    //1a- change variable list
+//2- Remove gotos
+//3- Use cpp libraries rather than c
+    //3a- change printf to cout
+    //3b- use string instead of char[]
+    //3c- use string.compare instead of strcmp
+    //3d- use cin instead of gets
+//4- re-write question to make sense
+
+
+#include <cstdio>
+#include <string>
+#include <iostream>
+#include<cstring>
+
+using namespace std;
 
 int flag;
 char cndvar[10][3];
@@ -70,7 +82,7 @@ main()
     printf("HIT RETURN TO CONTINUE");
     getchar();
 
-    /* enter variables as they appear in the IF clauses, Up to 3 
+    /* enter variables as they appear in the IF clauses, Up to 3
     variables per IF statement. If no more variables left, just
     hit return key */
     /****** comment 407, 408 *************/
@@ -104,7 +116,7 @@ main()
     strcpy(cndvar[bp], c);
     /* move backpointer (bp) to back */
     bp = bp + 1;
-    /* set the condition variable pointer consisting of the 
+    /* set the condition variable pointer consisting of the
     statement number (sn) and the clause number (cn) */
     sn = 1; cn = 1;
     /* find the next statement number containing the condition variable
