@@ -29,14 +29,14 @@ program to make it better.*/
    case statement of the main program
    example strcpy(po,"YES");*/
 
-   #include<string>
-   #include<cstdio>
-   #include<cstring>
-   #include<iostream>
+#include<string>
+#include<cstdio>
+#include<cstring>
+#include<iostream>
 
-   using namespace std;
+using namespace std;
 
-
+bool debug = true;
 /*  conclusion list */
 string conclusionList[21];
 /*  variable list */
@@ -118,7 +118,7 @@ int main()
         conclusionList[19].assign("PROFESSION");
         conclusionList[20].assign("PROFESSION");
         //printf("*** CONCLUSION LIST ***\n");
-        for (int i=1; i<21; i++) /*printf("CONCLUSION %d %s\n", i,conclt[i])*/ cout << "Conclusion: " << i << conclusionList[i] << endl;
+        for (int i=1; i<21; i++) /*printf("CONCLUSION %d %s\n", i,conclt[i])*/ cout << "Conclusion: " << i << " " << conclusionList[i] << endl;
 
         //printf("HIT RETURN TO CONTINUE");
         cout << "Hit Return to continue..." << endl;
@@ -218,13 +218,13 @@ key. */
         for(int i=1; i<18; i++)
         {
                // printf("** CLAUSE %d\n", i);
-               cout<<"***CLAUSE***"<<i;
+               cout<<"***CLAUSE*** "<<i << endl;
                 for(int j=1; j<5; j++)
                 {
                     int k = 4 * (i-1) + j;
 
                   //printf("VARIABLE %d  %s\n", j, clvarlt[k]); }
-                cout<<"VARIABLE "<< j <<clauseVariableList[k]<<endl;
+                cout<<" VARIABLE "<< j <<clauseVariableList[k]<<endl;
                 }
 
 
@@ -239,8 +239,9 @@ key. */
         //printf("** ENTER CONCLUSION ? "); gets(varble);
 
        // cout<<"****ENTER CONCLUSION? "<<endl;
-        cout<<"Conclusion here is....PROFESSION"<<endl;
+        cout<<"Conclusion here is.... ";
         variable.assign("PROFESSION");
+        cout << variable << endl;
 
 
 
@@ -450,14 +451,15 @@ void determine_member_concl_list() {
    conclusion list (conclt).  if yes return sn != 0.
    if not a member sn=0;
 */
-        /* initially set to not a member */
-        sn = 0;
-        /* member of conclusion list to be searched is f */
-        int i = f;
-        while((strcmp(variable.c_str(), conclusionList[i].c_str()) != 0) && (i<8))
-                /* test for membership */
-                i=i+1;
-        if (strcmp(variable.c_str(), conclusionList[i].c_str()) == 0) sn = i;  /* a member */
+    if(debug) cout << "Determine Member Conclussion List called" << endl;
+    /* initially set to not a member */
+    sn = 0;
+    /* member of conclusion list to be searched is f */
+    int i = f;
+    while((strcmp(variable.c_str(), conclusionList[i].c_str()) != 0) && (i<8))
+            /* test for membership */
+            i=i+1;
+    if (strcmp(variable.c_str(), conclusionList[i].c_str()) == 0) sn = i;  /* a member */
 }
 
 void push_on_stack()
@@ -479,6 +481,7 @@ variable list (varlt) contains the variable (varble). */
         /* find variable in the list */
         while((strcmp(variable.c_str(), variableList[i].c_str()) != 0) && (i<18)) i=i+1;
         if((strcmp(variable.c_str(), variableList[i].c_str()) == 0) && (instantiatedList[i] != 1))
+            if (debug) cout << "Instantiate called for " << variableList[i] << endl;
                 /*found variable and not already instantiated */
         {
                 instantiatedList[i]=1; /*mark instantiated */
@@ -561,6 +564,7 @@ variable list (varlt) contains the variable (varble). */
 
                 case 11: cout<<"What is your GPA?";
                         cin >> grade;
+                        if (debug) cout << "Grade is " << grade << endl;
                         break;
 
                 case 12 : cout<< "What do you want to do?";
