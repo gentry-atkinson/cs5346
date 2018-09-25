@@ -13,8 +13,10 @@ BC::BC(bool debug)
     stackPointer = size;
 	for (int i=1; i < size; i++)
         {
-            conclusionList[i] = "";
-            variableList[i] = "";
+            //conclusionList[i] = "";
+            conclusionList[i].assign("");
+            //variableList[i] = "";
+            variableList[i].assign("");
             instantiatedList[i]=0;
             statementStack[i]=0;
             clauseStack[i]=0;
@@ -80,7 +82,7 @@ BC::BC(bool debug)
     variableList[14].assign("GROUPLEADER");
     variableList[15].assign("HOURSOUTSIDE");
     variableList[16].assign("MEDFIELD");
-    variableList[17].assign("CRIMINAL BACKGROUND");
+    variableList[17].assign("CRIMINALBACKGROUND");
     for(int i=1; i<18; i++) /*printf("VARIABLE %d %s\n", i, varlt[i])*/
         cout << "Variable: " << i << " " << variableList[i]<<endl;
 
@@ -149,7 +151,7 @@ BC::BC(bool debug)
             int k = 4 * (i-1) + j;
 
             //printf("VARIABLE %d  %s\n", j, clvarlt[k]); }
-            cout<<" VARIABLE: "<< j << " " << clauseVariableList[k]<<endl;
+            cout<<"VARIABLE: "<< j << " " << clauseVariableList[k]<<endl;
         }
 
     }
@@ -196,8 +198,7 @@ void BC::KeepProcessing()
     {
         push_on_stack();
         B545();
-    }
-    while((statementActive != 1) && (statementNumber !=0));
+    } while((statementActive != 1) && (statementNumber !=0));
 }
 
 void BC::determine_member_concl_list()
@@ -213,7 +214,7 @@ void BC::determine_member_concl_list()
     if (debug) cout << "Value of f is currently " << f << endl;
     int i = f;
     //while((varble!=conclusionList[i]) && (i<20))
-    while(strcmp(varble.c_str(), conclusionList[i].c_str()) != 0 && i < 20)
+    while(strcmp(varble.c_str(), conclusionList[i].c_str()) != 0 && i < 21)
         i=i+1; /* test for membership */
     //if (varble == conclusionList[i])
     if (strcmp(varble.c_str(), conclusionList[i].c_str()) == 0) {
@@ -231,7 +232,17 @@ void BC::push_on_stack()
     stackPointer=stackPointer-1;
     if (debug) cout << "Stack pointer at " << stackPointer << endl;
     statementStack[stackPointer] = statementNumber;
+    if (debug){
+        cout << "Statement stack: ";
+        for (int i = 1; i < size; i++) cout << statementStack[i] << "|";
+        cout << endl;
+    }
     clauseStack[stackPointer] = 1;
+    if (debug){
+        cout << "Clause stack: ";
+        for (int i = 1; i < size; i++) cout << clauseStack[i] << "|";
+        cout << endl;
+    }
 }
 
 void BC::instantiate()
@@ -282,10 +293,12 @@ void BC::initkbase(int i)
                 //case 3: printf("INPUT A REAL NUMBER FOR EX-? ");
                 //        scanf("%f", &ex);
             case 3: cout << "How many courses will you take that include a lab section?";
+                if (debug) cout << "Bad value in initKBase()" << endl;
                 cin >> coursesWithLabs;
                 break;
             case 4:// printf("INPUT A REAL NUMBER FOR GR-? ");
                 // scanf("%f", &gr);
+                if (debug) cout << "Bad value in initKBase()" << endl;
                 cout << "How many group projects have you been the leader off?";
                 cin >> groupLeader;
                 if (groupLeader >= 1) leadership.assign("true");
@@ -304,27 +317,31 @@ void BC::initkbase(int i)
                     groupWork.assign("true");
                 else groupWork.assign("false");
                 break;
-            case 7: cout << "Do you like working in groups? ";
+            case 7: if (debug) cout << "Bad value in initKBase()" << endl;
+                cout << "Do you like working in groups? ";
                 cin >> buff;
                 if (buff.compare("yes") == 0 || buff.compare("y") == 0)
                     workAlone.assign("false");
                 else workAlone.assign("true");
                 break;
-            case 8: cout << "How many hours do you spend outside every week? ";
+            case 8: if (debug) cout << "Bad value in initKBase()" << endl;
+                cout << "How many hours do you spend outside every week? ";
                 cin >> hoursOutside;
                 if (hoursOutside > 15)
                     outdoorWork.assign("true");
                 else
                     outdoorWork.assign("false");
                 break;
-            case 9: cout << "Will you get a medical certification? ";
+            case 9: if (debug) cout << "Bad value in initKBase()" << endl;
+                cout << "Will you get a medical certification? ";
                 cin >> buff;
                 if (buff.compare("yes") == 0 || buff.compare("y") == 0)
                     medCert.assign("true");
                 else medCert.assign("false");
                 break;
 
-            case 10: cout<< "Will you get a Teaching certification? ";
+            case 10: if (debug) cout << "Bad value in initKBase()" << endl;
+                cout<< "Will you get a Teaching certification? ";
                 cin>>buff;
                 if(buff.compare("yes")==0||buff.compare("y")==0)
                     teachCert.assign("true");
@@ -337,7 +354,8 @@ void BC::initkbase(int i)
                 if (debug) cout << "Grade is " << grade << endl;
                 break;
 
-            case 12 : cout<< "What do you want to do?";
+            case 12 : if (debug) cout << "Bad value in initKBase()" << endl;
+                cout<< "What do you want to do?";
                 cin>>profession;
                 break;
 
@@ -476,7 +494,8 @@ void BC::B545()
         /* failed..search rest of statements for same conclusion */
         /* get conclusion */
         i = statementStack[stackPointer];
-        varble = conclusionList[i];
+        //varble = conclusionList[i];
+        varble.assign(conclusionList[i]);
         /* search for conclusion starting at the next statement number */
         f = statementStack[stackPointer] + 1;
         determine_member_concl_list();
@@ -487,6 +506,8 @@ void BC::B545()
 
 void BC::InBetweenFunction()
 {
+    if (debug) cout << "InBetweenFunction called" << endl;
+    if (debug) cout << "Left side of rule " << statementNumber << " satisfied."  << endl;
     switch (statementNumber)
         {
                 /* then part of statement 1 */
@@ -572,14 +593,14 @@ void BC::InBetweenFunction()
                 break;
 
             case 19: profession.assign("property management");
-                cout<<"Profession = prop management" << endl;
+                cout<<"Profession = property management" << endl;
                 break;
 
             case 20: profession.assign("computer science");
                 cout<<"Profession = CS" << endl;
                 break;
                 /****** comment 1680 ********/
-        }
+        } //end of switch
 }
 
 void BC::popStack()

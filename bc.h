@@ -18,7 +18,7 @@ class BC
         int instantiatedList[size];
         int statementStack[size], clauseStack[size], statementNumber, f, statementActive, stackPointer;
         float gr, ex, grade;
-        bool debug = true;
+        bool debug;
     public:
     	BC(bool debug = false);
     	void inferenceSection();
