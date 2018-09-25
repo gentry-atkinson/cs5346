@@ -4,81 +4,157 @@
 
 using namespace std;
 
-void BC::initialization()
+BC::BC()
 {
 	// Stack space is 10 we initially place stack space at 10+1
     sp = size;
 	for (i=1; i < size; i++)
         {
-            conclt[i] = "";
-            varlt[i] = "";
-            instlt[i]=0;
-            statsk[i]=0;
+            conclusionList[i] = "";
+            variableList[i] = "";
+            instantiatedList[i]=0;
+            statementStack[i]=0;
             clausk[i]=0;
         }
     for (i=1; i < clauseSize + 1; i++)
-        clvarlt[i] = "";
+        clauseVariableList[i] = "";
 
     // Initializing Conclusion List
-    conclt[1] = "PO";
-    conclt[2] = "QU";
-    conclt[3] = "PO";
-    conclt[4] = "PO";
-    conclt[5] = "PO";
-    conclt[6] = "PO";
-
-    // Printing Conclusion list
-    cout<<"*** CONCLUSION LIST ***"<<endl;
-    for (i=1; i < size; i++)
-    	cout<<"CONCLUSION "<<i<<" "<<conclt[i]<<endl;
+    /*** comment 305 *****/
+    //strcpy(conclt[1], "PO");
+    conclusionList[1].assign("GOODGRADES");
+    //strcpy(conclt[2], "QU");
+    conclusionList[2].assign("GOODGRADES");
+    //strcpy(conclt[3], "PO");
+    conclusionList[3].assign("LABWORK");
+    //strcpy(conclt[4], "PO");
+    conclusionList[4].assign("LEADERSHIP");
+    //strcpy(conclt[5], "PO");
+    conclusionList[5].assign("PROFESSION");
+    //strcpy(conclt[6], "PO");
+    conclusionList[6].assign("PROFESSION");
+    conclusionList[7].assign("PROFESSION");
+    conclusionList[8].assign("WORKALONE");
+    conclusionList[9].assign("PROFESSION");
+    conclusionList[10].assign("PROFESSION");
+    conclusionList[11].assign("OUTDOOR WORK");
+    conclusionList[12].assign("PROFESSION");
+    conclusionList[13].assign("PROFESSION");
+    conclusionList[14].assign("PROFESSION");
+    conclusionList[15].assign("MEDICALCERTIFICATE");
+    conclusionList[16].assign("PROFESSION");
+    conclusionList[17].assign("TEACHINGCERTIFICATE");
+    conclusionList[18].assign("PROFESSION");
+    conclusionList[19].assign("PROFESSION");
+    conclusionList[20].assign("PROFESSION");
+    //printf("*** CONCLUSION LIST ***\n");
+    for (int i=1; i<21; i++) /*printf("CONCLUSION %d %s\n", i,conclt[i])*/
+        cout << "Conclusion: " << i << " " << conclusionList[i] << endl;
 
     cout<<"HIT RETURN TO CONTINUE";
     gets(buff);
 
-    // Initializing Variable List
-    varlt[1] = "DE";
-    varlt[2] = "DI";
-    varlt[3] = "EX";
-    varlt[4] = "GR";
-
-    // Printing Variable List
-    cout<<"*** VARIABLE LIST ***"<<endl;
-    for(i=1; i < size; i++)
-    	cout<<"VARIABLE "<<i<<" "<<varlt[i]<<endl;
+    cout << "Variable List:" << endl;
+    /**** comment 367 *****/
+    //strcpy(varlt[1], "DE");
+    variableList[1].assign("DEGREE");
+    //strcpy(varlt[2], "DI");
+    variableList[2].assign("GOOD GRADES");
+    //strcpy(varlt[3], "EX");
+    variableList[3].assign("LAB WORK");
+    //strcpy(varlt[4], "GR");
+    variableList[4].assign("LEADERSHIP");
+    variableList[5].assign("MED SCHOOL");
+    variableList[6].assign("GROUP WORK");
+    variableList[7].assign("WORK ALONE");
+    variableList[8].assign("OUTDOOR WORK");
+    variableList[9].assign("MEDICAL CERTIFICATE");
+    variableList[10].assign("TEACHER CERTIFICATE");
+    variableList[11].assign("GPA");
+    variableList[12].assign("PROFESSION");
+    variableList[13].assign("COURSES WITH LABS");
+    variableList[14].assign("GROUP LEADER");
+    variableList[15].assign("HOURS OUTSIDE");
+    variableList[16].assign("MED FIELD");
+    variableList[17].assign("CRIMINAL BACKGROUND");
+    for(int i=1; i<18; i++) /*printf("VARIABLE %d %s\n", i, varlt[i])*/
+        cout << "Variable: " << i << " " << variableList[i]<<endl;
 
     cout<<"HIT RETURN TO CONTINUE";
     gets(buff);
 
     // Initializing Clause Variable List
-    clvarlt[1] = "DE";
-    clvarlt[5] = "DE";
-    clvarlt[9] = "DE";
-    clvarlt[10] = "DI";
-    clvarlt[13] = "QU";
-    clvarlt[14] = "GR";
-    clvarlt[15] = "EX";
-    clvarlt[17] = "QU";
-    clvarlt[18] = "GR";
-    clvarlt[19] = "EX";
-    clvarlt[21] = "QU";
-    clvarlt[22] = "GR";
+    cout<<"****Clause variable list****"<<endl;
+    /***** comment 407 through 409 ***/
+    //strcpy(clvarlt[1], "DE");
+    clauseVariableList[1].assign("GPA");
+    //strcpy(clvarlt[5], "DE");
+    clauseVariableList[5].assign("GPA");
+    //strcpy(clvarlt[9], "DE");
+    clauseVariableList[9].assign("COURSES WITH LABS");
+    //strcpy(clvarlt[10], "DI");
+    clauseVariableList[13].assign("GROUP LEADER");
+    //strcpy(clvarlt[13], "QU");
+    clauseVariableList[17].assign("DEGREE");
+    clauseVariableList[18].assign("GOOD GRADES");
+    //strcpy(clvarlt[14], "GR");
+    clauseVariableList[21].assign("DEGREE");
+    clauseVariableList[22].assign("GOOD GRADES");
+    clauseVariableList[23].assign("LAB WORK");
+    //strcpy(clvarlt[15], "EX");
+    clauseVariableList[25].assign("DEGREE");
+    clauseVariableList[26].assign("LEADERSHIP");
+    //strcpy(clvarlt[17], "QU");
+    clauseVariableList[29].assign("GROUP WORK");
+    //strcpy(clvarlt[18], "GR");
+    clauseVariableList[33].assign("DEGREE");
+    clauseVariableList[34].assign("MED SCHOOL");
+    clauseVariableList[35].assign("GROUP WORK");
+    //strcpy(clvarlt[19], "EX");
+    clauseVariableList[37].assign("DEGREE");
+    clauseVariableList[38].assign("WORK ALONE");
+    clauseVariableList[41].assign("HOURS OUTSODE");
+    clauseVariableList[45].assign("DEGREE");
+    clauseVariableList[46].assign("OUTDOOR WORK");
+    clauseVariableList[49].assign("DEGREE");
+    clauseVariableList[50].assign("GROUP WORK");
+    clauseVariableList[53].assign("DEGREE");
+    clauseVariableList[54].assign("OUTDOOR WORK");
+    clauseVariableList[57].assign("MED SCHOOL");
+    clauseVariableList[58].assign("MED FIELD");
+    clauseVariableList[61].assign("DEGREE");
+    clauseVariableList[62].assign("MEDICAL CERTIFICATE");
+    clauseVariableList[63].assign("GROUP WORK");
+    clauseVariableList[65].assign("CRIMINAL BACKGROUND");
+    clauseVariableList[69].assign("DEGREE");
+    clauseVariableList[70].assign("TEACHING CERTIFICATE");
+    clauseVariableList[73].assign("DEGREE");
+    clauseVariableList[74].assign("OUTDOOR WORK");
+    clauseVariableList[77].assign("DEGREE");
+    clauseVariableList[78].assign("GOOD GRADES");
+    clauseVariableList[79].assign("GROUP WORK");
 
     //Printing Clause Variable List
-    cout<<"*** CLAUSE VARIABLE LIST ***"<<endl;
-    for(i=1; i < clauseSize/4; i++)
+     for(int i=1; i<21; i++)
+    {
+        // printf("** CLAUSE %d\n", i);
+        cout<<"***CLAUSE*** "<<i << endl;
+        for(int j=1; j<5; j++)
         {
-            cout<<"** CLAUSE "<<i<<" **"<<endl;
-            for(j=1; j<5; j++)
-            {
-                k = 4 * (i-1) + j;
-                cout<<"VARIABLE "<<j<<" "<<clvarlt[k]<<endl;
-            }
-            if (i==4)
-            {
-    			cout<<"HIT RETURN TO CONTINUE";
-                gets(buff);
-            }
+            int k = 4 * (i-1) + j;
+
+            //printf("VARIABLE %d  %s\n", j, clvarlt[k]); }
+            cout<<" VARIABLE: "<< j << " " << clauseVariableList[k]<<endl;
         }
+
+
+        if (i==20)
+        {
+            //printf("HIT RETURN KEY TO CONTINUE"); gets(buff); }
+            cout<<"HIT THE RETURN KEY TO CONTINUE..."<<endl;
+            getchar();
+        }
+    }
 }
 
 void BC::inferenceSection()
@@ -129,16 +205,16 @@ void BC::determine_member_concl_list()
     sn = 0;
     /* member of conclusion list to be searched is f */
     i = f;
-    while((varble!=conclt[i]) && (i<8))
+    while((varble!=conclusionList[i]) && (i<20))
         i=i+1; /* test for membership */
-    if (varble == conclt[i])
+    if (varble == conclusionList[i])
     	sn = i;  /* a member */
 }
 
 void BC::push_on_stack()
 {
     sp=sp-1;
-    statsk[sp] = sn;
+    statementStack[sp] = sn;
     clausk[sp] = 1;
 }
 
@@ -146,13 +222,13 @@ void BC::instantiate()
 {
     i=1;
     /* find variable in the list */
-    while (varble != varlt[i] && i<10)
+    while (varble != variableList[i] && i<10)
     	i=i+1;
-    if (varble == varlt[i] && instlt[i] != 1)
+    if (varble == variableList[i] && instantiatedList[i] != 1)
     {
       	/*found variable and not already instantiated */
       	/*mark instantiated */
-        instlt[i]=1;
+        instantiatedList[i]=1;
     	/* the designer of the knowledge base places the input statements to
         instantiate the variables below in the case statement */
         initkbase();
@@ -189,9 +265,9 @@ void BC::B545()
     {
         /* calculate clause location in clause-variable list */
         //B545:
-        i= (statsk[sp] -1) *4 + clausk[sp];
+        i= (statementStack[sp] -1) *4 + clausk[sp];
         /* clause variable */
-        varble = clvarlt[i];
+        varble = clauseVariableList[i];
         if(varble != "")
         {
             /*is this clause variable a conclusion? */
@@ -205,7 +281,7 @@ void BC::B545()
         }
     }
     while(varble != "");
-    sn = statsk[sp];
+    sn = statementStack[sp];
     s = 0;
 
      switch (sn)
@@ -253,10 +329,10 @@ void BC::B545()
     {
         /* failed..search rest of statements for same conclusion */
         /* get conclusion */
-        i = statsk[sp];
-        varble = conclt[i];
+        i = statementStack[sp];
+        varble = conclusionList[i];
         /* search for conclusion starting at the next statement number */
-        f = statsk[sp] + 1;
+        f = statementStack[sp] + 1;
         determine_member_concl_list();
         sp = sp+1;
     }
