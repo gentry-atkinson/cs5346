@@ -8,6 +8,7 @@ using namespace std;
 
 BC::BC(bool debug)
 {
+    this->debug = debug;
 	// Stack space is 10 we initially place stack space at 10+1
     stackPointer = size;
 	for (int i=1; i < size; i++)
@@ -165,6 +166,7 @@ BC::BC(bool debug)
 
 void BC::inferenceSection()
 {
+    if (debug) cout << "inferenceSection() called" << endl;
     //cout<<"** ENTER CONCLUSION ? ";
     //cin>>varble;
     varble.assign("PROFESSION");
@@ -176,6 +178,7 @@ void BC::inferenceSection()
 
 void BC::B520()
 {
+    if (debug) cout << "B520 called" << endl;
 	f=1;
     determine_member_concl_list();
     if (statementNumber != 0)
@@ -193,6 +196,7 @@ void BC::B520()
 
 void BC::KeepProcessing()
 {
+    if (debug) cout << "KeepProcessing() called" << endl;
    	do
     /* push statement number (sn) and clause number=1 on
     goal stack which is composed of the statement stack (statsk) and clause stack (clausk) */
@@ -205,6 +209,7 @@ void BC::KeepProcessing()
 
 void BC::determine_member_concl_list()
 {
+    if (debug) cout << "determine_member_concl_list() called for " << varble << endl;
     /* routine to determine if a variable (varble) is a member of the
        conclusion list (conclt).  if yes return sn != 0.
        if not a member sn=0;
@@ -213,21 +218,31 @@ void BC::determine_member_concl_list()
     statementNumber = 0;
     /* member of conclusion list to be searched is f */
     int i = f;
-    while((varble!=conclusionList[i]) && (i<20))
+    //while((varble!=conclusionList[i]) && (i<20))
+    while(strcmp(varble.c_str(), conclusionList[i].c_str()) != 0 && i < 20)
         i=i+1; /* test for membership */
-    if (varble == conclusionList[i])
+    //if (varble == conclusionList[i])
+    if (strcmp(varble.c_str(), conclusionList[i].c_str()) == 0) {
     	statementNumber = i;  /* a member */
+    	if (debug) cout << varble << " found at " << i << endl;
+    }
+    else
+        if (debug) cout << varble << " not found in conclussion list" << endl;
+
 }
 
 void BC::push_on_stack()
 {
+    if (debug) cout << "Push_on_stack() called" << endl;
     stackPointer=stackPointer-1;
+    if (debug) cout << "Stack pointer at " << stackPointer << endl;
     statementStack[stackPointer] = statementNumber;
     clauseStack[stackPointer] = 1;
 }
 
 void BC::instantiate()
 {
+    if (debug) cout << "Instantiate called for " << varble << endl;
     int i=1;
     /* find variable in the list */
     while ((strcmp(varble.c_str(), variableList[i].c_str()) != 0) && i<18)
@@ -246,6 +261,7 @@ void BC::instantiate()
 
 void BC::initkbase(int i)
 {
+    if (debug) cout << "InitKBase() called for " << variableList[i] << endl;
 	switch (i)
         {
                 /***** input statement *****/
