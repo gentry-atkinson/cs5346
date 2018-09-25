@@ -14,20 +14,20 @@ class BC
         std::string groupWork, medSchool, medCert;
         std::string teachCert,medField,criminal,workAlone;
         int coursesWithLabs, groupLeader, hoursOutside;
-        char buff[256];
+        std::string buff;
         int instantiatedList[size];
-        int statementStack[size], clausk[size], sn, f, i, j, s, k, sp;
-        float gr, ex;
+        int statementStack[size], clauseStack[size], statementNumber, f, statementActive, stackPointer;
+        float gr, ex, grade;
         bool debug = true;
     public:
-    	BC();
+    	BC(bool debug = false);
     	void inferenceSection();
     	void B520();
     	void KeepProcessing();
     	void determine_member_concl_list();
     	void push_on_stack();
     	void instantiate();
-    	void initkbase();
+    	void initkbase(int);
     	void InBetweenFunction();
     	void popStack();
         void B545();

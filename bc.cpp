@@ -1,22 +1,24 @@
 #include "bc.h"
 #include <cstdio>
 #include <iostream>
+#include <cstring>
+#include <cstdlib>
 
 using namespace std;
 
-BC::BC()
+BC::BC(bool debug)
 {
 	// Stack space is 10 we initially place stack space at 10+1
-    sp = size;
-	for (i=1; i < size; i++)
+    stackPointer = size;
+	for (int i=1; i < size; i++)
         {
             conclusionList[i] = "";
             variableList[i] = "";
             instantiatedList[i]=0;
             statementStack[i]=0;
-            clausk[i]=0;
+            clauseStack[i]=0;
         }
-    for (i=1; i < clauseSize + 1; i++)
+    for (int i=1; i < clauseSize + 1; i++)
         clauseVariableList[i] = "";
 
     // Initializing Conclusion List
@@ -51,8 +53,9 @@ BC::BC()
     for (int i=1; i<21; i++) /*printf("CONCLUSION %d %s\n", i,conclt[i])*/
         cout << "Conclusion: " << i << " " << conclusionList[i] << endl;
 
-    cout<<"HIT RETURN TO CONTINUE";
-    gets(buff);
+    cout<<"HIT RETURN TO CONTINUE"<<endl;
+
+    getchar();
 
     cout << "Variable List:" << endl;
     /**** comment 367 *****/
@@ -80,8 +83,9 @@ BC::BC()
     for(int i=1; i<18; i++) /*printf("VARIABLE %d %s\n", i, varlt[i])*/
         cout << "Variable: " << i << " " << variableList[i]<<endl;
 
-    cout<<"HIT RETURN TO CONTINUE";
-    gets(buff);
+    cout<<"HIT RETURN TO CONTINUE"<<endl;
+
+    getchar();
 
     // Initializing Clause Variable List
     cout<<"****Clause variable list****"<<endl;
@@ -148,10 +152,12 @@ BC::BC()
         }
 
 
+
         if (i==20)
         {
             //printf("HIT RETURN KEY TO CONTINUE"); gets(buff); }
             cout<<"HIT THE RETURN KEY TO CONTINUE..."<<endl;
+            cout<<endl;
             getchar();
         }
     }
@@ -159,8 +165,10 @@ BC::BC()
 
 void BC::inferenceSection()
 {
-    cout<<"** ENTER CONCLUSION ? ";
-    cin>>varble;
+    //cout<<"** ENTER CONCLUSION ? ";
+    //cin>>varble;
+    varble.assign("PROFESSION");
+    cout << "Conclusion is set to: " << varble << endl;
     /* get conclusion statement number (sn) from the conclusion list
     (conclt).First statement starts search */
     B520();
@@ -170,11 +178,11 @@ void BC::B520()
 {
 	f=1;
     determine_member_concl_list();
-    if (sn != 0)
+    if (statementNumber != 0)
     {
         /* if sn = 0 then no conclusion of that name */
         KeepProcessing();
-        if(sn != 0)
+        if(statementNumber != 0)
         {
         	InBetweenFunction();
         	popStack();
@@ -192,7 +200,7 @@ void BC::KeepProcessing()
         push_on_stack();
         B545();
     }
-    while((s != 1) && (sn !=0));
+    while((statementActive != 1) && (statementNumber !=0));
 }
 
 void BC::determine_member_concl_list()
@@ -202,70 +210,169 @@ void BC::determine_member_concl_list()
        if not a member sn=0;
     */
     /* initially set to not a member */
-    sn = 0;
+    statementNumber = 0;
     /* member of conclusion list to be searched is f */
-    i = f;
+    int i = f;
     while((varble!=conclusionList[i]) && (i<20))
         i=i+1; /* test for membership */
     if (varble == conclusionList[i])
-    	sn = i;  /* a member */
+    	statementNumber = i;  /* a member */
 }
 
 void BC::push_on_stack()
 {
-    sp=sp-1;
-    statementStack[sp] = sn;
-    clausk[sp] = 1;
+    stackPointer=stackPointer-1;
+    statementStack[stackPointer] = statementNumber;
+    clauseStack[stackPointer] = 1;
 }
 
 void BC::instantiate()
 {
-    i=1;
+    int i=1;
     /* find variable in the list */
-    while (varble != variableList[i] && i<10)
+    while ((strcmp(varble.c_str(), variableList[i].c_str()) != 0) && i<18)
     	i=i+1;
-    if (varble == variableList[i] && instantiatedList[i] != 1)
+    //if (varble == variableList[i] && instantiatedList[i] != 1)
+    if ((strcmp(varble.c_str(), variableList[i].c_str()) == 0) && instantiatedList[i] != 1)
     {
       	/*found variable and not already instantiated */
       	/*mark instantiated */
         instantiatedList[i]=1;
     	/* the designer of the knowledge base places the input statements to
         instantiate the variables below in the case statement */
-        initkbase();
+        initkbase(i);
     }
 }
 
-void BC::initkbase()
+void BC::initkbase(int i)
 {
 	switch (i)
-    {
-        /* input statements for sample position knowledge base */
-        case 1:
-            cout<<"INPUT YES OR NOW FOR DE-? ";
-            cin>>de;
-            break;
-        case 2:
-            cout<<"INPUT YES OR NO FOR DI-? ";
-            cin>>di;
-            break;
-        case 3:
-            cout<<"INPUT A REAL NUMBER FOR EX-? ";
-            cin>>ex;
-            break;
-        case 4:
-            cout<<"INPUT A REAL NUMBER FOR GR-? ";
-            cin>>gr;
-            break;
-    }
+        {
+                /***** input statement *****/
+                /* input statements for sample position knowledge
+                 base */
+                /***** comment 1700 ******/
+                //case 1: printf("INPUT YES OR NO FOR DE-? ");
+                //        gets(de);
+            case 1: cout << "What degree are you working towards?";
+                cin >> degree;
+                cout << endl;
+                break;
+                //case 2: printf("INPUT YES OR NO FOR DI-? ");
+                //        gets(di);
+            case 2: cout << "What GPA do you maintain?";
+                cin >> grade;
+                if (grade > 3.5)
+                    goodGrades.assign("true");
+                else
+                    goodGrades.assign("false");
+                break;
+                //case 3: printf("INPUT A REAL NUMBER FOR EX-? ");
+                //        scanf("%f", &ex);
+            case 3: cout << "How many courses will you take that include a lab section?";
+                cin >> coursesWithLabs;
+                break;
+            case 4:// printf("INPUT A REAL NUMBER FOR GR-? ");
+                // scanf("%f", &gr);
+                cout << "How many group projects have you been the leader off?";
+                cin >> groupLeader;
+                if (groupLeader >= 1) leadership.assign("true");
+                else leadership.assign("false");
+                break;
+            case 5: cout << "Will you go to med school after college? ";
+                cin >> buff;
+                if (buff.compare("yes") == 0 || buff.compare("y") == 0)
+                    medSchool.assign("true");
+                else medSchool.assign("false");
+                break;
+                /***** comment 1715 ****/
+            case 6: cout << "Do you like working in groups? ";
+                cin >> buff;
+                if (buff.compare("yes") == 0 || buff.compare("y") == 0)
+                    groupWork.assign("true");
+                else groupWork.assign("false");
+                break;
+            case 7: cout << "Do you like working in groups? ";
+                cin >> buff;
+                if (buff.compare("yes") == 0 || buff.compare("y") == 0)
+                    workAlone.assign("false");
+                else workAlone.assign("true");
+                break;
+            case 8: cout << "How many hours do you spend outside every week? ";
+                cin >> hoursOutside;
+                if (hoursOutside > 15)
+                    outdoorWork.assign("true");
+                else
+                    outdoorWork.assign("false");
+                break;
+            case 9: cout << "Will you get a medical certification? ";
+                cin >> buff;
+                if (buff.compare("yes") == 0 || buff.compare("y") == 0)
+                    medCert.assign("true");
+                else medCert.assign("false");
+                break;
+
+            case 10: cout<< "Will you get a Teaching certification? ";
+                cin>>buff;
+                if(buff.compare("yes")==0||buff.compare("y")==0)
+                    teachCert.assign("true");
+                else
+                    teachCert.assign("false");
+                break;
+
+            case 11: cout<<"What is your GPA?";
+                cin >> grade;
+                if (debug) cout << "Grade is " << grade << endl;
+                break;
+
+            case 12 : cout<< "What do you want to do?";
+                cin>>profession;
+                break;
+
+            case 13: cout << "How many courses will you take that include a lab section?";
+                cin >> coursesWithLabs;
+                break;
+
+            case 14: cout<< "How many projects have you been a group leader for?";
+                cin>>groupLeader;
+                break;
+
+            case 15: cout<<"How many hours are you outside per week? " ;
+                cin>>hoursOutside;
+                break;
+
+            case 16: cout<<"Are you interested to study regarding the health care?";
+                cin>>buff;
+                if(buff.compare("yes")==0||buff.compare("y")==0)
+                    medField.assign("true");
+                else
+                    medField.assign("false");
+                break;
+
+            case 17 : cout<<"Do you have a criminal background?";
+                cin>>buff;
+                if(buff.compare("yes")==0||buff.compare("y")==0)
+                    criminal.assign("true");
+                else
+                    criminal.assign("false");
+                break;
+
+            default: cout<<"********************";
+                break;
+
+
+
+        } //end of switch
 }
 
 void BC::B545()
 {
+    int i;
     do
     {
         /* calculate clause location in clause-variable list */
         //B545:
-        i= (statementStack[sp] -1) *4 + clausk[sp];
+        i= (statementStack[stackPointer] -1) *4 + clauseStack[stackPointer];
         /* clause variable */
         varble = clauseVariableList[i];
         if(varble != "")
@@ -273,135 +380,216 @@ void BC::B545()
             /*is this clause variable a conclusion? */
             f = 1;
             determine_member_concl_list();
-            if(sn != 0)
+            if(statementNumber != 0)
                 B520(); /* it is a conclusion push it */
             /* check instantiation of this clause */
             instantiate();
-            clausk[sp] = clausk[sp] + 1;
+            clauseStack[stackPointer] = clauseStack[stackPointer] + 1;
         }
     }
     while(varble != "");
-    sn = statementStack[sp];
-    s = 0;
+    statementNumber = statementStack[stackPointer];
+    statementActive = 0;
 
-     switch (sn)
-    {
-        /* if part of statement 1 */
-        /****** comment 1500 ****/
-        case 1:
-        	if(de == "NO")
-        		s = 1;
+     switch (statementNumber) { //Left hand side of Rules
+            /* if part of statement 1 */
+            /****** comment 1500 ****/
+        case 1: //if(strcmp(degree.c_str(), "NO") == 0) s = 1;
+            if (grade >= 3.5) statementActive = 1;
             break;
-        /* if part of statement 2 */
-        /***** comment 1510 ******/
-        case 2:
-        	if(de == "YES")
-        		s = 1;
+            /* if part of statement 2 */
+            /***** comment 1510 ******/
+        case 2: //if(strcmp(degree.c_str(), "YES") == 0) s = 1;
+            if (grade < 3.5) statementActive = 1;
             break;
-        /* if part of statement 3 */
-        case 3:
-        	if(de == "YES" && di == "YES")
-        		s =1;
+            /* if part of statement 3 */
+        case 3: //if((strcmp(degree.c_str(), "YES") == 0) &&
+                //   (strcmp(labwork.c_str(), "YES") == 0)) s =1;
+            if (coursesWithLabs > 2) statementActive = 1;
             break;
-        /* if part of statement 4 */
-        /******** comment 1560 ******/
-        case 4:
-        	if(qu == "YES" && gr<3.5 && ex >= 2)
-        		s = 1;
+            /* if part of statement 4 */
+            /******** comment 1560 ******/
+        case 4: //if((strcmp(goodGrades.c_str(), "YES") == 0) &&
+                //   (grade<3.5) && (grade >= 2)) s = 1;
+            if (groupLeader >= 1) statementActive = 1;
             break;
-        /******** comment 1570 ********/
-        /* if part of statement 5 */
-        case 5:
-        	if(qu == "YES" && gr<3 && ex<2)
-        		s = 1;
+            /******** comment 1570 ********/
+            /* if part of statement 5 */
+        case 5: //if((strcmp(goodGrades.c_str(), "YES") == 0) &&
+                //   (grade<3) && (grade<2)) s = 1;
+            if (strcmp(degree.c_str(), "engineering\0") == 0 && strcmp(goodGrades.c_str(), "true\0") == 0) statementActive = 1;
             break;
-        /* if part of statement 6 */
-        case 6:
-        	if(qu == "YES" && gr >=3.5)
-        		s = 1;
-        	break;
-        /********* comment 1680 ******/
-    }
+            /* if part of statement 6 */
+        case 6: //if((strcmp(goodGrades.c_str(), "YES") == 0) &&
+                //   (grade >=3.5)) s = 1;
+            if (strcmp(degree.c_str(), "science") == 0 && strcmp(goodGrades.c_str(), "true") && strcmp(labwork.c_str(), "true")) statementActive = 1;
+            break;
+        case 7: if(strcmp(degree.c_str(), "none") != 0 && strcmp(leadership.c_str(), "true")) statementActive = 1;
+            break;
+        case 8: if (strcmp(groupWork.c_str(), "false") == 0) statementActive = 1;
+            break;
+        case 9: if (strcmp(degree.c_str(), "none") != 0 && strcmp(medSchool.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) statementActive = 1;
+            break;
+        case 10: if (strcmp(degree.c_str(), "english") == 0 && strcmp(workAlone.c_str(), "true")) statementActive = 1;
+            break;
+        case 11: if (hoursOutside >= 16) statementActive = 1;
+            break;
+        case 12: if (strcmp(degree.c_str(), "science") == 0 && strcmp(outdoorWork.c_str(), "true") == 0) statementActive = 1;
+            break;
+        case 13: if (strcmp(degree.c_str(), "psychology") == 0 && strcmp(groupWork.c_str(), "true") == 0) statementActive = 1;
+            break;
+        case 14: if (strcmp(degree.c_str(), "none") == 0 && strcmp(outdoorWork.c_str(), "true") == 0) statementActive = 1;
+            break;
+        case 15: if (strcmp(medSchool.c_str(), "false") == 0 && strcmp(medField.c_str(), "true") == 0) statementActive = 1;
+            break;
+        case 16: if (strcmp(degree.c_str(), "none") != 0 && strcmp(medCert.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) statementActive = 1;
+            break;
+        case 17: if (strcmp(criminal.c_str(), "true") == 0) statementActive = 1;
+            break;
+        case 18: if (strcmp(degree.c_str(), "none") != 0 && strcmp(teachCert.c_str(), "true") == 0) statementActive = 1;
+            break;
+        case 19: if (strcmp(degree.c_str(), "none") == 0 && strcmp(outdoorWork.c_str(), "false") == 0) statementActive = 1;
+            break;
+        case 20: if (strcmp(degree.c_str(), "cs") == 0 && strcmp(goodGrades.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true")) statementActive = 1;
+            break;
+        default : cout << "Unusable statement number." << endl;
+            /********* comment 1680 ******/
+    } //end of switch
 
 
     //ifkbase();
-    if( s != 1)
+    if( statementActive != 1)
     {
         /* failed..search rest of statements for same conclusion */
         /* get conclusion */
-        i = statementStack[sp];
+        i = statementStack[stackPointer];
         varble = conclusionList[i];
         /* search for conclusion starting at the next statement number */
-        f = statementStack[sp] + 1;
+        f = statementStack[stackPointer] + 1;
         determine_member_concl_list();
-        sp = sp+1;
+        stackPointer = stackPointer+1;
     }
 }
 
 
 void BC::InBetweenFunction()
 {
-    switch (sn)
-    {
-        /* then part of statement 1 */
-        /******* comment 1500 *******/
-        case 1:
-            po = "NO";
-            cout<<"PO=NO"<<endl;
-        break;
-        /* then part of statement 2 */
-        /****** comment 1510 ******/
-        case 2:
-            qu = "YES";
-            cout<<"QU=YES"<<endl;
-       	break;
-    	/* then part of statement 3 */
-        case 3:
-            po = "YES";
-            cout<<"PO=RESEARCH"<<endl;
-        break;
-        /* then part of statement 4 */
-        /******** comment 1560 ******/
-        case 4:
-            po = "YES";
-            cout<<"PO=SERVICE ENGINEER"<<endl;
-        break;
-        /* then part of statement 5 */
-        /****** comment 1570 *****/
-        case 5:
-            po = "NO";
-            cout<<"PO=NO"<<endl;
-        break;
-        /* then part of statement 6 */
-        case 6:
-            po = "YES";
-            cout<<"PO=PRODUCT ENGINEER"<<endl;
-        break;
-    	/****** comment 1680 ********/
-    }
+    switch (statementNumber)
+        {
+                /* then part of statement 1 */
+                /******* comment 1500 *******/
+            case 1: //strcpy(po, "NO");
+                //printf("PO=NO\n");
+                goodGrades.assign("true");
+                cout<<"Good Grades = YES" << endl;
+                break;
+                /* then part of statement 2 */
+                /****** comment 1510 ******/
+            case 2: //strcpy(qu, "YES");
+                //printf("QU=YES\n");
+                goodGrades.assign("false");
+                cout<<"Good Grades = NO" << endl;
+                break;
+
+                /* then part of statement 3 */
+            case 3: labwork.assign("true");
+                cout<<"LAB WORK = YES" << endl;
+                break;
+                /* then part of statement 4 */
+                /******** comment 1560 ******/
+            case 4: leadership.assign("true");
+                cout<<"leadership = YES" << endl;
+                break;
+                /* then part of statement 5 */
+                /****** comment 1570 *****/
+            case 5: profession.assign("Engineering");
+                cout<<"Profession = Engineering" << endl;
+                break;
+                /* then part of statement 6 */
+            case 6: profession.assign("Science");
+                cout<<"Profession = Science" << endl;
+                break;
+            case 7: profession.assign("Business");
+                cout<<"Profession = Business";
+                break;
+
+            case 8: workAlone.assign("true");
+                cout<<"workAlone = YES" << endl;
+                break;
+
+
+            case 9: profession.assign("Medical");
+                cout<<"Profession = Medical" << endl;
+                break;
+
+            case 10 : profession.assign("English");
+                cout<<"Profession = English" << endl;
+                break;
+
+            case 11: outdoorWork.assign("true");
+                cout<<"outdoorWork = YES" << endl;
+                break;
+
+            case 12 : profession.assign("geography");
+                cout<<"Profession = geography";
+                break;
+
+            case 13 : profession.assign("psychology");
+                cout<<"Profession = psychology" << endl;
+                break;
+
+            case 14 : profession.assign("agriculture");
+                cout<<"Profession = agriculture" << endl;
+                break;
+
+            case 15: medCert.assign("true");
+                cout<<"medCert = YES" << endl;
+                break;
+
+            case 16 : profession.assign("Health care");
+                cout<<"Profession = Health" << endl;
+                break;
+
+            case 17: teachCert.assign("true");
+                cout<<"Teaching certification = YES" << endl;
+                break;
+
+            case 18: profession.assign("education");
+                cout<<"Profession = education" << endl;
+                break;
+
+            case 19: profession.assign("property management");
+                cout<<"Profession = prop management" << endl;
+                break;
+
+            case 20: profession.assign("Computer science");
+                cout<<"Profession = CS" << endl;
+                break;
+                /****** comment 1680 ********/
+        }
 }
 
 void BC::popStack()
 {
     /* pop the stack */
-    sp = sp+1;
-    if(sp >= size)
+    stackPointer = stackPointer+1;
+    if(stackPointer >= size)
    	{
    		// Finished
         cout<<"*** SUCCESS ***"<<endl;
-       // exit(0);
+        exit(0);
     }
     else
     {
         /* stack is not empty */
         /* get next clause then continue */
-        clausk[sp] = clausk[sp]+1;
+        clauseStack[stackPointer] = clauseStack[stackPointer]+1;
         B545();
-        if((s != 1) && (sn !=0))
+        if((statementActive != 1) && (statementNumber !=0))
         {
             KeepProcessing();
         }
-        else if(sn != 0)
+        else if(statementNumber != 0)
         {
             InBetweenFunction();
             popStack();
