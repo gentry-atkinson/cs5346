@@ -40,7 +40,7 @@ BC::BC(bool debug)
     conclusionList[8].assign("WORKALONE");
     conclusionList[9].assign("PROFESSION");
     conclusionList[10].assign("PROFESSION");
-    conclusionList[11].assign("OUTDOOR WORK");
+    conclusionList[11].assign("OUTDOORWORK");
     conclusionList[12].assign("PROFESSION");
     conclusionList[13].assign("PROFESSION");
     conclusionList[14].assign("PROFESSION");
@@ -63,23 +63,23 @@ BC::BC(bool debug)
     //strcpy(varlt[1], "DE");
     variableList[1].assign("DEGREE");
     //strcpy(varlt[2], "DI");
-    variableList[2].assign("GOOD GRADES");
+    variableList[2].assign("GOODGRADES");
     //strcpy(varlt[3], "EX");
-    variableList[3].assign("LAB WORK");
+    variableList[3].assign("LABWORK");
     //strcpy(varlt[4], "GR");
     variableList[4].assign("LEADERSHIP");
-    variableList[5].assign("MED SCHOOL");
-    variableList[6].assign("GROUP WORK");
+    variableList[5].assign("MEDSCHOOL");
+    variableList[6].assign("GROUPWORK");
     variableList[7].assign("WORK ALONE");
-    variableList[8].assign("OUTDOOR WORK");
-    variableList[9].assign("MEDICAL CERTIFICATE");
-    variableList[10].assign("TEACHER CERTIFICATE");
+    variableList[8].assign("OUTDOORWORK");
+    variableList[9].assign("MEDICALCERTIFICATE");
+    variableList[10].assign("TEACHERCERTIFICATE");
     variableList[11].assign("GPA");
     variableList[12].assign("PROFESSION");
-    variableList[13].assign("COURSES WITH LABS");
-    variableList[14].assign("GROUP LEADER");
-    variableList[15].assign("HOURS OUTSIDE");
-    variableList[16].assign("MED FIELD");
+    variableList[13].assign("COURSESWITHLABS");
+    variableList[14].assign("GROUPLEADER");
+    variableList[15].assign("HOURSOUTSIDE");
+    variableList[16].assign("MEDFIELD");
     variableList[17].assign("CRIMINAL BACKGROUND");
     for(int i=1; i<18; i++) /*printf("VARIABLE %d %s\n", i, varlt[i])*/
         cout << "Variable: " << i << " " << variableList[i]<<endl;
@@ -96,48 +96,48 @@ BC::BC(bool debug)
     //strcpy(clvarlt[5], "DE");
     clauseVariableList[5].assign("GPA");
     //strcpy(clvarlt[9], "DE");
-    clauseVariableList[9].assign("COURSES WITH LABS");
+    clauseVariableList[9].assign("COURSESWITHLABS");
     //strcpy(clvarlt[10], "DI");
-    clauseVariableList[13].assign("GROUP LEADER");
+    clauseVariableList[13].assign("GROUPLEADER");
     //strcpy(clvarlt[13], "QU");
     clauseVariableList[17].assign("DEGREE");
-    clauseVariableList[18].assign("GOOD GRADES");
+    clauseVariableList[18].assign("GOODGRADES");
     //strcpy(clvarlt[14], "GR");
     clauseVariableList[21].assign("DEGREE");
-    clauseVariableList[22].assign("GOOD GRADES");
-    clauseVariableList[23].assign("LAB WORK");
+    clauseVariableList[22].assign("GOODGRADES");
+    clauseVariableList[23].assign("LABWORK");
     //strcpy(clvarlt[15], "EX");
     clauseVariableList[25].assign("DEGREE");
     clauseVariableList[26].assign("LEADERSHIP");
     //strcpy(clvarlt[17], "QU");
-    clauseVariableList[29].assign("GROUP WORK");
+    clauseVariableList[29].assign("GROUPWORK");
     //strcpy(clvarlt[18], "GR");
     clauseVariableList[33].assign("DEGREE");
-    clauseVariableList[34].assign("MED SCHOOL");
-    clauseVariableList[35].assign("GROUP WORK");
+    clauseVariableList[34].assign("MEDSCHOOL");
+    clauseVariableList[35].assign("GROUPWORK");
     //strcpy(clvarlt[19], "EX");
     clauseVariableList[37].assign("DEGREE");
-    clauseVariableList[38].assign("WORK ALONE");
-    clauseVariableList[41].assign("HOURS OUTSODE");
+    clauseVariableList[38].assign("WORKALONE");
+    clauseVariableList[41].assign("HOURSOUTSODE");
     clauseVariableList[45].assign("DEGREE");
-    clauseVariableList[46].assign("OUTDOOR WORK");
+    clauseVariableList[46].assign("OUTDOORWORK");
     clauseVariableList[49].assign("DEGREE");
-    clauseVariableList[50].assign("GROUP WORK");
+    clauseVariableList[50].assign("GROUPWORK");
     clauseVariableList[53].assign("DEGREE");
-    clauseVariableList[54].assign("OUTDOOR WORK");
-    clauseVariableList[57].assign("MED SCHOOL");
-    clauseVariableList[58].assign("MED FIELD");
+    clauseVariableList[54].assign("OUTDOORWORK");
+    clauseVariableList[57].assign("MEDSCHOOL");
+    clauseVariableList[58].assign("MEDFIELD");
     clauseVariableList[61].assign("DEGREE");
-    clauseVariableList[62].assign("MEDICAL CERTIFICATE");
+    clauseVariableList[62].assign("MEDICALCERTIFICATE");
     clauseVariableList[63].assign("GROUP WORK");
-    clauseVariableList[65].assign("CRIMINAL BACKGROUND");
+    clauseVariableList[65].assign("CRIMINALBACKGROUND");
     clauseVariableList[69].assign("DEGREE");
-    clauseVariableList[70].assign("TEACHING CERTIFICATE");
+    clauseVariableList[70].assign("TEACHINGCERTIFICATE");
     clauseVariableList[73].assign("DEGREE");
-    clauseVariableList[74].assign("OUTDOOR WORK");
+    clauseVariableList[74].assign("OUTDOORWORK");
     clauseVariableList[77].assign("DEGREE");
-    clauseVariableList[78].assign("GOOD GRADES");
-    clauseVariableList[79].assign("GROUP WORK");
+    clauseVariableList[78].assign("GOODGRADES");
+    clauseVariableList[79].assign("GROUPWORK");
 
     //Printing Clause Variable List
      for(int i=1; i<21; i++)
@@ -277,6 +277,7 @@ void BC::initkbase(int i)
                 //case 2: printf("INPUT YES OR NO FOR DI-? ");
                 //        gets(di);
             case 2: cout << "What GPA do you maintain?";
+                if (debug) cout << "Bad value in initKBase()" << endl;
                 cin >> grade;
                 if (grade > 3.5)
                     goodGrades.assign("true");
@@ -357,7 +358,7 @@ void BC::initkbase(int i)
                 cin>>hoursOutside;
                 break;
 
-            case 16: cout<<"Are you interested to study regarding the health care?";
+            case 16: cout<<"Are you interested in practicing health care?";
                 cin>>buff;
                 if(buff.compare("yes")==0||buff.compare("y")==0)
                     medField.assign("true");
@@ -373,7 +374,7 @@ void BC::initkbase(int i)
                     criminal.assign("false");
                 break;
 
-            default: cout<<"********************";
+            default: cout<<"This is not a valid input to initKBase()";
                 break;
 
 
@@ -588,12 +589,14 @@ void BC::InBetweenFunction()
 void BC::popStack()
 {
     /* pop the stack */
+    if (debug) cout << "PopStack() called" << endl;
     stackPointer = stackPointer+1;
+    if (debug) cout << "StackPointer is now " << stackPointer << endl;
     if(stackPointer >= size)
    	{
    		// Finished
         cout<<"*** SUCCESS ***"<<endl;
-        exit(0);
+        return;
     }
     else
     {
@@ -611,4 +614,8 @@ void BC::popStack()
             popStack();
         }
     }
+}
+
+void BC::printProfession(){
+    cout << profession << endl;
 }

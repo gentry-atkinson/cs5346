@@ -8,4 +8,6 @@ int main () {
 
     BC backChainer(true);
     backChainer.inferenceSection();
+    cout << "Your recomended profession is: ";
+    backChainer.printProfession();
 }

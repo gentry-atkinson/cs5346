@@ -31,4 +31,5 @@ class BC
     	void InBetweenFunction();
     	void popStack();
         void B545();
+        void printProfession();
 };
