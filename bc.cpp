@@ -70,7 +70,7 @@ BC::BC(bool debug)
     variableList[4].assign("LEADERSHIP");
     variableList[5].assign("MEDSCHOOL");
     variableList[6].assign("GROUPWORK");
-    variableList[7].assign("WORK ALONE");
+    variableList[7].assign("WORKALONE");
     variableList[8].assign("OUTDOORWORK");
     variableList[9].assign("MEDICALCERTIFICATE");
     variableList[10].assign("TEACHERCERTIFICATE");
@@ -152,16 +152,10 @@ BC::BC(bool debug)
             cout<<" VARIABLE: "<< j << " " << clauseVariableList[k]<<endl;
         }
 
-
-
-        if (i==20)
-        {
-            //printf("HIT RETURN KEY TO CONTINUE"); gets(buff); }
-            cout<<"HIT THE RETURN KEY TO CONTINUE..."<<endl;
-            cout<<endl;
-            getchar();
-        }
     }
+    cout<<"HIT THE RETURN KEY TO CONTINUE..."<<endl;
+    cout<<endl;
+    getchar();
 }
 
 void BC::inferenceSection()
@@ -171,14 +165,13 @@ void BC::inferenceSection()
     //cin>>varble;
     varble.assign("PROFESSION");
     cout << "Conclusion is set to: " << varble << endl;
-    /* get conclusion statement number (sn) from the conclusion list
-    (conclt).First statement starts search */
     B520();
 }
 
 void BC::B520()
 {
     if (debug) cout << "B520 called" << endl;
+    if (debug) cout << "Variable in B520 is " << varble << endl;
 	f=1;
     determine_member_concl_list();
     if (statementNumber != 0)
@@ -217,6 +210,7 @@ void BC::determine_member_concl_list()
     /* initially set to not a member */
     statementNumber = 0;
     /* member of conclusion list to be searched is f */
+    if (debug) cout << "Value of f is currently " << f << endl;
     int i = f;
     //while((varble!=conclusionList[i]) && (i<20))
     while(strcmp(varble.c_str(), conclusionList[i].c_str()) != 0 && i < 20)
@@ -262,6 +256,7 @@ void BC::instantiate()
 void BC::initkbase(int i)
 {
     if (debug) cout << "InitKBase() called for " << variableList[i] << endl;
+    if (debug) cout << "*************************************************" << endl;
 	switch (i)
         {
                 /***** input statement *****/
@@ -385,14 +380,16 @@ void BC::initkbase(int i)
 void BC::B545()
 {
     int i;
+    if (debug) cout << "B545() called" << endl;
     do
     {
         /* calculate clause location in clause-variable list */
         //B545:
         i= (statementStack[stackPointer] -1) *4 + clauseStack[stackPointer];
         /* clause variable */
-        varble = clauseVariableList[i];
-        if(varble != "")
+        //varble = clauseVariableList[i];
+        varble.assign(clauseVariableList[i]);
+        if(strcmp(varble.c_str(), "") != 0)
         {
             /*is this clause variable a conclusion? */
             f = 1;
@@ -403,8 +400,7 @@ void BC::B545()
             instantiate();
             clauseStack[stackPointer] = clauseStack[stackPointer] + 1;
         }
-    }
-    while(varble != "");
+    } while(strcmp(varble.c_str(), "") != 0);
     statementNumber = statementStack[stackPointer];
     statementActive = 0;
 
@@ -434,7 +430,7 @@ void BC::B545()
             /* if part of statement 5 */
         case 5: //if((strcmp(goodGrades.c_str(), "YES") == 0) &&
                 //   (grade<3) && (grade<2)) s = 1;
-            if (strcmp(degree.c_str(), "engineering\0") == 0 && strcmp(goodGrades.c_str(), "true\0") == 0) statementActive = 1;
+            if (strcmp(degree.c_str(), "engineering") == 0 && strcmp(goodGrades.c_str(), "true") == 0) statementActive = 1;
             break;
             /* if part of statement 6 */
         case 6: //if((strcmp(goodGrades.c_str(), "YES") == 0) &&
@@ -519,14 +515,14 @@ void BC::InBetweenFunction()
                 break;
                 /* then part of statement 5 */
                 /****** comment 1570 *****/
-            case 5: profession.assign("Engineering");
+            case 5: profession.assign("engineering");
                 cout<<"Profession = Engineering" << endl;
                 break;
                 /* then part of statement 6 */
-            case 6: profession.assign("Science");
+            case 6: profession.assign("science");
                 cout<<"Profession = Science" << endl;
                 break;
-            case 7: profession.assign("Business");
+            case 7: profession.assign("business");
                 cout<<"Profession = Business";
                 break;
 
@@ -535,11 +531,11 @@ void BC::InBetweenFunction()
                 break;
 
 
-            case 9: profession.assign("Medical");
+            case 9: profession.assign("medical");
                 cout<<"Profession = Medical" << endl;
                 break;
 
-            case 10 : profession.assign("English");
+            case 10 : profession.assign("english");
                 cout<<"Profession = English" << endl;
                 break;
 
@@ -563,7 +559,7 @@ void BC::InBetweenFunction()
                 cout<<"medCert = YES" << endl;
                 break;
 
-            case 16 : profession.assign("Health care");
+            case 16 : profession.assign("health care");
                 cout<<"Profession = Health" << endl;
                 break;
 
@@ -579,7 +575,7 @@ void BC::InBetweenFunction()
                 cout<<"Profession = prop management" << endl;
                 break;
 
-            case 20: profession.assign("Computer science");
+            case 20: profession.assign("computer science");
                 cout<<"Profession = CS" << endl;
                 break;
                 /****** comment 1680 ********/
