@@ -22,7 +22,8 @@ BC::BC(bool debug)
             clauseStack[i]=0;
         }
     for (int i=1; i < clauseSize + 1; i++)
-        clauseVariableList[i] = "";
+        //clauseVariableList[i] = "";
+        clauseVariableList[i].assign("");
 
     // Initializing Conclusion List
     /*** comment 305 *****/
@@ -631,6 +632,7 @@ void BC::popStack()
             popStack();
         }
     }
+    return;
 }
 
 void BC::printProfession(){
