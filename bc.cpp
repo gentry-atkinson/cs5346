@@ -194,6 +194,8 @@ void BC::B520()
 {
     if (debug) cout << "B520 called" << endl;
     if (debug) cout << "Variable in B520 is " << varble << endl;
+    if (strcmp(profession.c_str(), "") != 0)
+        return;
 	f=1;
     determine_member_concl_list();
     if (statementNumber != 0)
@@ -273,7 +275,7 @@ void BC::instantiate()
     while ((strcmp(varble.c_str(), variableList[i].c_str()) != 0) && i<18)
     	i=i+1;
     //if (varble == variableList[i] && instantiatedList[i] != 1)
-    if ((strcmp(varble.c_str(), variableList[i].c_str()) == 0) && instantiatedList[i] != 1)
+    if (/*strcmp(varble.c_str(), variableList[i].c_str()) == 0) &&*/i<18 && instantiatedList[i] != 1)
     {
       	/*found variable and not already instantiated */
       	/*mark instantiated */
@@ -302,10 +304,10 @@ void BC::initkbase(int i)
                 break;
                 //case 2: printf("INPUT YES OR NO FOR DI-? ");
                 //        gets(di);
-            case 2: cout << "What GPA do you maintain?";
+            case 2: cout << "What GPA do you maintain? ";
                 if (debug) cout << "Bad value in initKBase()" << endl;
                 cin >> grade;
-                if (grade > 3.5)
+                if (grade >= 3.5)
                     goodGrades.assign("true");
                 else
                     goodGrades.assign("false");
@@ -450,6 +452,8 @@ void BC::B545()
         cout << "Leadership: " << leadership << endl;
         cout << "Group Work: " << groupWork << endl;
         cout << "Work Alone: " << workAlone << endl;
+        cout << "Courses with Labs: " << coursesWithLabs << endl;
+        cout << "Statement Number: " << statementNumber << endl;
 
     }
 
@@ -475,8 +479,12 @@ void BC::B545()
                 //   (strcmp(labwork.c_str(), "YES") == 0)) s =1;
             if (coursesWithLabs > 2) {
                     statementActive = 1;
-                    if (debug) cout << "Rule 3 satisfied" << endl;
+                    if (debug) cout << "Rule 3 satisfied positively" << endl;
                 }
+            else {
+                statementActive = 1;
+                    if (debug) cout << "Rule 3 satisfied negatively" << endl;
+            }
             break;
             /* if part of statement 4 */
             /******** comment 1560 ******/
@@ -484,7 +492,11 @@ void BC::B545()
                 //   (grade<3.5) && (grade >= 2)) s = 1;
             if (groupLeader >= 1){
                     statementActive = 1;
-                    if (debug) cout << "Rule 4 satisfied" << endl;
+                    if (debug) cout << "Rule 4 satisfied positively" << endl;
+            }
+            else {
+                statementActive = 1;
+                if (debug) cout << "Rule 4 satisfied negatively" << endl;
             }
             break;
             /******** comment 1570 ********/
@@ -574,7 +586,7 @@ void BC::B545()
                     if (debug) cout << "Rule 20 satisfied" << endl;
                 }
             break;
-        default : cout << "Unusable statement number." << endl;
+        default : if (debug) cout << "Unusable statement number." << endl;
             /********* comment 1680 ******/
     } //end of switch
 
@@ -606,89 +618,121 @@ void BC::InBetweenFunction()
             case 1: //strcpy(po, "NO");
                 //printf("PO=NO\n");
                 goodGrades.assign("true");
-                cout<<"Good Grades = YES" << endl;
+                cout<<"Good Grades = true" << endl;
+                instantiatedList[2] = 1;
                 break;
                 /* then part of statement 2 */
                 /****** comment 1510 ******/
             case 2: //strcpy(qu, "YES");
                 //printf("QU=YES\n");
                 goodGrades.assign("false");
-                cout<<"Good Grades = NO" << endl;
+                cout<<"Good Grades = false" << endl;
+                instantiatedList[2] = 1;
                 break;
 
                 /* then part of statement 3 */
-            case 3: labwork.assign("true");
-                cout<<"LAB WORK = YES" << endl;
+            case 3: if (coursesWithLabs > 1){
+                        labwork.assign("true");
+                        cout<<"LAB WORK = true" << endl;
+                    }
+                    else {
+                        labwork.assign("false");
+                        cout<<"LAB WORK = false" << endl;
+                    }
+                instantiatedList[3] = 1;
                 break;
                 /* then part of statement 4 */
                 /******** comment 1560 ******/
-            case 4: leadership.assign("true");
-                cout<<"leadership = YES" << endl;
+            case 4: if (groupLeader >= 1){
+                        leadership.assign("true");
+                        cout<<"leadership = true" << endl;
+                    }
+                    else {
+                        leadership.assign("false");
+                        cout<<"leadership = false" << endl;
+                    }
+                instantiatedList[4] = 1;
                 break;
                 /* then part of statement 5 */
                 /****** comment 1570 *****/
             case 5: profession.assign("engineering");
                 cout<<"Profession = Engineering" << endl;
+                instantiatedList[12] = 1;
                 break;
                 /* then part of statement 6 */
             case 6: profession.assign("science");
                 cout<<"Profession = Science" << endl;
+                instantiatedList[12] = 1;
                 break;
             case 7: profession.assign("business");
                 cout<<"Profession = Business";
+                instantiatedList[12] = 1;
                 break;
 
             case 8: workAlone.assign("true");
-                cout<<"workAlone = YES" << endl;
+                cout<<"workAlone = true" << endl;
+                instantiatedList[7] = 1;
                 break;
 
 
             case 9: profession.assign("medical");
                 cout<<"Profession = Medical" << endl;
+                instantiatedList[12] = 1;
                 break;
 
             case 10 : profession.assign("english");
                 cout<<"Profession = English" << endl;
+                instantiatedList[12] = 1;
                 break;
 
             case 11: outdoorWork.assign("true");
-                cout<<"outdoorWork = YES" << endl;
+                cout<<"outdoorWork = true" << endl;
+                instantiatedList[8] = 1;
                 break;
 
             case 12 : profession.assign("geography");
                 cout<<"Profession = geography";
+                instantiatedList[12] = 1;
                 break;
 
             case 13 : profession.assign("psychology");
                 cout<<"Profession = psychology" << endl;
+                instantiatedList[12] = 1;
                 break;
 
             case 14 : profession.assign("agriculture");
                 cout<<"Profession = agriculture" << endl;
+                instantiatedList[12] = 1;
                 break;
 
             case 15: medCert.assign("true");
-                cout<<"medCert = YES" << endl;
+                cout<<"medCert = true" << endl;
+                instantiatedList[9] = 1;
                 break;
 
             case 16 : profession.assign("health care");
                 cout<<"Profession = Health" << endl;
+                instantiatedList[12] = 1;
                 break;
 
             case 17: teachCert.assign("false");
                 cout<<"Teaching certification = NO" << endl;
+                instantiatedList[10] = 1;
                 break;
 
             case 18: profession.assign("education");
                 cout<<"Profession = education" << endl;
+                instantiatedList[12] = 1;
                 break;
 
             case 19: profession.assign("property management");
                 cout<<"Profession = property management" << endl;
+                instantiatedList[12] = 1;
                 break;
 
-            case 20: profession.assign("computer science");
+            case 20: profession.assign("cs");
                 cout<<"Profession = CS" << endl;
+                instantiatedList[12] = 1;
                 break;
                 /****** comment 1680 ********/
         } //end of switch
