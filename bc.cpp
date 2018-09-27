@@ -423,6 +423,14 @@ void BC::B545()
     statementNumber = statementStack[stackPointer];
     statementActive = 0;
 
+    if (debug){
+        cout << "Values evaluated at B545: " << endl;
+        cout << "Degree: " << degree << endl;
+        cout << "Good Grades: " << goodGrades << endl;
+        cout << "Lab Work: " << labwork << endl;
+
+    }
+
      switch (statementNumber) { //Left hand side of Rules
             /* if part of statement 1 */
             /****** comment 1500 ****/
@@ -454,15 +462,18 @@ void BC::B545()
             /* if part of statement 6 */
         case 6: //if((strcmp(goodGrades.c_str(), "YES") == 0) &&
                 //   (grade >=3.5)) s = 1;
-            if (strcmp(degree.c_str(), "science") == 0 && strcmp(goodGrades.c_str(), "true") && strcmp(labwork.c_str(), "true")) statementActive = 1;
+            if (strcmp(degree.c_str(), "science") == 0 && strcmp(goodGrades.c_str(), "true") == 0 && strcmp(labwork.c_str(), "true") == 0){
+                    statementActive = 1;
+                    cout << "Rule 6 satisfied" << endl;
+            }
             break;
-        case 7: if(strcmp(degree.c_str(), "none") != 0 && strcmp(leadership.c_str(), "true")) statementActive = 1;
+        case 7: if(strcmp(degree.c_str(), "none") != 0 && strcmp(leadership.c_str(), "true") == 0) statementActive = 1;
             break;
         case 8: if (strcmp(groupWork.c_str(), "false") == 0) statementActive = 1;
             break;
         case 9: if (strcmp(degree.c_str(), "none") != 0 && strcmp(medSchool.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) statementActive = 1;
             break;
-        case 10: if (strcmp(degree.c_str(), "english") == 0 && strcmp(workAlone.c_str(), "true")) statementActive = 1;
+        case 10: if (strcmp(degree.c_str(), "english") == 0 && strcmp(workAlone.c_str(), "true") == 0) statementActive = 1;
             break;
         case 11: if (hoursOutside >= 16) statementActive = 1;
             break;
