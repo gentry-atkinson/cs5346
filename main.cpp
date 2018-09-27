@@ -10,4 +10,6 @@ int main () {
     backChainer.inferenceSection();
     cout << "Your recomended profession is: ";
     backChainer.printProfession();
+
+    return 0;
 }

@@ -7,7 +7,7 @@ class BC
         static const int size = 21;
         static const int clauseSize = 69;
         std::string conclusionList[size], variableList[size], clauseVariableList[clauseSize];
-        std::string varble, qu, de, di, po;
+        std::string varble /*, qu, de, di, po*/;
         std::string goodGrades, degree;
         std::string labwork, profession;
         std::string outdoorWork, leadership;

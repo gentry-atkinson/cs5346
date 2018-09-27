@@ -159,6 +159,25 @@ BC::BC(bool debug)
     cout<<"HIT THE RETURN KEY TO CONTINUE..."<<endl;
     cout<<endl;
     getchar();
+
+    goodGrades.assign("");
+    degree.assign("");
+    labwork.assign("");
+    profession.assign("");
+    outdoorWork.assign("");
+    leadership.assign("");
+    groupWork.assign("");
+    medSchool.assign("");
+    medCert.assign("");
+    teachCert.assign("");
+    medField.assign("");
+    criminal.assign("");
+    workAlone.assign("");
+    coursesWithLabs = -1;
+    groupLeader = -1;
+    hoursOutside = -1;
+
+    return;
 }
 
 void BC::inferenceSection()
@@ -267,7 +286,7 @@ void BC::instantiate()
 
 void BC::initkbase(int i)
 {
-    if (debug) cout << "InitKBase() called for " << variableList[i] << endl;
+    if (debug) cout << "InitKBase() called for " << variableList[i] << " with index " << i << endl;
     if (debug) cout << "*************************************************" << endl;
 	switch (i)
         {
@@ -428,6 +447,9 @@ void BC::B545()
         cout << "Degree: " << degree << endl;
         cout << "Good Grades: " << goodGrades << endl;
         cout << "Lab Work: " << labwork << endl;
+        cout << "Leadership: " << leadership << endl;
+        cout << "Group Work: " << groupWork << endl;
+        cout << "Work Alone: " << workAlone << endl;
 
     }
 
@@ -435,65 +457,122 @@ void BC::B545()
             /* if part of statement 1 */
             /****** comment 1500 ****/
         case 1: //if(strcmp(degree.c_str(), "NO") == 0) s = 1;
-            if (grade >= 3.5) statementActive = 1;
+            if (grade >= 3.5) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 1 satisfied" << endl;
+            }
             break;
             /* if part of statement 2 */
             /***** comment 1510 ******/
         case 2: //if(strcmp(degree.c_str(), "YES") == 0) s = 1;
-            if (grade < 3.5) statementActive = 1;
+            if (grade < 3.5) {
+                 statementActive = 1;
+                 if (debug) cout << "Rule 2 satisfied" << endl;
+            }
             break;
             /* if part of statement 3 */
         case 3: //if((strcmp(degree.c_str(), "YES") == 0) &&
                 //   (strcmp(labwork.c_str(), "YES") == 0)) s =1;
-            if (coursesWithLabs > 2) statementActive = 1;
+            if (coursesWithLabs > 2) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 3 satisfied" << endl;
+                }
             break;
             /* if part of statement 4 */
             /******** comment 1560 ******/
         case 4: //if((strcmp(goodGrades.c_str(), "YES") == 0) &&
                 //   (grade<3.5) && (grade >= 2)) s = 1;
-            if (groupLeader >= 1) statementActive = 1;
+            if (groupLeader >= 1){
+                    statementActive = 1;
+                    if (debug) cout << "Rule 4 satisfied" << endl;
+            }
             break;
             /******** comment 1570 ********/
             /* if part of statement 5 */
         case 5: //if((strcmp(goodGrades.c_str(), "YES") == 0) &&
                 //   (grade<3) && (grade<2)) s = 1;
-            if (strcmp(degree.c_str(), "engineering") == 0 && strcmp(goodGrades.c_str(), "true") == 0) statementActive = 1;
+            if (strcmp(degree.c_str(), "engineering") == 0 && strcmp(goodGrades.c_str(), "true") == 0){
+                statementActive = 1;
+                if (debug) cout << "Rule 5 satisfied" << endl;
+            }
             break;
             /* if part of statement 6 */
         case 6: //if((strcmp(goodGrades.c_str(), "YES") == 0) &&
                 //   (grade >=3.5)) s = 1;
             if (strcmp(degree.c_str(), "science") == 0 && strcmp(goodGrades.c_str(), "true") == 0 && strcmp(labwork.c_str(), "true") == 0){
                     statementActive = 1;
-                    cout << "Rule 6 satisfied" << endl;
+                    if (debug) cout << "Rule 6 satisfied" << endl;
             }
             break;
-        case 7: if(strcmp(degree.c_str(), "none") != 0 && strcmp(leadership.c_str(), "true") == 0) statementActive = 1;
+        case 7: if(strcmp(degree.c_str(), "none") != 0 && strcmp(leadership.c_str(), "true") == 0){
+                    statementActive = 1;
+                    if (debug) cout << "Rule 7 satisfied" << endl;
+                }
             break;
-        case 8: if (strcmp(groupWork.c_str(), "false") == 0) statementActive = 1;
+        case 8: if (strcmp(groupWork.c_str(), "false") == 0){
+                    statementActive = 1;
+                    if (debug) cout << "Rule 8 satisfied" << endl;
+                }
             break;
-        case 9: if (strcmp(degree.c_str(), "none") != 0 && strcmp(medSchool.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) statementActive = 1;
+        case 9: if (strcmp(degree.c_str(), "none") != 0 && strcmp(medSchool.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 9 satisfied" << endl;
+                }
             break;
-        case 10: if (strcmp(degree.c_str(), "english") == 0 && strcmp(workAlone.c_str(), "true") == 0) statementActive = 1;
+        case 10: if (strcmp(degree.c_str(), "english") == 0 && strcmp(workAlone.c_str(), "true") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 10 satisfied" << endl;
+                }
             break;
-        case 11: if (hoursOutside >= 16) statementActive = 1;
+        case 11: if (hoursOutside >= 16) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 11 satisfied" << endl;
+                }
             break;
-        case 12: if (strcmp(degree.c_str(), "science") == 0 && strcmp(outdoorWork.c_str(), "true") == 0) statementActive = 1;
+        case 12: if (strcmp(degree.c_str(), "science") == 0 && strcmp(outdoorWork.c_str(), "true") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 12 satisfied" << endl;
+                }
             break;
-        case 13: if (strcmp(degree.c_str(), "psychology") == 0 && strcmp(groupWork.c_str(), "true") == 0) statementActive = 1;
+        case 13: if (strcmp(degree.c_str(), "psychology") == 0 && strcmp(groupWork.c_str(), "true") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 13 satisfied" << endl;
+                }
             break;
-        case 14: if (strcmp(degree.c_str(), "none") == 0 && strcmp(outdoorWork.c_str(), "true") == 0) statementActive = 1;
+        case 14: if (strcmp(degree.c_str(), "none") == 0 && strcmp(outdoorWork.c_str(), "true") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 14 satisfied" << endl;
+                }
             break;
-        case 15: if (strcmp(medSchool.c_str(), "false") == 0 && strcmp(medField.c_str(), "true") == 0) statementActive = 1;
+        case 15: if (strcmp(medSchool.c_str(), "false") == 0 && strcmp(medField.c_str(), "true") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 15 satisfied" << endl;
+                }
             break;
-        case 16: if (strcmp(degree.c_str(), "none") != 0 && strcmp(medCert.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) statementActive = 1;
+        case 16: if (strcmp(degree.c_str(), "none") != 0 && strcmp(medCert.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 16 satisfied" << endl;
+                }
             break;
-        case 17: if (strcmp(criminal.c_str(), "true") == 0) statementActive = 1;
+        case 17: if (strcmp(criminal.c_str(), "true") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 17 satisfied" << endl;
+                }
             break;
-        case 18: if (strcmp(degree.c_str(), "none") != 0 && strcmp(teachCert.c_str(), "true") == 0) statementActive = 1;
+        case 18: if (strcmp(degree.c_str(), "none") != 0 && strcmp(teachCert.c_str(), "true") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 18 satisfied" << endl;
+                }
             break;
-        case 19: if (strcmp(degree.c_str(), "none") == 0 && strcmp(outdoorWork.c_str(), "false") == 0) statementActive = 1;
+        case 19: if (strcmp(degree.c_str(), "none") == 0 && strcmp(outdoorWork.c_str(), "false") == 0) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 19 satisfied" << endl;
+                }
             break;
-        case 20: if (strcmp(degree.c_str(), "cs") == 0 && strcmp(goodGrades.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true")) statementActive = 1;
+        case 20: if (strcmp(degree.c_str(), "cs") == 0 && strcmp(goodGrades.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true")) {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 20 satisfied" << endl;
+                }
             break;
         default : cout << "Unusable statement number." << endl;
             /********* comment 1680 ******/
@@ -596,8 +675,8 @@ void BC::InBetweenFunction()
                 cout<<"Profession = Health" << endl;
                 break;
 
-            case 17: teachCert.assign("true");
-                cout<<"Teaching certification = YES" << endl;
+            case 17: teachCert.assign("false");
+                cout<<"Teaching certification = NO" << endl;
                 break;
 
             case 18: profession.assign("education");
