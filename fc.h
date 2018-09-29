@@ -9,7 +9,7 @@ private:
     bool inst = false;
     static const int size = 61;
     static const int clauseSize = 241;
-    std::string conditionVariableQueue[size], variableList[size],clauseVariableList[clauseSize],c,v;
+    std::string conditionVariableQueue[size], variableList[size],clauseVariableList[clauseSize],c,varble;
     int instantiatedList[size];/* instantiated list*/
     std::string fedint,interest,stock,dollar,fedmon;
     std::string likePhysics, likeMath, groupWork, likeBology;

@@ -17,7 +17,7 @@ void FC::check_instantiation()
 {
     int i=1;
     /* find variable in the variable list */
-    while ((v != variableList[i]) && (i < size))
+    while ((varble != variableList[i]) && (i < size))
         i = i+1;
     /* check if already instantiated */
     if (instantiatedList[i] != 1)
@@ -35,7 +35,7 @@ void FC::instantiate()
 {
     int i=1;
     /* find varialbe in the varialbe list (varlt) */
-    while ((v != variableList[i]) && (i < size))
+    while ((varble != variableList[i]) && (i < size))
         i=i+1;
 
     /* instantiate it */
@@ -43,12 +43,12 @@ void FC::instantiate()
     i = 1;
 
     /* determine if (v) is or already has been on the queue (cndvar) */
-    while ((v != conditionVariableQueue[i]) && (i < size))
+    while ((varble != conditionVariableQueue[i]) && (i < size))
         i=i+1;
     /* variable has not been on the queue. Store it in the back of the queue */
-    if (v != conditionVariableQueue[i])
+    if (varble != conditionVariableQueue[i])
     {
-        conditionVariableQueue[backPointer] = v;
+        conditionVariableQueue[backPointer] = varble;
         backPointer=backPointer+1;
     }
 }
@@ -87,7 +87,7 @@ void FC::gotoF()
         /* clause variable */
         v = clauseVariableList[i];
         /* are there any more clauses for this statement */
-        while (v != "")
+        while (varble != "")
         /* more clauses */
         {
             /* check instantiation of this clause */
@@ -95,7 +95,7 @@ void FC::gotoF()
             cn = cn+1;
             /* check next clause */
             i = 4 * (statementNumber-1) + cn;
-            v = clauseVariableList[i];
+            varble = clauseVariableList[i];
         }
 
         /* no more clauses - check IF part of statement */
@@ -367,9 +367,36 @@ FC::FC(string profession)
     clauseVariableList[191].assign("LIKECHEMISTRY");
     clauseVariableList[193].assign("PROFESSION");
     clauseVariableList[194].assign("LIKECOMMUNICATION");
+    clauseVariableList[195].assign("LIKECHILDREN");
+    clauseVariableList[197].assign("PROFESSION");
+    clauseVariableList[198].assign("LIKESOCIALSCIENCE");
+    clauseVariableList[199].assign("LIKECOMMUNICATION");
+    clauseVariableList[201].assign("PROFESSION");
+    clauseVariableList[202].assign("LIKEMANAGEMENT");
+    clauseVariableList[205].assign("PROFESSION");
+    clauseVariableList[206].assign("GROUPWORK");
+    clauseVariableList[209].assign("PROFESSION");
+    clauseVariableList[210].assign("RELIABLE");
+    clauseVariableList[213].assign("PROFESSION");
+    clauseVariableList[214].assign("LIKEREPAIRS");
+    clauseVariableList[217].assign("PROFESSION");
+    clauseVariableList[218].assign("LIKECOMMUNICATION");
+    clauseVariableList[221].assign("PROFESSION");
+    clauseVariableList[222].assign("LIKEMATH");
+    clauseVariableList[223].assign("LIKESOCIALSCIENCE");
+    clauseVariableList[225].assign("PROFESSION");
+    clauseVariableList[226].assign("LIKEMATH");
+    clauseVariableList[227].assign("LIKEANALYTICALSKILLS");
+    clauseVariableList[229].assign("PROFESSION");
+    clauseVariableList[230].assign("GROUPWORK");
+    clauseVariableList[233].assign("PROFESSION");
+    clauseVariableList[234].assign("LIKEMATH");
+    clauseVariableList[235].assign("LIKEMARKETING");
+    clauseVariableList[237].assign("PROFESSION");
+    clauseVariableList[238].assign("LIKEORIGINALITY");
 
     printf("*** CLAUSE-VARIABLE LIST ***\n");
-    for (i = 1; i < (clauseSize-1)/4 ; i++)
+    for (i = 1; i <= (clauseSize-1)/4 ; i++)
     {
         printf("** CLAUSE %d\n", i);
         for (j = 1; j < 5; j++)
@@ -378,7 +405,7 @@ FC::FC(string profession)
             cout<<"VARIABLE "<<j<< " "<<clauseVariableList[k]<<endl;
         }
 
-        if (i==4)
+        if (i==61)
         {
             cout<<"HIT RETURN TO CONTINUE";
             getchar();
@@ -435,7 +462,7 @@ void FC::Result()
         case 1:
             stock = "RISE";
             cout<<"ST=RISE"<<endl;
-            v = "ST";
+            varble = "ST";
             inst = true;
             break;
             /*********** comment 1510 ***********/
@@ -443,7 +470,7 @@ void FC::Result()
         case 2:
             stock = "FALL";
             cout<<"ST=FALL"<<endl;
-            v = "ST";
+            varble = "ST";
             inst = true;
             break;
             /*********** comment 1540 ***********/
@@ -451,7 +478,7 @@ void FC::Result()
         case 3:
             interest = "RISE";
             cout<<"IN=RISE"<<endl;
-            v = "IN";
+            varble = "IN";
             inst = true;
             break;
             /*********** comment 1550 ***********/
@@ -459,14 +486,14 @@ void FC::Result()
         case 4:
             interest = "FALL";
             cout<<"IN=FALL"<<endl;
-            v = "IN";
+            varble = "IN";
             inst = true;
             break;
             /* put variable on the conclusion variable queue */
         case 5:
             interest = "FALL";
             cout<<"IN=FALL"<<endl;
-            v = "IN";
+            varble = "IN";
             inst = true;
             break;
             /*********** comment 1610 ***********/
