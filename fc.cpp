@@ -8,7 +8,6 @@ using namespace std;
 
 void FC::start()
 {
-    initialize();
     inference();
     gotoF();
 }
@@ -164,15 +163,18 @@ void FC::search()
 
 
 
-void FC::initialize()
+FC::FC(string profession)
 {
     /******** INITIALIZATION SECTION ***********/
     for (i=1;i < clauseSize; i++)
-        clauseVariableList[i] = "";
+        //clauseVariableList[i] = "";
+        clauseVariableList[i].assign("");
     for (i=1;i < size; i++)
     {
-        conditionVariableQueue[i] = "";
-        variableList[i] = "";
+        //conditionVariableQueue[i] = "";
+        conditionVariableQueue[i].assign("");
+        //variableList[i] = "";
+        variableList[i].assign("");
         instantiatedList[i] = 0;
     }
     /* enter variables which are in the IF part, 1 at a time in
@@ -182,14 +184,46 @@ void FC::initialize()
      hit return key */
     /****** comment 367 *************/
 
-    variableList[1] = "IN";
-    variableList[2] = "DO";
-    variableList[3] = "FT";
-    variableList[4] = "FM";
+    //variableList[1] = "IN";
+    //variableList[2] = "DO";
+    //variableList[3] = "FT";
+    //variableList[4] = "FM";
+
+    variableList[1].assign("LIKEPHYSICS");
+    variableList[2].assign("LIKEMATH");
+    variableList[3].assign("GROUPWORK");
+    variableList[4].assign("LIKEBIOLOGY");
+    variableList[5].assign("LIKECHEMISTRY");
+    variableList[6].assign("LIKEMARKETING");
+    variableList[7].assign("LIKEMANAGEMENT");
+    variableList[8].assign("GOODCREDIT");
+    variableList[9].assign("LIKEMEDICALETHICS");
+    variableList[10].assign("STATELICENSURE");
+    variableList[11].assign("LIKEWRITING");
+    variableList[12].assign("LIKEORIGINALITY");
+    variableList[13].assign("LIKEMEDIA");
+    variableList[14].assign("LIKESOCIALSCIENCE");
+    variableList[15].assign("LIKEENGLISH");
+    variableList[16].assign("LIKEREADING");
+    variableList[17].assign("LIKECLIMATE");
+    variableList[18].assign("LIKESTONES");
+    variableList[19].assign("LIKELAND");
+    variableList[20].assign("LIKESOIL");
+    variableList[21].assign("LIKEWATERRESOURCES");
+    variableList[22].assign("LIKEANALYTICALSKILLS");
+    variableList[23].assign("LIKEINTERNSHIPS");
+    variableList[24].assign("LIKEANATOMY");
+    variableList[25].assign("LIKECHILDREN");
+    variableList[26].assign("RELIABLE");
+    variableList[27].assign("LIKEREPAIRS");
+    variableList[28].assign("PROFESSION");
+    variableList[29].assign("AREA");
 
     cout<<"*** VARIABLE LIST ***"<<endl;
-    for (i=1;i < size; i++)
+    for (i=1;i < size; i++) {
+        if (variableList[i].compare("") == 0) break;
         cout<<"VARIABLE "<<i<<" "<<variableList[i]<<endl;
+    }
     cout<<"HIT RETURN TO CONTINUE";
     getchar();
 
@@ -197,12 +231,51 @@ void FC::initialize()
      variables per IF statement. If no more variables left, just
      hit return key */
     /****** comment 407, 408 *************/
-    clauseVariableList[1]  = "IN";
-    clauseVariableList[5]  = "IN";
-    clauseVariableList[9]  = "DO";
-    clauseVariableList[13] = "DO";
-    clauseVariableList[17] = "FT";
-    clauseVariableList[18] = "FM";
+    //clauseVariableList[1]  = "IN";
+    //clauseVariableList[5]  = "IN";
+    //clauseVariableList[9]  = "DO";
+    //clauseVariableList[13] = "DO";
+    //clauseVariableList[17] = "FT";
+    //clauseVariableList[18] = "FM";
+
+    clauseVariableList[1].assign("PROFESSION");
+    clauseVariableList[2].assign("LIKEMATH");
+    clauseVariableList[3].assign("LIKEPHYSICS");
+    clauseVariableList[5].assign("PROFESSION");
+    clauseVariableList[6].assign("LIKEPHYSICS");
+    clauseVariableList[7].assign("GROUPWORK");
+    clauseVariableList[9].assign("PROFESSION");
+    clauseVariableList[10].assign("LIKELAW");
+    clauseVariableList[11].assign("LIKEPHYSICS");
+    clauseVariableList[13].assign("PROFESSION");
+    clauseVariableList[14].assign("LIKEMATH");
+    clauseVariableList[15].assign("LIKEBIOLOGY");
+    clauseVariableList[17].assign("PROFESSION");
+    clauseVariableList[18].assign("LIKECHEMISTRY");
+    clauseVariableList[19].assign("GROUPWORK");
+    clauseVariableList[21].assign("PROFESSION");
+    clauseVariableList[22].assign("LIKEBIOLOGY");
+    clauseVariableList[23].assign("LIKECHEMISTRY");
+    clauseVariableList[25].assign("PROFESSION");
+    clauseVariableList[26].assign("LIKEBIOLOGY");
+    clauseVariableList[27].assign("GROUPWORK");
+    clauseVariableList[29].assign("PROFESSION");
+    clauseVariableList[30].assign("LIKEMATH");
+    clauseVariableList[33].assign("PROFESSION");
+    clauseVariableList[34].assign("LIKEPHYSICS");
+    clauseVariableList[37].assign("PROFESSION");
+    clauseVariableList[38].assign("LIKEBIOLOGY");
+    clauseVariableList[39].assign("LIKEPHYSICS");
+    clauseVariableList[41].assign("PROFESSION");
+    clauseVariableList[42].assign("GOODCREDIT");
+    clauseVariableList[45].assign("PROFESSION");
+    clauseVariableList[46].assign("LIKEMARKETING");
+    clauseVariableList[47].assign("LIKEMANAGEMENT");
+    clauseVariableList[49].assign("PROFESSION");
+    clauseVariableList[50].assign("LIKEMATH");
+    clauseVariableList[53].assign("PROFESSION");
+    clauseVariableList[54].assign("GROUPWORK");
+    clauseVariableList[57].assign("PROFESSION");
 
     printf("*** CLAUSE-VARIABLE LIST ***\n");
     for (i = 1; i < (clauseSize-1)/4 ; i++)
@@ -220,6 +293,7 @@ void FC::initialize()
             getchar();
         }
     }
+    this->profession.assign(profession);
 }
 
 void FC::ifcondtions()

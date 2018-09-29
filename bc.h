@@ -32,4 +32,5 @@ class BC
     	void popStack();
         void B545();
         void printProfession();
+        std::string getProfession() {return profession;}
 };

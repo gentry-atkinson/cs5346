@@ -12,7 +12,7 @@ int main () {
     //cout << "Your recomended profession is: ";
     //backChainer.printProfession();
 
-    FC f;
+    FC f("engineer");
     f.start();
 
     return 0;
