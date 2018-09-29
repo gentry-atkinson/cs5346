@@ -12,7 +12,7 @@ private:
     std::string conditionVariableQueue[size], variableList[size],clauseVariableList[clauseSize],clause,varble;
     int instantiatedList[size];/* instantiated list*/
     std::string fedint,interest,stock,dollar,fedmon;
-    std::string likePhysics, likeMath, groupWork, likeBology;
+    std::string likePhysics, likeMath, groupWork, likeBiology;
     std::string likeChemistry, likeMarketing, likeManagement;
     std::string goodCredit, likeMedicalEthics, stateLicensure;
     std::string likeWriting, likeOriginality, likeMedia;
@@ -21,7 +21,7 @@ private:
     std::string likeLand, likeSoil, likeWaterResources;
     std::string likeAnalyticalSkills, likeInternship, likeAnatomy;
     std::string likeChildren, reliable, likeRepairs;
-    std::string profession, area, likeLaw;
+    std::string profession, area, likeLaw, likeCommunication;
     int f, i, j, k, statementActive, frontPointer   /* front pointer */;
     int  backPointer  /* back pointer */,  statementNumber; /* statement number */
     int clauseNumber;  /* clause number */

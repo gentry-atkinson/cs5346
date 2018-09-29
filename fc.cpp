@@ -229,6 +229,8 @@ FC::FC(string profession)
     variableList[27].assign("LIKEREPAIRS");
     variableList[28].assign("PROFESSION");
     variableList[29].assign("AREA");
+    variableList[30].assign("LIKELAW");
+    variableList[31].assign("LIKECOMMUNICATION");
 
     cout<<"*** VARIABLE LIST ***"<<endl;
     for (i=1;i < size; i++) {
@@ -426,7 +428,7 @@ FC::FC(string profession)
     likePhysics.assign("");
     likeMath.assign("");
     groupWork.assign("");
-    likeBology.assign("");
+    likeBiology.assign("");
     likeChemistry.assign("");
     likeMarketing.assign("");
     likeManagement.assign("");
@@ -452,6 +454,7 @@ FC::FC(string profession)
     likeRepairs.assign("");
     area.assign("");
     likeLaw.assign("");
+    likeCommunication.assign("");
 }
 
 void FC::ifcondtions()
@@ -494,169 +497,169 @@ void FC::ifcondtions()
 
     switch(statementNumber){
         case 1:
-            if (profession.compare("engineering") == 0 && likeMath.compare("yes") == 0 && likePhysics.compare("yes") == 0){
+            if (profession.compare("engineering") == 0 && isYes(likeMath) && isYes(likePhysics)){
                 statementActive = 1;
                 if (debug) cout << "Rule 1 satisfied." << endl;
             }
             break;
         case 2:
-            if(profession.compare("engineering") == 0 && likePhysics.compare("yes") == 0 && groupWork.compare("yes") == 0){
+            if(profession.compare("engineering") == 0 && isYes(likePhysics) && isYes(groupWork)){
                 statementActive = 1;
                 if(debug) cout << "Rule 2 satisfied" << endl;
             }
             break;
         case 3:
-            if(profession.compare("engineering") == 0 && likeLaw.compare("yes") == 0 && likePhysics.compare("yes") == 0){
+            if(profession.compare("engineering") == 0 && isYes(likeLaw) && isYes(likePhysics)){
                 statementActive = 1;
                 if(debug) cout << "Rule 3 satisfied" << endl;
             }
             break;
         case 4:
-            if(profession.compare("engineering") == 0 && likeMath.compare("yes") == 0 && likeBology.compare("yes") == 0){
+            if(profession.compare("engineering") == 0 && isYes(likeMath) && isYes(likeBiology)){
                 statementActive = 1;
                 if(debug) cout << "Rule 4 satisfied" << endl;
             }
             break;
         case 5:
-            if(profession.compare("engineering") == 0 && likeChemistry.compare("yes") == 0 && groupWork.compare("yes") == 0){
+            if(profession.compare("engineering") == 0 && isYes(likeChemistry) && isYes(groupWork)){
                 statementActive = 1;
                 if(debug) cout << "Rule 5 satisfied" << endl;
             }
             break;
         case 6:
-            if(profession.compare("science") == 0 && likeBiology.compare("yes") == 0 && likeChemistry.compare("yes") == 0){
+            if(profession.compare("science") == 0 && isYes(likeBiology) && isYes(likeChemistry)){
                 statementActive = 1;
                 if(debug) cout << "Rule 6 satisfied" << endl;
             }
             break;
         case 7:
-            if(profession.compare("science") == 0 && likeBiology.compare("yes") == 0 && groupWork.compare("yes") == 0){
+            if(profession.compare("science") == 0 && isYes(likeBiology) && isYes(groupWork)){
                 statementActive = 1;
                 if(debug) cout << "Rule 7 satisfied" << endl;
             }
             break;
         case 8:
-            if(profession.compare("science") == 0 && likeMath.compare("yes")){
+            if(profession.compare("science") == 0 && isYes(likeMath)){
                 statementActive = 1;
                 if(debug) cout << "Rule 8 satisfied" << endl;
             }
             break;
         case 9:
-            if(profession.compare("science") == 0 && likePhysics.compare("yes") == 0){
+            if(profession.compare("science") == 0 && isYes(likePhysics)){
                 statementActive = 1;
                 if(debug) cout << "Rule 9 satisfied" << endl;
             }
             break;
         case 10:
-            if(profession.compare("science") == 0 && likeBiology.compare("yes") == 0 && likePhysics.compare("yes") == 0){
+            if(profession.compare("science") == 0 && isYes(likeBiology) && isYes(likePhysics)){
                 statementActive = 1;
                 if(debug) cout << "Rule 10 satisfied" << endl;
             }
             break;
         case 11:
-            if(profession.compare("business") == 0 && goodCredit.compare("yes") == 0){
+            if(profession.compare("business") == 0 && isYes(goodCredit)){
                 statementActive = 1;
                 if(debug) cout << "Rule 11 satisfied" << endl;
             }
             break;
         case 12:
-            if(profession.compare("business") == 0 && likeMarketing.compare("yes") == 0 && likeManagement.compare("yes") == 0){
+            if(profession.compare("business") == 0 && isYes(likeMarketing) && isYes(likeManagement)){
                 statementActive = 1;
                 if(debug) cout << "Rule 12 satisfied" << endl;
             }
             break;
         case 13:
-            if(profession.compare("business") == 0 && likeMath.compare("yes") == 0){
+            if(profession.compare("business") == 0 && isYes(likeMath)){
                 statementActive = 1;
                 if(debug) cout << "Rule 13 satisfied" << endl;
             }
             break;
         case 14:
-            if(profession.compare("business") == 0 && groupWork.compare("yes") == 0){
+            if(profession.compare("business") == 0 && isYes(groupWork)){
                 statementActive = 1;
                 if(debug) cout << "Rule 14 satisfied" << endl;
             }
             break;
         case 15:
-            if(profession.compare("business") == 0 && goodCredit.compare("yes") == 0 && likeManagement.compare("yes") == 0){
+            if(profession.compare("business") == 0 && isYes(goodCredit) && isYes(likeManagement)){
                 statementActive = 1;
                 if(debug) cout << "Rule 15 satisfied" << endl;
             }
             break;
         case 16:
-            if(profession.compare("medical") == 0 && groupWork.compare("yes") == 0){
+            if(profession.compare("medical") == 0 && isYes(groupWork)){
                 statementActive = 1;
                 if(debug) cout << "Rule 16 satisfied" << endl;
             }
             break;
         case 17:
-            if(profession.compare("medical") == 0 && likeChemistry.compare("yes") == 0){
+            if(profession.compare("medical") == 0 && isYes(likeChemistry)){
                 statementActive = 1;
                 if(debug) cout << "Rule 17 satisfied" << endl;
             }
             break;
         case 18:
-            if(profession.compare("medical") == 0 && stateLicensure.compare("yes") == 0 && likeChemistry.compare("yes") == 0){
+            if(profession.compare("medical") == 0 && isYes(stateLicensure) && isYes(likeChemistry)){
                 statementActive = 1;
                 if(debug) cout << "Rule 18 satisfied" << endl;
             }
             break;
         case 19:
-            if(profession.compare("medical") == 0 && likeMedicalEthics.compare("yes") == 0){
+            if(profession.compare("medical") == 0 && isYes(likeMedicalEthics)){
                 statementActive = 1;
                 if(debug) cout << "Rule 19 satisfied" << endl;
             }
             break;
         case 20:
-            if(profession.compare("medical") == 0 && likeBiology.compare("yes") == 0 && likeChemistry.compare("yes") == 0){
+            if(profession.compare("medical") == 0 && isYes(likeBiology) && likeChemistry.compare("yes") == 0){
                 statementActive = 1;
                 if(debug) cout << "Rule 20 satisfied" << endl;
             }
             break;
         case 21:
-            if(profession.compare("english") == 0 && likeWriting.compare("yes") == 0 && likeOriginality.compare("yes") == 0){
+            if(profession.compare("english") == 0 && isYes(likeWriting) && isYes(likeOriginality)){
                 statementActive = 1;
                 if(debug) cout << "Rule 21 satisfied" << endl;
             }
             break;
         case 22:
-            if(profession.compare("engllish") == 0 && likeMedia.compare("yes") == 0 && likeSocialScience.compare("yes") == 0){
+            if(profession.compare("engllish") == 0 && isYes(likeMedia) && isYes(likeSocialScience)){
                 statementActive = 1;
                 if(debug) cout << "Rule 22 satisfied" << endl;
             }
             break;
         case 23:
-            if(profession.compare("english") == 0 && likeEnglish.compare("yes") == 0 && likeReading.compare("yes") == 0){
+            if(profession.compare("english") == 0 && isYes(likeEnglish) && isYes(likeReading)){
                 statementActive = 1;
                 if(debug) cout << "Rule 23 satisfied" << endl;
             }
             break;
         case 24:
-            if(profession.compare("english") == 0 && likeMarketing.compare("yes") == 0 && likeEnglish.compare("yes") == 0){
+            if(profession.compare("english") == 0 && isYes(likeMarketing) && isYes(likeEnglish)){
                 statementActive = 1;
                 if(debug) cout << "Rule 24 satisfied" << endl;
             }
             break;
         case 25:
-            if(profession.compare("english") == 0 && likeReading.compare("yes") == 0 && likeOriginality.compare("yes") == 0){
+            if(profession.compare("english") == 0 && isYes(likeReading) && isYes(likeOriginality)){
                 statementActive = 1;
                 if(debug) cout << "Rule 25 satisfied" << endl;
             }
             break;
         case 26:
-            if(profession.compare("geography") == 0 && likeClimate.compare("yes") == 0 && likeStones.compare("yes") == 0){
+            if(profession.compare("geography") == 0 && isYes(likeClimate) && isYes(likeStones)){
                 statementActive = 1;
                 if(debug) cout << "Rule 26 satisfied" << endl;
             }
             break;
         case 27:
-            if(profession.compare("geography") == 0 && likeLand.compare("yes") == 0 && likeOriginality.compare("yes") == 0){
+            if(profession.compare("geography") == 0 && isYes(likeLand) && isYes(likeOriginality)){
                 statementActive = 1;
                 if(debug) cout << "Rule 27 satisfied" << endl;
             }
             break;
         case 28:
-            if(profession.compare("geography") == 0 && likeSoil.compare("yes") == 0 && likeClimate.compare("yes") == 0){
+            if(profession.compare("geography") == 0 && isYes(likeSoil) && isYes(likeClimate)){
                 statementActive = 1;
                 if(debug) cout << "Rule 28 satisfied" << endl;
             }
@@ -686,7 +689,7 @@ void FC::ifcondtions()
             }
             break;
         case 33:
-            if(profession.compare("psychology") == 0 && isYes(likeInternships)){
+            if(profession.compare("psychology") == 0 && isYes(likeInternship)){
                 statementActive = 1;
                 if(debug) cout << "Rule 34 satisfied" << endl;
             }
@@ -710,7 +713,7 @@ void FC::ifcondtions()
             }
             break;
         case 37:
-            if(profession.compare("agriculture") == 0 && isYes(groupWork) && isYes(likeManagement){
+            if(profession.compare("agriculture") == 0 && isYes(groupWork) && isYes(likeManagement)){
                 statementActive = 1;
                 if(debug) cout << "Rule 37 satisfied" << endl;
             }
@@ -818,7 +821,7 @@ void FC::ifcondtions()
             }
             break;
         case 55:
-            if(profession.compare("propertymanagement") == 0 && && isYes(likeCommunication)){
+            if(profession.compare("propertymanagement") == 0 && isYes(likeCommunication)){
                 statementActive = 1;
                 if(debug) cout << "Rule 55 satisfied" << endl;
             }
@@ -929,7 +932,7 @@ void FC::takingInput()
 }
 
 bool FC::isYes(string inString){
-    if (inString.compare("yes" == 0 || inString.compare("y") == 0)
+    if (inString.compare("yes") == 0 || inString.compare("y") == 0)
         return true;
     else
         return false;
