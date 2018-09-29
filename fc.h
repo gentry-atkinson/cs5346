@@ -9,7 +9,7 @@ private:
     bool inst = false;
     static const int size = 61;
     static const int clauseSize = 241;
-    std::string conditionVariableQueue[size], variableList[size],clauseVariableList[clauseSize],c,varble;
+    std::string conditionVariableQueue[size], variableList[size],clauseVariableList[clauseSize],clause,varble;
     int instantiatedList[size];/* instantiated list*/
     std::string fedint,interest,stock,dollar,fedmon;
     std::string likePhysics, likeMath, groupWork, likeBology;
@@ -21,10 +21,11 @@ private:
     std::string likeLand, likeSoil, likeWaterResources;
     std::string likeAnalyticalSkills, likeInternship, likeAnatomy;
     std::string likeChildren, reliable, likeRepairs;
-    std::string profession, area;
+    std::string profession, area, likeLaw;
     int f, i, j, k, statementActive, frontPointer   /* front pointer */;
     int  backPointer  /* back pointer */,  statementNumber; /* statement number */
-    int cn;  /* clause number */
+    int clauseNumber;  /* clause number */
+    bool isYes(std::string);
 
 public:
     FC(std::string);
@@ -38,4 +39,5 @@ public:
     void inference();
     void gotoF();
     void start();
+    std::string getArea() {return area;}
 };

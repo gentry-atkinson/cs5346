@@ -15,5 +15,8 @@ int main () {
     FC f("engineer");
     f.start();
 
+    cout << "*************************************" << endl;
+    //cout << "Congratulations! Your future profession will be: " << backChainer.getProfession();
+
     return 0;
 }

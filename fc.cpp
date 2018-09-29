@@ -17,7 +17,8 @@ void FC::check_instantiation()
 {
     int i=1;
     /* find variable in the variable list */
-    while ((varble != variableList[i]) && (i < size))
+    //while ((varble != variableList[i]) && (i < size))
+    while((varble.compare(variableList[i]) != 0) && i < size)
         i = i+1;
     /* check if already instantiated */
     if (instantiatedList[i] != 1)
@@ -35,7 +36,8 @@ void FC::instantiate()
 {
     int i=1;
     /* find varialbe in the varialbe list (varlt) */
-    while ((varble != variableList[i]) && (i < size))
+    //while ((varble != variableList[i]) && (i < size))
+    while (varble.compare(variableList[i]) != 0 && i < size)
         i=i+1;
 
     /* instantiate it */
@@ -43,10 +45,12 @@ void FC::instantiate()
     i = 1;
 
     /* determine if (v) is or already has been on the queue (cndvar) */
-    while ((varble != conditionVariableQueue[i]) && (i < size))
+    //while ((varble != conditionVariableQueue[i]) && (i < size))
+    while (varble.compare(conditionVariableQueue[i]) != 0 && i < size)
         i=i+1;
     /* variable has not been on the queue. Store it in the back of the queue */
-    if (varble != conditionVariableQueue[i])
+    //if (varble != conditionVariableQueue[i])
+    if (varble.compare(conditionVariableQueue[i]) != 0)
     {
         conditionVariableQueue[backPointer] = varble;
         backPointer=backPointer+1;
@@ -59,15 +63,16 @@ void FC::inference()
     backPointer=1;
     /****** INFERENCE SECTION *****************/
     printf("ENTER CONDITION VARIABLE? ");
-    cin>>c;
+    cin>>clause;
     /* place condition variable c on condition var queue cndvar */
-    conditionVariableQueue[backPointer] = c;
+    //conditionVariableQueue[backPointer] = clause;
+    conditionVariableQueue[backPointer].assign("clause");
     /* move backpointer (bp) to back */
     backPointer = backPointer + 1;
     /* set the condition variable pointer consisting of the
      statement number (sn) and the clause number (cn) */
     statementNumber = 1;
-    cn = 1;
+    clauseNumber = 1;
     /* find the next statement number containing the condition variable
      which is in front of the queue (cndvar), this statement number
      is located in the clause variable list (clvarlt) */
@@ -79,23 +84,26 @@ void FC::gotoF()
 {
     search();
     /* point to first clause in statement */
-    cn=1;
+    clauseNumber=1;
     if (statementNumber != 0)/* more statements */
     {
         /* locate the clause */
-        i = 4 * (statementNumber-1) + cn;
+        i = 4 * (statementNumber-1) + clauseNumber;
         /* clause variable */
-        v = clauseVariableList[i];
+        //varble = clauseVariableList[i];
+        varble.assign(clauseVariableList[i]);
         /* are there any more clauses for this statement */
-        while (varble != "")
+        //while (varble != "")
+        while (varble.compare("") != 0)
         /* more clauses */
         {
             /* check instantiation of this clause */
             check_instantiation();
-            cn = cn+1;
+            clauseNumber = clauseNumber+1;
             /* check next clause */
-            i = 4 * (statementNumber-1) + cn;
-            varble = clauseVariableList[i];
+            i = 4 * (statementNumber-1) + clauseNumber;
+            //varble = clauseVariableList[i];
+            varble.assign(clauseVariableList[i]);
         }
 
         /* no more clauses - check IF part of statement */
@@ -134,8 +142,9 @@ void FC::gotoF()
         gotoF();
     }
     /* no more conclusion variables on queue */
-    cout<<"*** Success ***";
-    exit(1);
+    cout<<"*** Success ***" << endl;
+    //exit(1);
+    return;
 }
 
 void FC::search()
@@ -144,15 +153,17 @@ void FC::search()
     statementNumber = f;
     while ((flag == 0) && (statementNumber <= (clauseSize-1)/4))
     {
-        cn=1;
-        k = (statementNumber-1)*4+cn;
-        while ((clauseVariableList[k] != conditionVariableQueue[frontPointer]) && (cn < 4))
+        clauseNumber=1;
+        k = (statementNumber-1)*4+clauseNumber;
+        //while ((clauseVariableList[k] != conditionVariableQueue[frontPointer]) && (clauseNumber < 4))
+        while(clauseVariableList[k].compare(conditionVariableQueue[frontPointer]) != 0 && clauseNumber < 4)
         {
-            cn = cn+1;
-            k = (statementNumber-1)*4+cn;
+            clauseNumber = clauseNumber+1;
+            k = (statementNumber-1)*4+clauseNumber;
         }
 
-        if (clauseVariableList[k] == conditionVariableQueue[frontPointer])
+        //if (clauseVariableList[k] == conditionVariableQueue[frontPointer])
+        if (clauseVariableList[k].compare(conditionVariableQueue[frontPointer]) == 0)
             flag = 1;
         if (flag == 0)
             statementNumber = statementNumber+1;
@@ -412,44 +423,437 @@ FC::FC(string profession)
         }
     }
     this->profession.assign(profession);
+    likePhysics.assign("");
+    likeMath.assign("");
+    groupWork.assign("");
+    likeBology.assign("");
+    likeChemistry.assign("");
+    likeMarketing.assign("");
+    likeManagement.assign("");
+    goodCredit.assign("");
+    likeMedicalEthics.assign("");
+    stateLicensure.assign("");
+    likeWriting.assign("");
+    likeOriginality.assign("");
+    likeMedia.assign("");
+    likeSocialScience.assign("");
+    likeEnglish.assign("");
+    likeReading.assign("");
+    likeClimate.assign("");
+    likeStones.assign("");
+    likeLand.assign("");
+    likeSoil.assign("");
+    likeWaterResources.assign("");
+    likeAnalyticalSkills.assign("");
+    likeInternship.assign("");
+    likeAnatomy.assign("");
+    likeChildren.assign("");
+    reliable.assign("");
+    likeRepairs.assign("");
+    area.assign("");
+    likeLaw.assign("");
 }
 
 void FC::ifcondtions()
 {
     /* sample IF-THEN statements from the position knowledge base */
-    switch(statementNumber)
-    {
+
+    //switch(statementNumber)
+    //{
             /* statement 1 */
             /***** comment 1500 *****/
+    //    case 1:
+    //        if (interest == "FALL")
+    //            statementActive=1;
+    //        break;
+    //        /* statement 2 */
+    //        /***** comment 1510 *****/
+    //    case 2:
+    //        if (interest == "RISE")
+    //            statementActive=1;
+    //        break;
+    //        /* statement 3 */
+    //        /***** comment 1540 *****/
+    //    case 3:
+    //        if (dollar == "FALL")
+    //            statementActive=1;
+    //        break;
+    //        /* statement 4 */
+    //        /***** comment 1550 *****/
+    //    case 4:
+    //        if (dollar == "RISE")
+    //            statementActive=1;
+    //        break;
+    //    /* statement 5 */
+    //    case 5:
+    //        if ((fedint == "FALL") && (fedmon == "ADD"))
+    //            statementActive=1;
+    //        break;
+    //        /***** comment 1610 *****/
+    //}
+
+    switch(statementNumber){
         case 1:
-            if (interest == "FALL")
-                statementActive=1;
+            if (profession.compare("engineering") == 0 && likeMath.compare("yes") == 0 && likePhysics.compare("yes") == 0){
+                statementActive = 1;
+                if (debug) cout << "Rule 1 satisfied." << endl;
+            }
             break;
-            /* statement 2 */
-            /***** comment 1510 *****/
         case 2:
-            if (interest == "RISE")
-                statementActive=1;
+            if(profession.compare("engineering") == 0 && likePhysics.compare("yes") == 0 && groupWork.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 2 satisfied" << endl;
+            }
             break;
-            /* statement 3 */
-            /***** comment 1540 *****/
         case 3:
-            if (dollar == "FALL")
-                statementActive=1;
+            if(profession.compare("engineering") == 0 && likeLaw.compare("yes") == 0 && likePhysics.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 3 satisfied" << endl;
+            }
             break;
-            /* statement 4 */
-            /***** comment 1550 *****/
         case 4:
-            if (dollar == "RISE")
-                statementActive=1;
+            if(profession.compare("engineering") == 0 && likeMath.compare("yes") == 0 && likeBology.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 4 satisfied" << endl;
+            }
             break;
-            /* statement 5 */
         case 5:
-            if ((fedint == "FALL") && (fedmon == "ADD"))
-                statementActive=1;
+            if(profession.compare("engineering") == 0 && likeChemistry.compare("yes") == 0 && groupWork.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 5 satisfied" << endl;
+            }
             break;
-            /***** comment 1610 *****/
-    }
+        case 6:
+            if(profession.compare("science") == 0 && likeBiology.compare("yes") == 0 && likeChemistry.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 6 satisfied" << endl;
+            }
+            break;
+        case 7:
+            if(profession.compare("science") == 0 && likeBiology.compare("yes") == 0 && groupWork.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 7 satisfied" << endl;
+            }
+            break;
+        case 8:
+            if(profession.compare("science") == 0 && likeMath.compare("yes")){
+                statementActive = 1;
+                if(debug) cout << "Rule 8 satisfied" << endl;
+            }
+            break;
+        case 9:
+            if(profession.compare("science") == 0 && likePhysics.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 9 satisfied" << endl;
+            }
+            break;
+        case 10:
+            if(profession.compare("science") == 0 && likeBiology.compare("yes") == 0 && likePhysics.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 10 satisfied" << endl;
+            }
+            break;
+        case 11:
+            if(profession.compare("business") == 0 && goodCredit.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 11 satisfied" << endl;
+            }
+            break;
+        case 12:
+            if(profession.compare("business") == 0 && likeMarketing.compare("yes") == 0 && likeManagement.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 12 satisfied" << endl;
+            }
+            break;
+        case 13:
+            if(profession.compare("business") == 0 && likeMath.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 13 satisfied" << endl;
+            }
+            break;
+        case 14:
+            if(profession.compare("business") == 0 && groupWork.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 14 satisfied" << endl;
+            }
+            break;
+        case 15:
+            if(profession.compare("business") == 0 && goodCredit.compare("yes") == 0 && likeManagement.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 15 satisfied" << endl;
+            }
+            break;
+        case 16:
+            if(profession.compare("medical") == 0 && groupWork.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 16 satisfied" << endl;
+            }
+            break;
+        case 17:
+            if(profession.compare("medical") == 0 && likeChemistry.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 17 satisfied" << endl;
+            }
+            break;
+        case 18:
+            if(profession.compare("medical") == 0 && stateLicensure.compare("yes") == 0 && likeChemistry.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 18 satisfied" << endl;
+            }
+            break;
+        case 19:
+            if(profession.compare("medical") == 0 && likeMedicalEthics.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 19 satisfied" << endl;
+            }
+            break;
+        case 20:
+            if(profession.compare("medical") == 0 && likeBiology.compare("yes") == 0 && likeChemistry.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 20 satisfied" << endl;
+            }
+            break;
+        case 21:
+            if(profession.compare("english") == 0 && likeWriting.compare("yes") == 0 && likeOriginality.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 21 satisfied" << endl;
+            }
+            break;
+        case 22:
+            if(profession.compare("engllish") == 0 && likeMedia.compare("yes") == 0 && likeSocialScience.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 22 satisfied" << endl;
+            }
+            break;
+        case 23:
+            if(profession.compare("english") == 0 && likeEnglish.compare("yes") == 0 && likeReading.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 23 satisfied" << endl;
+            }
+            break;
+        case 24:
+            if(profession.compare("english") == 0 && likeMarketing.compare("yes") == 0 && likeEnglish.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 24 satisfied" << endl;
+            }
+            break;
+        case 25:
+            if(profession.compare("english") == 0 && likeReading.compare("yes") == 0 && likeOriginality.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 25 satisfied" << endl;
+            }
+            break;
+        case 26:
+            if(profession.compare("geography") == 0 && likeClimate.compare("yes") == 0 && likeStones.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 26 satisfied" << endl;
+            }
+            break;
+        case 27:
+            if(profession.compare("geography") == 0 && likeLand.compare("yes") == 0 && likeOriginality.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 27 satisfied" << endl;
+            }
+            break;
+        case 28:
+            if(profession.compare("geography") == 0 && likeSoil.compare("yes") == 0 && likeClimate.compare("yes") == 0){
+                statementActive = 1;
+                if(debug) cout << "Rule 28 satisfied" << endl;
+            }
+            break;
+        case 29:
+            if(profession.compare("geography") == 0 && isYes(likeWaterResources) && isYes(likeSoil)){
+                statementActive = 1;
+                if(debug) cout << "Rule 29 satisfied" << endl;
+            }
+            break;
+        case 30:
+            if(profession.compare("geography") == 0 && isYes(likeMath)){
+                statementActive = 1;
+                if(debug) cout << "Rule 30 satisfied" << endl;
+            }
+            break;
+        case 31:
+            if(profession.compare("psychology") == 0 && isYes(likeSocialScience)){
+                statementActive = 1;
+                if(debug) cout << "Rule 31 satisfied" << endl;
+            }
+            break;
+        case 32:
+            if(profession.compare("psychology") == 0 && isYes(groupWork) && isYes(likeAnalyticalSkills)){
+                statementActive = 1;
+                if(debug) cout << "Rule 32 satisfied" << endl;
+            }
+            break;
+        case 33:
+            if(profession.compare("psychology") == 0 && isYes(likeInternships)){
+                statementActive = 1;
+                if(debug) cout << "Rule 34 satisfied" << endl;
+            }
+            break;
+        case 34:
+            if(profession.compare("psychology") == 0 && isYes(groupWork) && isYes(likeSocialScience)){
+                statementActive = 1;
+                if(debug) cout << "Rule 34 satisfied" << endl;
+            }
+            break;
+        case 35:
+            if(profession.compare("psychology") == 0 && isYes(likeCommunication) && isYes(likeAnalyticalSkills)){
+                statementActive = 1;
+                if(debug) cout << "Rule 35 satisfied" << endl;
+            }
+            break;
+        case 36:
+            if(profession.compare("agriculture") == 0 && isYes(goodCredit) && isYes(likeManagement)){
+                statementActive = 1;
+                if(debug) cout << "Rule 36 satisfied" << endl;
+            }
+            break;
+        case 37:
+            if(profession.compare("agriculture") == 0 && isYes(groupWork) && isYes(likeManagement){
+                statementActive = 1;
+                if(debug) cout << "Rule 37 satisfied" << endl;
+            }
+            break;
+        case 38:
+            if(profession.compare("agricuture") == 0 && isYes(likeManagement) && isYes(likeMarketing)){
+                statementActive = 1;
+                if(debug) cout << "Rule 38 satisfied" << endl;
+            }
+            break;
+        case 39:
+            if(profession.compare("agriculture") == 0 && isYes(likeChemistry)){
+                statementActive = 1;
+                if(debug) cout << "Rule 39 satisfied" << endl;
+            }
+            break;
+        case 40:
+            if(profession.compare("agriculture") == 0 && isYes(likeWaterResources)){
+                statementActive = 1;
+                if(debug) cout << "Rule 40 satisfied" << endl;
+            }
+            break;
+        case 41:
+            if(profession.compare("healthcare") == 0 && isYes(likeCommunication)){
+                statementActive = 1;
+                if(debug) cout << "Rule 41 satisfied" << endl;
+            }
+            break;
+        case 42:
+            if(profession.compare("healthcare") == 0 && isYes(likeManagement)){
+                statementActive = 1;
+                if(debug) cout << "Rule 42 satisfied" << endl;
+            }
+            break;
+        case 43:
+            if(profession.compare("healthcare") == 0 && isYes(likeBiology)){
+                statementActive = 1;
+                if(debug) cout << "Rule 43 satisfied" << endl;
+            }
+            break;
+        case 44:
+            if(profession.compare("healthcare") == 0 && isYes(likeManagement) && isYes(groupWork)){
+                statementActive = 1;
+                if(debug) cout << "Rule 44 satisfied" << endl;
+            }
+            break;
+        case 45:
+            if(profession.compare("healthcare") == 0 && isYes(likeAnatomy) && isYes(likeChemistry)){
+                statementActive = 1;
+                if(debug) cout << "Rule 45 satisfied" << endl;
+            }
+            break;
+        case 46:
+            if(profession.compare("education") == 0 && isYes(likeChildren)){
+                statementActive = 1;
+                if(debug) cout << "Rule 46 satisfied" << endl;
+            }
+            break;
+        case 47:
+            if(profession.compare("education") == 0 && isYes(likeReading) && isYes(likeCommunication)){
+                statementActive = 1;
+                if(debug) cout << "Rule 47 satisfied" << endl;
+            }
+            break;
+        case 48:
+            if(profession.compare("education") == 0 && isYes(likeMath) && isYes(likeChemistry)){
+                statementActive = 1;
+                if(debug) cout << "Rule 48 satisfied" << endl;
+            }
+            break;
+        case 49:
+            if(profession.compare("education") == 0 && isYes(likeCommunication) && isYes(likeChildren)){
+                statementActive = 1;
+                if(debug) cout << "Rule 49 satisfied" << endl;
+            }
+            break;
+        case 50:
+            if(profession.compare("education") == 0 && isYes(likeSocialScience) && isYes(likeCommunication)){
+                statementActive = 1;
+                if(debug) cout << "Rule 50 satisfied" << endl;
+            }
+            break;
+        case 51:
+            if(profession.compare("propertymanagement") == 0 && isYes(likeManagement)){
+                statementActive = 1;
+                if(debug) cout << "Rule 51 satisfied" << endl;
+            }
+            break;
+        case 52:
+            if(profession.compare("propertymanagement") == 0 && isYes(groupWork)){
+                statementActive = 1;
+                if(debug) cout << "Rule 53 satisfied" << endl;
+            }
+            break;
+        case 53:
+            if(profession.compare("propertymanagement") == 0 && isYes(reliable)){
+                statementActive = 1;
+                if(debug) cout << "Rule 53 satisfied" << endl;
+            }
+            break;
+        case 54:
+            if(profession.compare("propertymanagement") == 0 && isYes(likeRepairs)){
+                statementActive = 1;
+                if(debug) cout << "Rule 54 satisfied" << endl;
+            }
+            break;
+        case 55:
+            if(profession.compare("propertymanagement") == 0 && && isYes(likeCommunication)){
+                statementActive = 1;
+                if(debug) cout << "Rule 55 satisfied" << endl;
+            }
+            break;
+        case 56:
+            if(profession.compare("cs") == 0 && isYes(likeSocialScience)){
+                statementActive = 1;
+                if(debug) cout << "Rule 56 satisfied" << endl;
+            }
+            break;
+        case 57:
+            if(profession.compare("cs") == 0 && isYes(likeMath) && isYes(likeAnalyticalSkills)){
+                statementActive = 1;
+                if(debug) cout << "Rule 58 satisfied" << endl;
+            }
+            break;
+        case 58:
+            if(profession.compare("cs") == 0 && isYes(groupWork)){
+                statementActive = 1;
+                if(debug) cout << "Rule 58 satisfied" << endl;
+            }
+            break;
+        case 59:
+            if(profession.compare("cs") == 0 && isYes(likeMarketing)){
+                statementActive = 1;
+                if(debug) cout << "Rule 59 satisfied" << endl;
+            }
+            break;
+        case 60:
+            if(profession.compare("cs") == 0 && isYes(likeOriginality)){
+                statementActive = 1;
+                if(debug) cout << "Rule 60 satisfied" << endl;
+            }
+            break;
+    }//end of switch
 }
 
 void FC::Result()
@@ -523,3 +927,10 @@ void FC::takingInput()
             break;
     }
 }
+
+bool FC::isYes(string inString){
+    if (inString.compare("yes" == 0 || inString.compare("y") == 0)
+        return true;
+    else
+        return false;
+    }
