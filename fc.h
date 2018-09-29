@@ -5,14 +5,15 @@ class FC
 
 private:
     int flag;
+    bool debug = true;
     bool inst = false;
-    static const int size = 11;
-    static const int csize = 41;
-    std::string cndvar[size], varlt[size],clvarlt[csize],c,v;
-    int instlt[size];/* instantiated list*/
+    static const int size = 61;
+    static const int clauseSize = 240;
+    std::string conditionVariableQueue[size], variableList[size],clauseVariableList[clauseSize],c,v;
+    int instantiatedList[size];/* instantiated list*/
     std::string fedint,interest,stock,dollar,fedmon;
-    int f, i, j, k, s, fp   /* front pointer */;
-    int  bp  /* back pointer */,  sn; /* statement number */
+    int f, i, j, k, statementActive, frontPointer   /* front pointer */;
+    int  backPointer  /* back pointer */,  statementNumber; /* statement number */
     int cn;  /* clause number */
 
 public:
