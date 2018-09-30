@@ -19,10 +19,7 @@ class BC
         int statementStack[size], clauseStack[size], statementNumber, f, statementActive, stackPointer;
         float gr, ex, grade;
         bool debug;
-    public:
-    	BC(bool debug = false);
-    	void inferenceSection();
-    	void B520();
+        void B520();
     	void KeepProcessing();
     	void determine_member_concl_list();
     	void push_on_stack();
@@ -31,6 +28,10 @@ class BC
     	void InBetweenFunction();
     	void popStack();
         void B545();
+
+    public:
+    	BC(bool debug = false);
+    	void inferenceSection();
         void printProfession();
         std::string getProfession() {return profession;}
 };

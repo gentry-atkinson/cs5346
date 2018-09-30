@@ -15,6 +15,7 @@ void FC::start()
 
 void FC::check_instantiation()
 {
+    if (debug) cout << "Check_instantiation called for " << varble << endl;
     int i=1;
     /* find variable in the variable list */
     //while ((varble != variableList[i]) && (i < size))
@@ -23,17 +24,21 @@ void FC::check_instantiation()
     /* check if already instantiated */
     if (instantiatedList[i] != 1)
     {
+        if (debug) cout << "This is a new variable." << endl;
         /* mark instantiated */
         instantiatedList[i] = 1;
         /* the designer of this knowledge base places the input
          statements to instantiate the variables in this case
          statement */
-        takingInput();
+        takingInput(i);
     }
+    else
+        if (debug) cout << "I already have a value for this variable." << endl;
 }
 
 void FC::instantiate()
 {
+    if (debug) cout << "instantiate called for " << varble << endl;
     int i=1;
     /* find varialbe in the varialbe list (varlt) */
     //while ((varble != variableList[i]) && (i < size))
@@ -59,14 +64,18 @@ void FC::instantiate()
 
 void FC::inference()
 {
+    if (debug) cout << "inference called" << endl;
     frontPointer=1;
     backPointer=1;
     /****** INFERENCE SECTION *****************/
-    printf("ENTER CONDITION VARIABLE? ");
-    cin>>clause;
+    //printf("ENTER CONDITION VARIABLE? ");
+    //cin>>clause;
+    cout << "Your condition variable is Profession." << endl;
+    cout << "Your current profession is: " << profession << endl;
+    clause.assign("PROFESSION");
     /* place condition variable c on condition var queue cndvar */
     //conditionVariableQueue[backPointer] = clause;
-    conditionVariableQueue[backPointer].assign("clause");
+    conditionVariableQueue[backPointer].assign(clause);
     /* move backpointer (bp) to back */
     backPointer = backPointer + 1;
     /* set the condition variable pointer consisting of the
@@ -82,6 +91,8 @@ void FC::inference()
 
 void FC::gotoF()
 {
+    int i;
+    if (debug) cout << "goToF called" << endl;
     search();
     /* point to first clause in statement */
     clauseNumber=1;
@@ -149,6 +160,8 @@ void FC::gotoF()
 
 void FC::search()
 {
+    if (debug) cout << "search called" << endl;
+    if (debug) cout << "current front of queue is " << conditionVariableQueue[frontPointer] << endl;
     flag = 0;
     statementNumber = f;
     while ((flag == 0) && (statementNumber <= (clauseSize-1)/4))
@@ -170,6 +183,7 @@ void FC::search()
     }
     if (flag == 0)
         statementNumber=0;
+    cout << "SN after search is " << statementNumber << endl;
 }
 
 
@@ -177,10 +191,10 @@ void FC::search()
 FC::FC(string profession)
 {
     /******** INITIALIZATION SECTION ***********/
-    for (i=1;i < clauseSize; i++)
+    for (int i=1;i < clauseSize; i++)
         //clauseVariableList[i] = "";
         clauseVariableList[i].assign("");
-    for (i=1;i < size; i++)
+    for (int i=1;i < size; i++)
     {
         //conditionVariableQueue[i] = "";
         conditionVariableQueue[i].assign("");
@@ -188,6 +202,7 @@ FC::FC(string profession)
         variableList[i].assign("");
         instantiatedList[i] = 0;
     }
+
     /* enter variables which are in the IF part, 1 at a time in
      the exact order that they occur. Up to 3 variables per
      IF statement. Do not duplicate any variable names. Any
@@ -222,7 +237,7 @@ FC::FC(string profession)
     variableList[20].assign("LIKESOIL");
     variableList[21].assign("LIKEWATERRESOURCES");
     variableList[22].assign("LIKEANALYTICALSKILLS");
-    variableList[23].assign("LIKEINTERNSHIPS");
+    variableList[23].assign("LIKEINTERNSHIP");
     variableList[24].assign("LIKEANATOMY");
     variableList[25].assign("LIKECHILDREN");
     variableList[26].assign("RELIABLE");
@@ -233,7 +248,7 @@ FC::FC(string profession)
     variableList[31].assign("LIKECOMMUNICATION");
 
     cout<<"*** VARIABLE LIST ***"<<endl;
-    for (i=1;i < size; i++) {
+    for (int i=1;i < size; i++) {
         if (variableList[i].compare("") == 0) break;
         cout<<"VARIABLE "<<i<<" "<<variableList[i]<<endl;
     }
@@ -338,7 +353,7 @@ FC::FC(string profession)
     clauseVariableList[126].assign("GROUPWORK");
     clauseVariableList[127].assign("LIKEANALYTICALSKILLS");
     clauseVariableList[129].assign("PROFESSION");
-    clauseVariableList[130].assign("LIKEINTERNSHIPS");
+    clauseVariableList[130].assign("LIKEINTERNSHIP");
     clauseVariableList[133].assign("PROFESSION");
     clauseVariableList[134].assign("GROUPWORK");
     clauseVariableList[135].assign("LIKESOCIALSCIENCE");
@@ -409,10 +424,10 @@ FC::FC(string profession)
     clauseVariableList[238].assign("LIKEORIGINALITY");
 
     printf("*** CLAUSE-VARIABLE LIST ***\n");
-    for (i = 1; i <= (clauseSize-1)/4 ; i++)
+    for (int i = 1; i <= (clauseSize-1)/4 ; i++)
     {
         printf("** CLAUSE %d\n", i);
-        for (j = 1; j < 5; j++)
+        for (int j = 1; j < 5; j++)
         {
             k = 4 * (i - 1) + j;
             cout<<"VARIABLE "<<j<< " "<<clauseVariableList[k]<<endl;
@@ -425,6 +440,7 @@ FC::FC(string profession)
         }
     }
     this->profession.assign(profession);
+    instantiatedList[28] = 1;
     likePhysics.assign("");
     likeMath.assign("");
     groupWork.assign("");
@@ -459,6 +475,13 @@ FC::FC(string profession)
 
 void FC::ifcondtions()
 {
+    if (debug){
+        cout << "ifconditions called for SN: " << statementNumber << endl;
+        cout << "current values for ifs: " << endl;
+        cout << "Profession: " << profession << endl;
+        cout << "Like Math: " << likeMath << endl;
+        cout << "Like Physics: " << likePhysics << endl;
+    }
     /* sample IF-THEN statements from the position knowledge base */
 
     //switch(statementNumber)
@@ -863,6 +886,7 @@ void FC::ifcondtions()
 
 void FC::Result()
 {
+    if (debug) cout << "result called for SN: " << statementNumber << endl;
     /* invoke THEN part */
     switch (statementNumber)
     {
@@ -1212,8 +1236,9 @@ void FC::Result()
     } //end of switch
 } // end of result func
 
-void FC::takingInput()
+void FC::takingInput(int i)
 {
+    if (debug) cout << "takingInput called for variable: " << i << endl;
     switch (i)
     {
             /* input statements for sample position knowledge base */
@@ -1239,7 +1264,7 @@ void FC::takingInput()
         //    break;
             cout << "Do you work well in groups: ";
             cin >> groupWork;
-            cout >> endl;
+            cout << endl;
             break;
         case 4:
         //    cout<<"ADD OR SUBTRACT FOR FM? ";
@@ -1252,7 +1277,7 @@ void FC::takingInput()
         case 5:
             cout << "Do you enjoy studying chemistry: ";
             cin >> likeChemistry;
-            cout >> endl;
+            cout << endl;
             break;
         case 6:
             cout << "Do you like marketing goods and services: ";
@@ -1341,7 +1366,7 @@ void FC::takingInput()
             break;
         case 23:
             cout << "Are you interested in doing an internship: ";
-            cin >> likeInternships;
+            cin >> likeInternship;
             cout << endl;
             break;
         case 24:
