@@ -12,10 +12,11 @@ int main () {
     //cout << "Your recomended profession is: ";
     //backChainer.printProfession();
 
-    FC forwardChainer("engineering");
+    FC forwardChainer ("psychology", true);
     forwardChainer.start();
 
-    cout << "*************************************" << endl;
+    cout << "Congratulation! Your future profession will be " << forwardChainer.getProfession();
+    cout << " with a focus in " << forwardChainer.getArea() << endl;
     //cout << "Congratulations! Your future profession will be: " << backChainer.getProfession();
 
     return 0;

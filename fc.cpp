@@ -15,6 +15,7 @@ void FC::start()
 
 void FC::check_instantiation()
 {
+    if (done) return;
     if (debug) cout << "Check_instantiation called for " << varble << endl;
     int i=1;
     /* find variable in the variable list */
@@ -38,6 +39,7 @@ void FC::check_instantiation()
 
 void FC::instantiate()
 {
+    if(done) return;
     if (debug) cout << "instantiate called for " << varble << endl;
     int i=1;
     /* find varialbe in the varialbe list (varlt) */
@@ -91,6 +93,7 @@ void FC::inference()
 
 void FC::gotoF()
 {
+    if(done) return;
     int i;
     if (debug) cout << "goToF called" << endl;
     search();
@@ -183,12 +186,12 @@ void FC::search()
     }
     if (flag == 0)
         statementNumber=0;
-    cout << "SN after search is " << statementNumber << endl;
+    if (debug) cout << "SN after search is " << statementNumber << endl;
 }
 
 
 
-FC::FC(string profession)
+FC::FC(string profession, bool debug)
 {
     /******** INITIALIZATION SECTION ***********/
     for (int i=1;i < clauseSize; i++)
@@ -439,7 +442,9 @@ FC::FC(string profession)
             getchar();
         }
     }
+    this->debug = debug;
     this->profession.assign(profession);
+    done = false;
     instantiatedList[28] = 1;
     likePhysics.assign("");
     likeMath.assign("");
@@ -887,6 +892,8 @@ void FC::ifcondtions()
 void FC::Result()
 {
     if (debug) cout << "result called for SN: " << statementNumber << endl;
+    if (statementNumber > 0 && statementNumber < size)
+        done = true;
     /* invoke THEN part */
     switch (statementNumber)
     {

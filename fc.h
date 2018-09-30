@@ -5,7 +5,7 @@ class FC
 
 private:
     int flag;
-    bool debug = true;
+    bool debug, done;
     bool inst = false;
     static const int size = 61;
     static const int clauseSize = 241;
@@ -36,7 +36,8 @@ private:
     void gotoF();
 
 public:
-    FC(std::string);
+    FC(std::string, bool);
     void start();
     std::string getArea() {return area;}
+    std::string getProfession() {return profession;}
 };
