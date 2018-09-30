@@ -176,6 +176,7 @@ BC::BC(bool debug)
     coursesWithLabs = -1;
     groupLeader = -1;
     hoursOutside = -1;
+    grade = -1.0;
 
     return;
 }
@@ -456,7 +457,11 @@ void BC::B545()
         cout << "Statement Number: " << statementNumber << endl;
         cout << "Med Field: " << medField << endl;
         cout << "Med Cert: " << medCert << endl;
-        //getchar();
+        cout << "Hours Outside: " << hoursOutside << endl;
+        cout << "Outdoor Work: " << outdoorWork << endl;
+        cout << "Criminal Background: " << criminal << endl;
+        cout << "Teaching Certificate: " << teachCert << endl;
+        getchar();
 
     }
 
