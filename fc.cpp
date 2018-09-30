@@ -856,56 +856,361 @@ void FC::ifcondtions()
                 if(debug) cout << "Rule 60 satisfied" << endl;
             }
             break;
+        default:
+            if (debug) cout << "bad value passed to ifconditions()" << endl;
     }//end of switch
-}
+}//end of ifconditions()
 
 void FC::Result()
 {
     /* invoke THEN part */
     switch (statementNumber)
     {
-            /*********** comment 1500 ***********/
-            /* put variable on the conclusion variable queue */
+    //        /*********** comment 1500 ***********/
+    //        /* put variable on the conclusion variable queue */
+    //    case 1:
+    //        stock = "RISE";
+    //        cout<<"ST=RISE"<<endl;
+    //        varble = "ST";
+    //        inst = true;
+    //        break;
+    //        /*********** comment 1510 ***********/
+    //        /* put variable on the conclusion variable queue */
         case 1:
-            stock = "RISE";
-            cout<<"ST=RISE"<<endl;
-            varble = "ST";
+            area.assign("electricalengineering");
+            if (debug) cout << "Area is now electrical engineering" << endl;
+            varble.assign("AREA");
             inst = true;
             break;
-            /*********** comment 1510 ***********/
-            /* put variable on the conclusion variable queue */
+    //    case 2:
+    //        stock = "FALL";
+    //        cout<<"ST=FALL"<<endl;
+    //        varble = "ST";
+    //        inst = true;
+    //        break;
+    //        /*********** comment 1540 ***********/
+    //        /* put variable on the conclusion variable queue */
         case 2:
-            stock = "FALL";
-            cout<<"ST=FALL"<<endl;
-            varble = "ST";
+            area.assign("mechanicalengineering");
+            if (debug) cout << "Area is now mechanical engineering"<< endl;
             inst = true;
             break;
-            /*********** comment 1540 ***********/
-            /* put variable on the conclusion variable queue */
+    //    case 3:
+    //        interest = "RISE";
+    //        cout<<"IN=RISE"<<endl;
+    //        varble = "IN";
+    //        inst = true;
+    //        break;
+    //        /*********** comment 1550 ***********/
+    //        /* put variable on the conclusion variable queue */
         case 3:
-            interest = "RISE";
-            cout<<"IN=RISE"<<endl;
-            varble = "IN";
+            area.assign("civilengineering");
+            if (debug) cout << "Area is now civil engineering"<< endl;
             inst = true;
             break;
-            /*********** comment 1550 ***********/
-            /* put variable on the conclusion variable queue */
+    //    case 4:
+    //        interest = "FALL";
+    //        cout<<"IN=FALL"<<endl;
+    //        varble = "IN";
+    //        inst = true;
+    //        break;
+    //        /* put variable on the conclusion variable queue */
         case 4:
-            interest = "FALL";
-            cout<<"IN=FALL"<<endl;
-            varble = "IN";
+            area.assign("petroleumengineering");
+            if (debug) cout << "Area is now petroleum engineering"<< endl;
             inst = true;
             break;
-            /* put variable on the conclusion variable queue */
+    //    case 5:
+    //        interest = "FALL";
+    //        cout<<"IN=FALL"<<endl;
+    //        varble = "IN";
+    //        inst = true;
+    //        break;
         case 5:
-            interest = "FALL";
-            cout<<"IN=FALL"<<endl;
-            varble = "IN";
+            area.assign("chemicalengineering");
+            if (debug) cout << "Area is now chemical engineering"<< endl;
             inst = true;
             break;
+        case 6:
+            area.assign("pharmaceuticals");
+            if (debug) cout << "Area is now pharmaceuticals"<< endl;
+            inst = true;
+            break;
+        case 7:
+            area.assign("biology");
+            if (debug) cout << "Area is now biology"<< endl;
+            inst = true;
+            break;
+        case 8:
+            area.assign("astronomy");
+            if (debug) cout << "Area is now astronomy"<< endl;
+            inst = true;
+            break;
+        case 9:
+            area.assign("quantumphysics");
+            if (debug) cout << "Area is now quantum physics"<< endl;
+            inst = true;
+            break;
+        case 10:
+            area.assign("oceanography");
+            if (debug) cout << "Area is now oceanography"<< endl;
+            inst = true;
+            break;
+        case 11:
+            area.assign("businessowner");
+            if (debug) cout << "Area is now business owner"<< endl;
+            inst = true;
+            break;
+        case 12:
+            area.assign("manager");
+            if (debug) cout << "Area is now manager"<< endl;
+            inst = true;
+            break;
+        case 13:
+            area.assign("accounting");
+            if (debug) cout << "Area is now accounting"<< endl;
+            inst = true;
+            break;
+        case 14:
+            area.assign("humanresources");
+            if (debug) cout << "Area is now human resources"<< endl;
+            inst = true;
+            break;
+        case 15:
+            area.assign("ceo");
+            if (debug) cout << "Area is now ceo"<< endl;
+            inst = true;
+            break;
+        case 16:
+            area.assign("mentalhealth");
+            if (debug) cout << "Area is now mental health"<< endl;
+            inst = true;
+            break;
+        case 17:
+            area.assign("oncology");
+            if (debug) cout << "Area is now oncology"<< endl;
+            inst = true;
+            break;
+        case 18:
+            area.assign("cardiology");
+            if (debug) cout << "Area is now cardiology"<< endl;
+            inst = true;
+            break;
+        case 19:
+            area.assign("orthopedics");
+            if (debug) cout << "Area is now orthopedics"<< endl;
+            inst = true;
+            break;
+        case 20:
+            area.assign("generalpractitioner");
+            if (debug) cout << "Area is now general practitioner"<< endl;
+            inst = true;
+            break;
+        case 21:
+            area.assign("author");
+            if (debug) cout << "Area is now author"<< endl;
+            inst = true;
+            break;
+        case 22:
+            area.assign("journalism");
+            if (debug) cout << "Area is now journalism"<< endl;
+            inst = true;
+            break;
+        case 23:
+            area.assign("editing");
+            if (debug) cout << "Area is now editing"<< endl;
+            inst = true;
+            break;
+        case 24:
+            area.assign("copywriting");
+            if (debug) cout << "Area is now copywriting"<< endl;
+            inst = true;
+            break;
+        case 25:
+            area.assign("academia");
+            if (debug) cout << "Area is now academia"<< endl;
+            inst = true;
+            break;
+        case 26:
+            area.assign("preciousmetals");
+            if (debug) cout << "Area is now precious metals"<< endl;
+            inst = true;
+            break;
+        case 27:
+            area.assign("cartography");
+            if (debug) cout << "Area is now cartography"<< endl;
+            inst = true;
+            break;
+        case 28:
+            area.assign("climatology");
+            if (debug) cout << "Area is now climatology"<< endl;
+            inst = true;
+            break;
+        case 29:
+            area.assign("environmentalmanagement");
+            if (debug) cout << "Area is now enironmental management"<< endl;
+            inst = true;
+            break;
+        case 30:
+            area.assign("geomatics");
+            if (debug) cout << "Area is now geomatics"<< endl;
+            inst = true;
+            break;
+        case 31:
+            area.assign("mentaltherapy");
+            if (debug) cout << "Area is now mental therapy"<< endl;
+            inst = true;
+            break;
+        case 32:
+            area.assign("psychologicalresearch");
+            if (debug) cout << "Area is now psychological research"<< endl;
+            inst = true;
+            break;
+        case 33:
+            area.assign("industrial psychology");
+            if (debug) cout << "Area is now industrial psychology"<< endl;
+            inst = true;
+            break;
+        case 34:
+            area.assign("accesibility");
+            if (debug) cout << "Area is now accesibility"<< endl;
+            inst = true;
+            break;
+        case 35:
+            area.assign("clinicalpsychology");
+            if (debug) cout << "Area is now clinical psychology"<< endl;
+            inst = true;
+            break;
+        case 36:
+            area.assign("farmownership");
+            if (debug) cout << "Area is now farm ownership"<< endl;
+            inst = true;
+            break;
+        case 37:
+            area.assign("ranchwork");
+            if (debug) cout << "Area is now ranch work"<< endl;
+            inst = true;
+            break;
+        case 38:
+            area.assign("viniculture");
+            if (debug) cout << "Area is now viniculture"<< endl;
+            inst = true;
+            break;
+        case 39:
+            area.assign("cropspraying");
+            if (debug) cout << "Area is now crop spraying"<< endl;
+            inst = true;
+            break;
+        case 40:
+            area.assign("irrigation");
+            if (debug) cout << "Area is now irrigation"<< endl;
+            inst = true;
+            break;
+        case 41:
+            area.assign("healthservicesmanagement");
+            if (debug) cout << "Area is now health services management"<< endl;
+            inst = true;
+            break;
+        case 42:
+            area.assign("healthcareadministration");
+            if (debug) cout << "Area is now health care administration"<< endl;
+            inst = true;
+            break;
+        case 43:
+            area.assign("physiciansassistant");
+            if (debug) cout << "Area is now physicians assistant"<< endl;
+            inst = true;
+            break;
+        case 44:
+            area.assign("publichealth");
+            if (debug) cout << "Area is now public health"<< endl;
+            inst = true;
+            break;
+        case 45:
+            area.assign("nursing");
+            if (debug) cout << "Area is now nursing"<< endl;
+            inst = true;
+            break;
+        case 46:
+            area.assign("earlychildhood");
+            if (debug) cout << "Area is now early childhood"<< endl;
+            inst = true;
+            break;
+        case 47:
+            area.assign("k-12");
+            if (debug) cout << "Area is now k-12"<< endl;
+            inst = true;
+            break;
+        case 48:
+            area.assign("highereducation");
+            if (debug) cout << "Area is now higher education"<< endl;
+            inst = true;
+            break;
+        case 49:
+            area.assign("teachersaid");
+            if (debug) cout << "Area is now teachers aid"<< endl;
+            inst = true;
+            break;
+        case 50:
+            area.assign("counselor");
+            if (debug) cout << "Area is now counselor"<< endl;
+            inst = true;
+            break;
+        case 51:
+            area.assign("propertymanager");
+            if (debug) cout << "Area is now property manager"<< endl;
+            inst = true;
+            break;
+        case 52:
+            area.assign("realty");
+            if (debug) cout << "Area is now realty"<< endl;
+            inst = true;
+            break;
+        case 53:
+            area.assign("cleaning");
+            if (debug) cout << "Area is now cleaning"<< endl;
+            inst = true;
+            break;
+        case 54:
+            area.assign("maintenancework");
+            if (debug) cout << "Area is now maintenance work"<< endl;
+            inst = true;
+            break;
+        case 55:
+            area.assign("painting");
+            if (debug) cout << "Area is now painting"<< endl;
+            inst = true;
+            break;
+        case 56:
+            area.assign("ai");
+            if (debug) cout << "Area is now ai"<< endl;
+            inst = true;
+            break;
+        case 57:
+            area.assign("machinelearning");
+            if (debug) cout << "Area is now machine learning"<< endl;
+            inst = true;
+            break;
+        case 58:
+            area.assign("softwareengineering");
+            if (debug) cout << "Area is now software engineering"<< endl;
+            inst = true;
+            break;
+        case 59:
+            area.assign("datascience");
+            if (debug) cout << "Area is now data science"<< endl;
+            inst = true;
+            break;
+        case 60:
+            area.assign("languages");
+            if (debug) cout << "Area is now languages" << endl;
+            inst = true;
+            break;
+        default:
+            if(debug) cout << "Bad value passed to result()" << endl;
             /*********** comment 1610 ***********/
-    }
-}
+    } //end of switch
+} // end of result func
 
 void FC::takingInput()
 {
