@@ -1218,23 +1218,177 @@ void FC::takingInput()
     {
             /* input statements for sample position knowledge base */
         case 1:
-            cout<<"RISE OR FALL FOR IN? ";
-            cin>>interest;
+        //    cout<<"RISE OR FALL FOR IN? ";
+        //    cin>>interest;
+        //    break;
+            cout << "Do you enjoy working with physics: ";
+            cin >> likePhysics;
+            cout << endl;
             break;
         case 2:
-            cout<<"RISE OR FALL FOR DO? ";
-            cin>>dollar;
+        //    cout<<"RISE OR FALL FOR DO? ";
+        //    cin>>dollar;
+        //    break;
+            cout << "Do you enjoy doing math: ";
+            cin >> likeMath;
+            cout << endl;
             break;
         case 3:
-            cout<<"RISE OR FALL FOR FT? ";
-            cin>>fedint;
+        //    cout<<"RISE OR FALL FOR FT? ";
+        //    cin>>fedint;
+        //    break;
+            cout << "Do you work well in groups: ";
+            cin >> groupWork;
+            cout >> endl;
             break;
         case 4:
-            cout<<"ADD OR SUBTRACT FOR FM? ";
-            cin>>fedmon;
+        //    cout<<"ADD OR SUBTRACT FOR FM? ";
+        //    cin>>fedmon;
+        //    break;
+            cout << "Do you enjoy studying biology: ";
+            cin >> likeBiology;
+            cout << endl;
             break;
-    }
-}
+        case 5:
+            cout << "Do you enjoy studying chemistry: ";
+            cin >> likeChemistry;
+            cout >> endl;
+            break;
+        case 6:
+            cout << "Do you like marketing goods and services: ";
+            cin >> likeMarketing;
+            cout << endl;
+            break;
+        case 7:
+            cout << "Do you enjoy managing employees: ";
+            cin >> likeManagement;
+            cout << endl;
+            break;
+        case 8:
+            cout << "Do you maintain a good credit score: ";
+            cin >> goodCredit;
+            cout << endl;
+            break;
+        case 9:
+            cout << "Are you interested in medical ethics: ";
+            cin >> likeMedicalEthics;
+            cout << endl;
+            break;
+        case 10:
+            cout << "Will you get a state license to practice your job: ";
+            cin >> stateLicensure;
+            cout << endl;
+            break;
+        case 11:
+            cout << "Do you like writing: ";
+            cin >> likeWriting;
+            cout << endl;
+            break;
+        case 12:
+            cout << "Do you enjoy practicing creativity and originality: ";
+            cin >> likeOriginality;
+            cout << endl;
+            break;
+        case 13:
+            cout << "Do you follow the media closely: ";
+            cin >> likeMedia;
+            cout << endl;
+            break;
+        case 14:
+            cout << "Have you studied social sciences: ";
+            cin >> likeSocialScience;
+            cout << endl;
+            break;
+        case 15:
+            cout << "Do you enjoy studying grammar and syntax: ";
+            cin >> likeEnglish;
+            cout << endl;
+            break;
+        case 16:
+            cout << "Do you read much: ";
+            cin >> likeReading;
+            cout << endl;
+            break;
+        case 17:
+            cout << "Are you interested in studying the climate: ";
+            cin >> likeClimate;
+            cout << endl;
+            break;
+        case 18:
+            cout << "Would you want to work with minerals: ";
+            cin >> likeStones;
+            cout << endl;
+            break;
+        case 19:
+            cout << "Would you enjoy doing land surveys: ";
+            cin >> likeLand;
+            cout << endl;
+            break;
+        case 20:
+            cout << "Would you enjoy taking soil samples: ";
+            cin >> likeSoil;
+            cout << endl;
+            break;
+        case 21:
+            cout << "Do you have an interest in maintaining water resources: ";
+            cin >> likeWaterResources;
+            cout << endl;
+            break;
+        case 22:
+            cout << "Are you interested in data analysis: ";
+            cin >> likeAnalyticalSkills;
+            cout << endl;
+            break;
+        case 23:
+            cout << "Are you interested in doing an internship: ";
+            cin >> likeInternships;
+            cout << endl;
+            break;
+        case 24:
+            cout << "Would you like to study human anatomy: ";
+            cin >> likeAnatomy;
+            cout << endl;
+            break;
+        case 25:
+            cout << "Do you enjoy working with children: ";
+            cin >> likeChildren;
+            cout << endl;
+            break;
+        case 26:
+            cout << "Are you a reliable person: ";
+            cin >> reliable;
+            cout << endl;
+            break;
+        case 27:
+            cout << "Do you enjoy doing repairs: ";
+            cin >> likeRepairs;
+            cout << endl;
+            break;
+        case 28:
+            cout << "What have you chosen as your profession: ";
+            cin >> profession;
+            cout << endl;
+            break;
+        case 29:
+            cout << "What area are you interested in going into: ";
+            cin >> area;
+            cout << endl;
+            break;
+        case 30:
+            cout << "Would you like to study the law: ";
+            cin >> likeLaw;
+            cout << endl;
+            break;
+        case 31:
+            cout << "Are you interested in practicing human communication: ";
+            cin >> likeCommunication;
+            cout << endl;
+            break;
+        default:
+            if (debug) cout << "Bad value passed to takingput()" << endl;
+
+    } //end of switch
+} //end of takinginput()
 
 bool FC::isYes(string inString){
     if (inString.compare("yes") == 0 || inString.compare("y") == 0)
