@@ -1098,7 +1098,7 @@ void FC::Result()
             inst = true;
             break;
         case 33:
-            area.assign("industrial psychology");
+            area.assign("industrialpsychology");
             if (debug) cout << "Area is now industrial psychology"<< endl;
             inst = true;
             break;
@@ -1168,7 +1168,7 @@ void FC::Result()
             inst = true;
             break;
         case 47:
-            area.assign("k-12");
+            area.assign("kthrough12");
             if (debug) cout << "Area is now k-12"<< endl;
             inst = true;
             break;
@@ -1427,4 +1427,163 @@ bool FC::isYes(string inString){
         return true;
     else
         return false;
-    }
+}
+
+void FC::printProfession(){
+    if(profession.compare("science") == 0)
+        cout << "Science" << endl;
+    else if (profession.compare("engineering")==0)
+        cout << "Engineering" << endl;
+    else if (profession.compare("business")==0)
+        cout << "Business" << endl;
+    else if (profession.compare("medical")==0)
+        cout << "Medical" << endl;
+    else if (profession.compare("english")==0)
+        cout << "English" << endl;
+    else if (profession.compare("geography")==0)
+        cout << "Geography" << endl;
+    else if (profession.compare("psychology")==0)
+        cout << "Psychology" << endl;
+    else if (profession.compare("healthcare")==0)
+        cout << "Health Care" << endl;
+    else if (profession.compare("agriculture")==0)
+        cout << "Agriculture" << endl;
+    else if (profession.compare("education")==0)
+        cout << "Education" << endl;
+    else if (profession.compare("propertymanagement")==0)
+        cout << "Property Management" << endl;
+    else if (profession.compare("cs")==0)
+        cout << "Computer Science" << endl;
+    else
+        cout << "No Profession" << endl;
+
+    return;
+}
+
+void FC::printArea(){
+    if(area.compare("electricalengineering") == 0)
+        cout << "Electrical Engineering" << endl;
+    else if (area.compare("mechanicalengineering")==0)
+        cout << "Mechanical Engineering" << endl;
+    else if (area.compare("civilengineering")==0)
+        cout << "Civil Engineering" << endl;
+    else if (area.compare("petroleumengineering")==0)
+        cout << "Petroleum Engineering" << endl;
+    else if (area.compare("chemicalengineering")==0)
+        cout << "Chemical Engineering" << endl;
+    else if (area.compare("pharmaceuticals")==0)
+        cout << "Pharmaceuticals" << endl;
+    else if (area.compare("biology")==0)
+        cout << "Biology" << endl;
+    else if (area.compare("astronomy")==0)
+        cout << "Astronomy" << endl;
+    else if (area.compare("quantumphysics")==0)
+        cout << "Quantam" << endl;
+    else if (area.compare("oceanography")==0)
+        cout << "Oceanography" << endl;
+    else if (area.compare("businessowner")==0)
+        cout << "Owning a Small Business" << endl;
+    else if (area.compare("manager")==0)
+        cout << "Management" << endl;
+    else if (area.compare("accounting")==0)
+        cout << "Accounting" << endl;
+    else if (area.compare("humanresources")==0)
+        cout << "Human Resources" << endl;
+    else if (area.compare("ceo")==0)
+        cout << "finding a position as a CEO" << endl;
+    else if (area.compare("mentalhealth")==0)
+        cout << "Mental Health" << endl;
+    else if (area.compare("oncology")==0)
+        cout << "Oncology" << endl;
+    else if (area.compare("cardiology")==0)
+        cout << "Cardiology" << endl;
+    else if (area.compare("orthopedics")==0)
+        cout << "Orthopedics" << endl;
+    else if (area.compare("generalpractitioner")==0)
+        cout << "General Practice" << endl;
+    else if (area.compare("author")==0)
+        cout << "Authoring your own Novel" << endl;
+    else if (area.compare("journalism")==0)
+        cout << "Journalism" << endl;
+    else if (area.compare("editing")==0)
+        cout << "Editing" << endl;
+    else if (area.compare("copywriting")==0)
+        cout << "Copy Writing" << endl;
+    else if (area.compare("academia")==0)
+        cout << "Academia" << endl;
+    else if (area.compare("preciousmetals")==0)
+        cout << "prospecting for Precious Metals" << endl;
+    else if (area.compare("cartography")==0)
+        cout << "Cartography" << endl;
+    else if (area.compare("climatology")==0)
+        cout << "Climate Studies" << endl;
+    else if (area.compare("environmentalmanagement")==0)
+        cout << "Environmental Management" << endl;
+    else if (area.compare("geomatics")==0)
+        cout << "Geomatics" << endl;
+    else if (area.compare("mentaltherapy")==0)
+        cout << "Mental Therapy" << endl;
+    else if (area.compare("psychologicalresearch")==0)
+        cout << "Psychological Research" << endl;
+    else if (area.compare("industrialpsychology")==0)
+        cout << "Industrial Psychology" << endl;
+    else if (area.compare("accesibility")==0)
+        cout << "Accesibility" << endl;
+    else if (area.compare("clinicalpsychology")==0)
+        cout << "Clinical Psychology" << endl;
+    else if (area.compare("farmownership")==0)
+        cout << "Farm Ownership" << endl;
+    else if (area.compare("ranchwork")==0)
+        cout << "Working on a Ranch" << endl;
+    else if (area.compare("viniculture")==0)
+        cout << "Viniculture" << endl;
+    else if (area.compare("cropspraying")==0)
+        cout << "Crop Spraying" << endl;
+    else if (area.compare("irrigation")==0)
+        cout << "Irrigation" << endl;
+    else if (area.compare("healthservicesmanagement")==0)
+        cout << "Health Services Management" << endl;
+    else if (area.compare("healthcareadministration")==0)
+        cout << "Healthcare Administration" << endl;
+    else if (area.compare("physiciansassistant")==0)
+        cout << "a position as a Physician's Assistant" << endl;
+    else if (area.compare("publichealth")==0)
+        cout << "Public Health" << endl;
+    else if (area.compare("nursing")==0)
+        cout << "Nursing" << endl;
+    else if (area.compare("earlychildhood")==0)
+        cout << "Early Childhood Education" << endl;
+    else if (area.compare("kthrough12")==0)
+        cout << "K Through 12" << endl;
+    else if (area.compare("highereducation")==0)
+        cout << "Higher Education" << endl;
+    else if (area.compare("teachersaid")==0)
+        cout << "a position as a Teacher's Aid" << endl;
+    else if (area.compare("counselor")==0)
+        cout << "Counseling Students" << endl;
+    else if (area.compare("propertymanager")==0)
+        cout << "Managing Properties" << endl;
+    else if (area.compare("realty")==0)
+        cout << "Realty" << endl;
+    else if (area.compare("cleaning")==0)
+        cout << "Cleaning" << endl;
+    else if (area.compare("maintenancework")==0)
+        cout << "Maintenance Work" << endl;
+    else if (area.compare("painting")==0)
+        cout << "Painting" << endl;
+    else if (area.compare("ai")==0)
+        cout << "Artificial Intelligence" << endl;
+    else if (area.compare("machinelearning")==0)
+        cout << "Machine Learning" << endl;
+    else if (area.compare("softwareengineering")==0)
+        cout << "Software Engineering" << endl;
+    else if (area.compare("datascience")==0)
+        cout << "Data Science" << endl;
+    else if (area.compare("languages")==0)
+        cout << "Languages" << endl;
+    else
+        cout << area << endl;
+
+
+    return;
+}

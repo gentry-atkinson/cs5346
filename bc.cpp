@@ -76,7 +76,7 @@ BC::BC(bool debug)
     variableList[7].assign("WORKALONE");
     variableList[8].assign("OUTDOORWORK");
     variableList[9].assign("MEDICALCERTIFICATE");
-    variableList[10].assign("TEACHERCERTIFICATE");
+    variableList[10].assign("TEACHINGCERTIFICATE");
     variableList[11].assign("GPA");
     variableList[12].assign("PROFESSION");
     variableList[13].assign("COURSESWITHLABS");
@@ -121,7 +121,7 @@ BC::BC(bool debug)
     //strcpy(clvarlt[19], "EX");
     clauseVariableList[37].assign("DEGREE");
     clauseVariableList[38].assign("WORKALONE");
-    clauseVariableList[41].assign("HOURSOUTSODE");
+    clauseVariableList[41].assign("HOURSOUTSIDE");
     clauseVariableList[45].assign("DEGREE");
     clauseVariableList[46].assign("OUTDOORWORK");
     clauseVariableList[49].assign("DEGREE");
@@ -132,7 +132,7 @@ BC::BC(bool debug)
     clauseVariableList[58].assign("MEDFIELD");
     clauseVariableList[61].assign("DEGREE");
     clauseVariableList[62].assign("MEDICALCERTIFICATE");
-    clauseVariableList[63].assign("GROUP WORK");
+    clauseVariableList[63].assign("GROUPWORK");
     clauseVariableList[65].assign("CRIMINALBACKGROUND");
     clauseVariableList[69].assign("DEGREE");
     clauseVariableList[70].assign("TEACHINGCERTIFICATE");
@@ -454,6 +454,9 @@ void BC::B545()
         cout << "Work Alone: " << workAlone << endl;
         cout << "Courses with Labs: " << coursesWithLabs << endl;
         cout << "Statement Number: " << statementNumber << endl;
+        cout << "Med Field: " << medField << endl;
+        cout << "Med Cert: " << medCert << endl;
+        //getchar();
 
     }
 
@@ -523,7 +526,11 @@ void BC::B545()
             break;
         case 8: if (strcmp(groupWork.c_str(), "false") == 0){
                     statementActive = 1;
-                    if (debug) cout << "Rule 8 satisfied" << endl;
+                    if (debug) cout << "Rule 8 satisfied positively" << endl;
+                }
+                else {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 8 satisfied negatively" << endl;
                 }
             break;
         case 9: if (strcmp(degree.c_str(), "none") != 0 && strcmp(medSchool.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) {
@@ -538,7 +545,11 @@ void BC::B545()
             break;
         case 11: if (hoursOutside >= 16) {
                     statementActive = 1;
-                    if (debug) cout << "Rule 11 satisfied" << endl;
+                    if (debug) cout << "Rule 11 satisfied positively" << endl;
+                }
+                else {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 11 satisfied negatively" << endl;
                 }
             break;
         case 12: if (strcmp(degree.c_str(), "science") == 0 && strcmp(outdoorWork.c_str(), "true") == 0) {
@@ -558,7 +569,11 @@ void BC::B545()
             break;
         case 15: if (strcmp(medSchool.c_str(), "false") == 0 && strcmp(medField.c_str(), "true") == 0) {
                     statementActive = 1;
-                    if (debug) cout << "Rule 15 satisfied" << endl;
+                    if (debug) cout << "Rule 15 satisfied positively" << endl;
+                }
+                else {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 15 satisfied negatively" << endl;
                 }
             break;
         case 16: if (strcmp(degree.c_str(), "none") != 0 && strcmp(medCert.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) {
@@ -568,7 +583,11 @@ void BC::B545()
             break;
         case 17: if (strcmp(criminal.c_str(), "true") == 0) {
                     statementActive = 1;
-                    if (debug) cout << "Rule 17 satisfied" << endl;
+                    if (debug) cout << "Rule 17 satisfied positively" << endl;
+                }
+                else {
+                    statementActive = 1;
+                    if (debug) cout << "Rule 17 satisfied negatively" << endl;
                 }
             break;
         case 18: if (strcmp(degree.c_str(), "none") != 0 && strcmp(teachCert.c_str(), "true") == 0) {
@@ -669,9 +688,15 @@ void BC::InBetweenFunction()
                 instantiatedList[12] = 1;
                 break;
 
-            case 8: workAlone.assign("true");
-                if (debug)cout<<"workAlone = true" << endl;
-                instantiatedList[7] = 1;
+            case 8: if (strcmp(groupWork.c_str(), "false") == 0){
+                        workAlone.assign("true");
+                        if (debug)cout<<"workAlone = true" << endl;
+                    }
+                    else {
+                        workAlone.assign("false");
+                        if (debug)cout<<"workAlone = false" << endl;
+                    }
+                    instantiatedList[7] = 1;
                 break;
 
 
@@ -685,8 +710,14 @@ void BC::InBetweenFunction()
                 instantiatedList[12] = 1;
                 break;
 
-            case 11: outdoorWork.assign("true");
-                if (debug)cout<<"outdoorWork = true" << endl;
+            case 11: if (hoursOutside >= 16) {
+                    outdoorWork.assign("true");
+                    if (debug)cout<<"outdoorWork = true" << endl;
+                }
+                else {
+                    outdoorWork.assign("false");
+                    if (debug)cout<<"outdoorWork = false" << endl;
+                }
                 instantiatedList[8] = 1;
                 break;
 
@@ -705,18 +736,31 @@ void BC::InBetweenFunction()
                 instantiatedList[12] = 1;
                 break;
 
-            case 15: medCert.assign("true");
-                if (debug)cout<<"medCert = true" << endl;
-                instantiatedList[9] = 1;
+            case 15: if (strcmp(medField.c_str(), "true") == 0){
+                        medCert.assign("true");
+                        if (debug)cout<<"medCert = true" << endl;
+                    }
+                    else {
+                        medCert.assign("false");
+                        if (debug)cout<<"medCert = false" << endl;
+                    }
+                    instantiatedList[9] = 1;
+                    instantiatedList[16] = 1;
                 break;
 
-            case 16 : profession.assign("health care");
+            case 16 : profession.assign("healthcare");
                 if (debug)cout<<"Profession = Health" << endl;
                 instantiatedList[12] = 1;
                 break;
 
-            case 17: teachCert.assign("false");
-                if (debug)cout<<"Teaching certification = NO" << endl;
+            case 17: if (strcmp(criminal.c_str(), "true") == 0) {
+                        teachCert.assign("false");
+                        if (debug)cout<<"Teaching certification = false" << endl;
+                    }
+                    else {
+                        teachCert.assign("true");
+                        if (debug)cout<<"Teaching certification = true" << endl;
+                    }
                 instantiatedList[10] = 1;
                 break;
 
@@ -725,7 +769,7 @@ void BC::InBetweenFunction()
                 instantiatedList[12] = 1;
                 break;
 
-            case 19: profession.assign("property management");
+            case 19: profession.assign("propertymanagement");
                 if (debug)cout<<"Profession = property management" << endl;
                 instantiatedList[12] = 1;
                 break;

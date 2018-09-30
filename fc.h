@@ -40,4 +40,6 @@ public:
     void start();
     std::string getArea() {return area;}
     std::string getProfession() {return profession;}
+    void printProfession();
+    void printArea();
 };
