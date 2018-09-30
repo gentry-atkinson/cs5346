@@ -15,7 +15,6 @@ int main () {
 
     cout << "Congratulation! Your future profession will be " << forwardChainer.getProfession();
     cout << " with a focus in " << forwardChainer.getArea() << endl;
-    //cout << "Congratulations! Your future profession will be: " << backChainer.getProfession();
 
     return 0;
 }

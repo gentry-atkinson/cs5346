@@ -156,7 +156,7 @@ void FC::gotoF()
         gotoF();
     }
     /* no more conclusion variables on queue */
-    cout<<"*** Success ***" << endl;
+    if (debug)cout<<"*** Success ***" << endl;
     //exit(1);
     return;
 }

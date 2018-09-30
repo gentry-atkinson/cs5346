@@ -618,7 +618,7 @@ void BC::InBetweenFunction()
             case 1: //strcpy(po, "NO");
                 //printf("PO=NO\n");
                 goodGrades.assign("true");
-                cout<<"Good Grades = true" << endl;
+                if (debug) cout<<"Good Grades = true" << endl;
                 instantiatedList[2] = 1;
                 break;
                 /* then part of statement 2 */
@@ -626,18 +626,18 @@ void BC::InBetweenFunction()
             case 2: //strcpy(qu, "YES");
                 //printf("QU=YES\n");
                 goodGrades.assign("false");
-                cout<<"Good Grades = false" << endl;
+                if (debug)cout<<"Good Grades = false" << endl;
                 instantiatedList[2] = 1;
                 break;
 
                 /* then part of statement 3 */
             case 3: if (coursesWithLabs > 1){
                         labwork.assign("true");
-                        cout<<"LAB WORK = true" << endl;
+                        if (debug)cout<<"LAB WORK = true" << endl;
                     }
                     else {
                         labwork.assign("false");
-                        cout<<"LAB WORK = false" << endl;
+                        if (debug)cout<<"LAB WORK = false" << endl;
                     }
                 instantiatedList[3] = 1;
                 break;
@@ -645,93 +645,93 @@ void BC::InBetweenFunction()
                 /******** comment 1560 ******/
             case 4: if (groupLeader >= 1){
                         leadership.assign("true");
-                        cout<<"leadership = true" << endl;
+                        if (debug)cout<<"leadership = true" << endl;
                     }
                     else {
                         leadership.assign("false");
-                        cout<<"leadership = false" << endl;
+                        if (debug)cout<<"leadership = false" << endl;
                     }
                 instantiatedList[4] = 1;
                 break;
                 /* then part of statement 5 */
                 /****** comment 1570 *****/
             case 5: profession.assign("engineering");
-                cout<<"Profession = Engineering" << endl;
+                if (debug)cout<<"Profession = Engineering" << endl;
                 instantiatedList[12] = 1;
                 break;
                 /* then part of statement 6 */
             case 6: profession.assign("science");
-                cout<<"Profession = Science" << endl;
+                if (debug)cout<<"Profession = Science" << endl;
                 instantiatedList[12] = 1;
                 break;
             case 7: profession.assign("business");
-                cout<<"Profession = Business";
+                if (debug)cout<<"Profession = Business";
                 instantiatedList[12] = 1;
                 break;
 
             case 8: workAlone.assign("true");
-                cout<<"workAlone = true" << endl;
+                if (debug)cout<<"workAlone = true" << endl;
                 instantiatedList[7] = 1;
                 break;
 
 
             case 9: profession.assign("medical");
-                cout<<"Profession = Medical" << endl;
+                if (debug)cout<<"Profession = Medical" << endl;
                 instantiatedList[12] = 1;
                 break;
 
             case 10 : profession.assign("english");
-                cout<<"Profession = English" << endl;
+                if (debug)cout<<"Profession = English" << endl;
                 instantiatedList[12] = 1;
                 break;
 
             case 11: outdoorWork.assign("true");
-                cout<<"outdoorWork = true" << endl;
+                if (debug)cout<<"outdoorWork = true" << endl;
                 instantiatedList[8] = 1;
                 break;
 
             case 12 : profession.assign("geography");
-                cout<<"Profession = geography";
+                if (debug)cout<<"Profession = geography";
                 instantiatedList[12] = 1;
                 break;
 
             case 13 : profession.assign("psychology");
-                cout<<"Profession = psychology" << endl;
+                if (debug)cout<<"Profession = psychology" << endl;
                 instantiatedList[12] = 1;
                 break;
 
             case 14 : profession.assign("agriculture");
-                cout<<"Profession = agriculture" << endl;
+                if (debug)cout<<"Profession = agriculture" << endl;
                 instantiatedList[12] = 1;
                 break;
 
             case 15: medCert.assign("true");
-                cout<<"medCert = true" << endl;
+                if (debug)cout<<"medCert = true" << endl;
                 instantiatedList[9] = 1;
                 break;
 
             case 16 : profession.assign("health care");
-                cout<<"Profession = Health" << endl;
+                if (debug)cout<<"Profession = Health" << endl;
                 instantiatedList[12] = 1;
                 break;
 
             case 17: teachCert.assign("false");
-                cout<<"Teaching certification = NO" << endl;
+                if (debug)cout<<"Teaching certification = NO" << endl;
                 instantiatedList[10] = 1;
                 break;
 
             case 18: profession.assign("education");
-                cout<<"Profession = education" << endl;
+                if (debug)cout<<"Profession = education" << endl;
                 instantiatedList[12] = 1;
                 break;
 
             case 19: profession.assign("property management");
-                cout<<"Profession = property management" << endl;
+                if (debug)cout<<"Profession = property management" << endl;
                 instantiatedList[12] = 1;
                 break;
 
             case 20: profession.assign("cs");
-                cout<<"Profession = CS" << endl;
+                if (debug)cout<<"Profession = CS" << endl;
                 instantiatedList[12] = 1;
                 break;
                 /****** comment 1680 ********/
@@ -747,7 +747,7 @@ void BC::popStack()
     if(stackPointer >= size)
    	{
    		// Finished
-        cout<<"*** SUCCESS ***"<<endl;
+        if (debug)cout<<"*** SUCCESS ***"<<endl;
         return;
     }
     else
