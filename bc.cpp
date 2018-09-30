@@ -754,7 +754,7 @@ void BC::InBetweenFunction()
                 break;
 
             case 16 : profession.assign("healthcare");
-                if (debug)cout<<"Profession = Health" << endl;
+                if (debug)cout<<"Profession = Health Care" << endl;
                 instantiatedList[12] = 1;
                 break;
 
@@ -767,6 +767,7 @@ void BC::InBetweenFunction()
                         if (debug)cout<<"Teaching certification = true" << endl;
                     }
                 instantiatedList[10] = 1;
+                instantiatedList[17] = 1;
                 break;
 
             case 18: profession.assign("education");
