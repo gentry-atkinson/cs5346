@@ -7,7 +7,7 @@ using namespace std;
 int main () {
     cout << "This recomender will help you choose a profession and an area..." << endl;
 
-    BC backChainer(true);
+    BC backChainer(false);
     backChainer.inferenceSection();
 
     FC forwardChainer (backChainer.getProfession(), false);

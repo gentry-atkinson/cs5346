@@ -1478,7 +1478,7 @@ void FC::printArea(){
     else if (area.compare("astronomy")==0)
         cout << "Astronomy" << endl;
     else if (area.compare("quantumphysics")==0)
-        cout << "Quantam" << endl;
+        cout << "Quantam Physics" << endl;
     else if (area.compare("oceanography")==0)
         cout << "Oceanography" << endl;
     else if (area.compare("businessowner")==0)
