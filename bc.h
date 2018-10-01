@@ -5,7 +5,7 @@ class BC
 	private:
 		/* Variables declared here */
         static const int size = 21;
-        static const int clauseSize = 80;
+        static const int clauseSize = 81;
         std::string conclusionList[size], variableList[size], clauseVariableList[clauseSize];
         std::string varble;
         std::string goodGrades, degree;
@@ -15,6 +15,7 @@ class BC
         std::string teachCert,medField,criminal,workAlone;
         int coursesWithLabs, groupLeader, hoursOutside;
         std::string buff;
+        bool done;
         int instantiatedList[size];
         int statementStack[size], clauseStack[size], statementNumber, f, statementActive, stackPointer;
         float grade;

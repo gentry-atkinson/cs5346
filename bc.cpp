@@ -177,6 +177,7 @@ BC::BC(bool debug)
     groupLeader = -1;
     hoursOutside = -1;
     grade = -1.0;
+    done = false;
 
     return;
 }
@@ -195,8 +196,7 @@ void BC::B520()
 {
     if (debug) cout << "B520 called" << endl;
     if (debug) cout << "Variable in B520 is " << varble << endl;
-    if (strcmp(profession.c_str(), "") != 0)
-        return;
+    if (done) return;
 	f=1;
     determine_member_concl_list();
     if (statementNumber != 0)
@@ -227,6 +227,7 @@ void BC::KeepProcessing()
 void BC::determine_member_concl_list()
 {
     if (debug) cout << "determine_member_concl_list() called for " << varble << endl;
+    if (done) return;
     /* routine to determine if a variable (varble) is a member of the
        conclusion list (conclt).  if yes return sn != 0.
        if not a member sn=0;
@@ -252,6 +253,7 @@ void BC::determine_member_concl_list()
 void BC::push_on_stack()
 {
     if (debug) cout << "Push_on_stack() called" << endl;
+    if (done) return;
     stackPointer=stackPointer-1;
     if (debug) cout << "Stack pointer at " << stackPointer << endl;
     statementStack[stackPointer] = statementNumber;
@@ -271,6 +273,7 @@ void BC::push_on_stack()
 void BC::instantiate()
 {
     if (debug) cout << "Instantiate called for " << varble << endl;
+    if (done) return;
     int i=1;
     /* find variable in the list */
     while ((strcmp(varble.c_str(), variableList[i].c_str()) != 0) && i<18)
@@ -423,6 +426,7 @@ void BC::initkbase(int i)
 void BC::B545()
 {
     int i;
+    if (done) return;
     if (debug) cout << "B545() called" << endl;
     if (debug) cout << "Look at clause variable: " << (statementStack[stackPointer] -1) *4 + clauseStack[stackPointer] << endl;
     do
@@ -470,7 +474,7 @@ void BC::B545()
         cout << "Outdoor Work: " << outdoorWork << endl;
         cout << "Criminal Background: " << criminal << endl;
         cout << "Teaching Certificate: " << teachCert << endl;
-        getchar();
+        //getchar();
 
     }
 
@@ -614,7 +618,7 @@ void BC::B545()
                     if (debug) cout << "Rule 19 satisfied" << endl;
                 }
             break;
-        case 20: if (strcmp(degree.c_str(), "cs") == 0 && strcmp(goodGrades.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true")) {
+        case 20: if (strcmp(degree.c_str(), "cs") == 0 && strcmp(goodGrades.c_str(), "true") == 0 && strcmp(groupWork.c_str(), "true") == 0) {
                     statementActive = 1;
                     if (debug) cout << "Rule 20 satisfied" << endl;
                 }
@@ -691,15 +695,18 @@ void BC::InBetweenFunction()
             case 5: profession.assign("engineering");
                 if (debug)cout<<"Profession = Engineering" << endl;
                 instantiatedList[12] = 1;
+                done = true;
                 break;
                 /* then part of statement 6 */
             case 6: profession.assign("science");
                 if (debug)cout<<"Profession = Science" << endl;
                 instantiatedList[12] = 1;
+                done = true;
                 break;
             case 7: profession.assign("business");
                 if (debug)cout<<"Profession = Business";
                 instantiatedList[12] = 1;
+                done = true;
                 break;
 
             case 8: if (strcmp(groupWork.c_str(), "false") == 0){
@@ -717,11 +724,13 @@ void BC::InBetweenFunction()
             case 9: profession.assign("medical");
                 if (debug)cout<<"Profession = Medical" << endl;
                 instantiatedList[12] = 1;
+                done = true;
                 break;
 
             case 10 : profession.assign("english");
                 if (debug)cout<<"Profession = English" << endl;
                 instantiatedList[12] = 1;
+                done = true;
                 break;
 
             case 11: if (hoursOutside >= 16) {
@@ -737,17 +746,20 @@ void BC::InBetweenFunction()
 
             case 12 : profession.assign("geography");
                 if (debug)cout<<"Profession = geography";
+                done = true;
                 instantiatedList[12] = 1;
                 break;
 
             case 13 : profession.assign("psychology");
                 if (debug)cout<<"Profession = psychology" << endl;
+                done = true;
                 instantiatedList[12] = 1;
                 break;
 
             case 14 : profession.assign("agriculture");
                 if (debug)cout<<"Profession = agriculture" << endl;
                 instantiatedList[12] = 1;
+                done = true;
                 break;
 
             case 15: if (strcmp(medField.c_str(), "true") == 0 && strcmp(medSchool.c_str(), "false") == 0){
@@ -765,6 +777,7 @@ void BC::InBetweenFunction()
             case 16 : profession.assign("healthcare");
                 if (debug)cout<<"Profession = Health Care" << endl;
                 instantiatedList[12] = 1;
+                done = true;
                 break;
 
             case 17: if (strcmp(criminal.c_str(), "true") == 0) {
@@ -782,16 +795,19 @@ void BC::InBetweenFunction()
             case 18: profession.assign("education");
                 if (debug)cout<<"Profession = education" << endl;
                 instantiatedList[12] = 1;
+                done = true;
                 break;
 
             case 19: profession.assign("propertymanagement");
                 if (debug)cout<<"Profession = property management" << endl;
                 instantiatedList[12] = 1;
+                done = true;
                 break;
 
             case 20: profession.assign("cs");
                 if (debug)cout<<"Profession = CS" << endl;
                 instantiatedList[12] = 1;
+                done = true;
                 break;
                 /****** comment 1680 ********/
         } //end of switch
@@ -808,7 +824,10 @@ void BC::popStack()
     if(stackPointer >= size)
    	{
    		// Finished
-        if (debug)cout<<"*** SUCCESS ***"<<endl;
+        if (debug){
+            cout<<"*** SUCCESS ***"<<endl;
+            getchar();
+        }
         return;
     }
     else
