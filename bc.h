@@ -5,7 +5,7 @@ class BC
 	private:
 		/* Variables declared here */
         static const int size = 21;
-        static const int clauseSize = 69;
+        static const int clauseSize = 80;
         std::string conclusionList[size], variableList[size], clauseVariableList[clauseSize];
         std::string varble;
         std::string goodGrades, degree;

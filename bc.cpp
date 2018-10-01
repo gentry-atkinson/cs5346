@@ -256,13 +256,13 @@ void BC::push_on_stack()
     if (debug) cout << "Stack pointer at " << stackPointer << endl;
     statementStack[stackPointer] = statementNumber;
     if (debug){
-        cout << "Statement stack: ";
+        cout << "Statement stack:\t";
         for (int i = 1; i < size; i++) cout << statementStack[i] << "|";
         cout << endl;
     }
     clauseStack[stackPointer] = 1;
     if (debug){
-        cout << "Clause stack: ";
+        cout << "Clause stack:\t\t";
         for (int i = 1; i < size; i++) cout << clauseStack[i] << "|";
         cout << endl;
     }
@@ -285,6 +285,8 @@ void BC::instantiate()
         instantiate the variables below in the case statement */
         initkbase(i);
     }
+    else
+        if (debug) cout << "Variable already has a value." << endl;
 }
 
 void BC::initkbase(int i)
@@ -422,11 +424,18 @@ void BC::B545()
 {
     int i;
     if (debug) cout << "B545() called" << endl;
+    if (debug) cout << "Look at clause variable: " << (statementStack[stackPointer] -1) *4 + clauseStack[stackPointer] << endl;
     do
     {
         /* calculate clause location in clause-variable list */
         //B545:
         i= (statementStack[stackPointer] -1) *4 + clauseStack[stackPointer];
+        if (debug)
+            if (i == 69){
+                cout << "Should be looking for degree." << endl;
+                cout << "But I'm looking for: " << clauseVariableList[i] << endl;
+            }
+
         /* clause variable */
         //varble = clauseVariableList[i];
         varble.assign(clauseVariableList[i]);
@@ -655,7 +664,7 @@ void BC::InBetweenFunction()
                 break;
 
                 /* then part of statement 3 */
-            case 3: if (coursesWithLabs > 1){
+            case 3: if (coursesWithLabs > 2){
                         labwork.assign("true");
                         if (debug)cout<<"LAB WORK = true" << endl;
                     }
@@ -741,7 +750,7 @@ void BC::InBetweenFunction()
                 instantiatedList[12] = 1;
                 break;
 
-            case 15: if (strcmp(medField.c_str(), "true") == 0){
+            case 15: if (strcmp(medField.c_str(), "true") == 0 && strcmp(medSchool.c_str(), "false") == 0){
                         medCert.assign("true");
                         if (debug)cout<<"medCert = true" << endl;
                     }
@@ -792,6 +801,8 @@ void BC::popStack()
 {
     /* pop the stack */
     if (debug) cout << "PopStack() called" << endl;
+    statementStack[stackPointer] = 0;
+    clauseStack[stackPointer] = 0;
     stackPointer = stackPointer+1;
     if (debug) cout << "StackPointer is now " << stackPointer << endl;
     if(stackPointer >= size)
