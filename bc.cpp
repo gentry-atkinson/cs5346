@@ -215,6 +215,7 @@ void BC::B520()
 void BC::KeepProcessing()
 {
     if (debug) cout << "KeepProcessing() called" << endl;
+    if (done) return;
    	do
     /* push statement number (sn) and clause number=1 on
     goal stack which is composed of the statement stack (statsk) and clause stack (clausk) */
@@ -648,6 +649,7 @@ void BC::InBetweenFunction()
 {
     if (debug) cout << "InBetweenFunction called" << endl;
     if (debug) cout << "Left side of rule " << statementNumber << " satisfied."  << endl;
+    if (done) return;
     switch (statementNumber)
         {
                 /* then part of statement 1 */
@@ -816,6 +818,7 @@ void BC::InBetweenFunction()
 void BC::popStack()
 {
     /* pop the stack */
+    if (done) return;
     if (debug) cout << "PopStack() called" << endl;
     statementStack[stackPointer] = 0;
     clauseStack[stackPointer] = 0;
